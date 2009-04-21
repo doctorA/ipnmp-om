@@ -1,0 +1,16 @@
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\bin\Debug\IPNMP.dll
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\bin\Debug\IPNMP.pdb
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.dll
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.pdb
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.csproj.GenerateResource.Cache
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.Properties.Resources.resources
+C:\Documents and Settings\Jebiga\My Documents\SP\IPNMP\IPNMP\bin\Debug\IPNMP.dll.config
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\bin\Debug\IPNMP.dll.config
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\bin\Debug\IPNMP.dll
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\bin\Debug\IPNMP.pdb
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.Properties.Resources.resources
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.csproj.GenerateResource.Cache
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.dll
+C:\Users\blaz\Documents\SP\IPNMP\IPNMP\obj\Debug\IPNMP.pdb
