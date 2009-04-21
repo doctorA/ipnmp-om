@@ -51,6 +51,7 @@
     <Compile Include="Ekipa.cs" />
     <Compile Include="IPNMP.cs" />
     <Compile Include="IPNMPdb1.cs" />
+    <Compile Include="Kraj.cs" />
     <Compile Include="Naslov.cs" />
     <Compile Include="Preiskava.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
