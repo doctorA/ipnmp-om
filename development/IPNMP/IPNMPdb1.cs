@@ -110,6 +110,84 @@ namespace IPNMP
 
         }
 
+        /// <summary>
+        /// Pošlje kartoteko na bazo.
+        /// </summary>
+        /// <param name="seznam">Kartoteka ime_kartoteke</param>
+        public void UstvariKartoteko(Kartoteka seznam)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("UstvariKartoteko", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@DatumObiska", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@Simptomi", SqlDbType.NVarChar, 255));
+
+            ukaz.Parameters["@DatumObiska"].Value = seznam.DatumObiska;
+            ukaz.Parameters["@Simptomi"].Value = seznam.Simptomi;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
+        /// <summary>
+        /// Izbris kartoteke na podlagi ID-ja
+        /// </summary>
+        /// <param name="seznam">int ID</param>
+        public void IzbrisiKartoteko(int id)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            SqlCommand ukaz = new SqlCommand("IzbrisiKartoteko", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@ID", SqlDbType.Int));
+            ukaz.Parameters["@ID"].Value = id;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
+        /// <summary>
+        /// Vrne vse kartoteke iz podatkovne baze
+        /// </summary>
+        /// <returns></returns>
+        public DataSet VrniVseKartoteke()
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVseKartoteke", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+
+            SqlDataAdapter da = new SqlDataAdapter(ukaz);
+            DataSet ds = new DataSet();
+
+            da.Fill(ds, "Kartoteke");
+            povezava.Close();
+
+            return ds;
+        }
+
+        /// <summary>
+        /// Posodobi kartoteko v podatkovni bazi
+        /// </summary>
+        /// <param name="seznam">Kartoteka kartoteka1</param>
+        public void PosodobiKartoteko(Kartoteka seznam)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("PosodobiKartoteko", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@DatumObiska", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@Simptomi", SqlDbType.NVarChar, 255));
+
+            ukaz.Parameters["@DatumObiska"].Value = seznam.DatumObiska;
+            ukaz.Parameters["@Simptomi"].Value = seznam.Simptomi;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
 
     }
 }
