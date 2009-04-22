@@ -37,18 +37,21 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Poročilo">
-    <Position X="15.5" Y="3" Width="2.5" />
+    <Position X="16.25" Y="3.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AIAACAAAAAAEAAAAAAAABAAAAQAAAAAQAAQAAgAAAAA=</HashCode>
+      <HashCode>AIAACAAAAAAAAAAAAAAABAAAAQAAAAAQAAQAAAAAAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
     <Position X="13.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAgAACAgEAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAhAACAgEAAI=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Poročila" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Naslov">
     <Position X="8.5" Y="1.25" Width="1.5" />
@@ -61,13 +64,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Vožnja">
-    <Position X="13.5" Y="1.25" Width="1.75" />
+    <Position X="14.25" Y="0.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAwABAAAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAA=</HashCode>
+      <HashCode>AAAAwABAAAAAABAAAAAAAAAAAAAAACAAABAAEAAAAAA=</HashCode>
       <FileName>Vo+żnja.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Naslov" />
+      <Property Name="Poročila" />
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Diagnoza">

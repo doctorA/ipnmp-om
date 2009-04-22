@@ -273,24 +273,14 @@ namespace IPNMP
 
         }
     /// <summary>
-    /// Poročilo ob prispetju reševalnega vozila
+    /// Poročila ob prispetju reševalnega vozila
     /// </summary>
-    public class Poročilo : Vožnja
+    public class Poročilo
     {
         public String OpisDogodka { set; get; }
         public String StanjePacientaObPrispetju { set; get; }
         public String AkcijeReševalcev { set; get; }
         public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
-
-        public IPNMP.Poročilo[] VrniPorociloPoPacientu()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Poročilo[] VrniPorociloPoZaposlenem()
-        {
-            throw new System.NotImplementedException();
-        }
 
         public IPNMP.Poročilo[] VrniPorociloPoDatumu()
         {
@@ -340,6 +330,17 @@ namespace IPNMP
             }
         }
 
+        public IPNMP.Poročilo[] Poročila
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         public DataSet VrniVseZaposlene()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -372,6 +373,11 @@ namespace IPNMP
         }
 
         public Zaposleni VrniVsePoTipu()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void VrniPorocilapoZaposlenem()
         {
             throw new System.NotImplementedException();
         }

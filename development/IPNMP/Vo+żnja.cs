@@ -25,5 +25,21 @@ namespace IPNMP
             {
             }
         }
+
+        public IPNMP.Poročilo[] Poročila
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public void VrniPorocilapoVoznji()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
