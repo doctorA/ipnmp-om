@@ -20,7 +20,7 @@
         <Point X="12" Y="6.213" />
         <Point X="12" Y="5.974" />
         <Point X="16.75" Y="5.974" />
-        <Point X="16.75" Y="5.14" />
+        <Point X="16.75" Y="5.469" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -47,7 +47,7 @@
   <Class Name="IPNMP.Poročilo">
     <Position X="15.5" Y="3" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAAAABAAAAAAAAQAAAAAQAAQAAAAAAAI=</HashCode>
+      <HashCode>AAAACACAAAAAAAAABAAABAAAAQAAAAAQAAQAAAAAAAI=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -282,12 +282,22 @@ namespace IPNMP
         public String AkcijeReševalcev { set; get; }
         public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
 
-        public void VrniPorocilopoPacientu()
+        public IPNMP.Poročilo[] VrniPorocilopoPacientu()
         {
             throw new System.NotImplementedException();
         }
 
-        public void VrniPorocilopoZaposlenem()
+        public Poročilo[] VrniPorocilopoZaposlenem()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IPNMP.Poročilo[] VrniPorocilopoDatumu()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void VrniVsaPorocila()
         {
             throw new System.NotImplementedException();
         }
