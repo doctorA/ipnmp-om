@@ -19,17 +19,6 @@ namespace IPNMP
             }
         }
 
-        public int Kaj
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
         public int Opis
         {
             get

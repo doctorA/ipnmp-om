@@ -39,16 +39,5 @@ namespace IPNMP
             {
             }
         }
-
-        public Vožnja Vožnja
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
     }
 }

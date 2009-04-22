@@ -18,3 +18,13 @@ C:\Users\blaz\Documents\SP\IPNMP\WindowsFormsApplication1\obj\Debug\ResolveAssem
 C:\Users\blaz\Documents\SP\IPNMP\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
 C:\Users\blaz\Documents\SP\IPNMP\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 C:\Users\blaz\Documents\SP\IPNMP\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\bin\Debug\IPNMP.dll
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\bin\Debug\IPNMP.pdb
+C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

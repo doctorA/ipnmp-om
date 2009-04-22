@@ -14,5 +14,16 @@ namespace IPNMP
         public DateTime ČasPrispetjaVBolnišnico { set; get; }
 
         public DateTime ČasDogodka { set; get; }
+
+        public Naslov Naslov
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
     }
 }

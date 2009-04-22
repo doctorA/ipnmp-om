@@ -25,22 +25,23 @@ namespace WindowsFormsApplication1
             oseba.EMŠO=Convert.ToInt32(textBox3.Text);
             oseba.DatumRojstva=Convert.ToDateTime(textBox4.Text);
             oseba.Spol=textBox5.Text;
-            IPNMP.IPNMPdb1 vmesnik=new IPNMPdb1();
-            vmesnik.UstvariOsebo(oseba);
+           
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
            int EMŠO = Convert.ToInt32(textBox3.Text);
-            IPNMP.IPNMPdb1 vmesnik=new IPNMPdb1();
-           vmesnik.IzbrisiOsebo(EMŠO);
+           Oseba tmp = new Oseba();
+                tmp.IzbrisiOsebo(EMŠO);
             
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            IPNMP.IPNMPdb1 vmesnik = new IPNMPdb1();
-            vmesnik.VrniVseOsebe();
+            Oseba tmp = new Oseba();
+            tmp.VrniVseOsebe();
+            
            
         }
 
@@ -52,8 +53,7 @@ namespace WindowsFormsApplication1
             oseba.EMŠO = Convert.ToInt32(textBox3.Text);
             oseba.DatumRojstva = Convert.ToDateTime(textBox4.Text);
             oseba.Spol = textBox5.Text;
-            IPNMP.IPNMPdb1 vmesnik = new IPNMPdb1();
-            vmesnik.PosodobiOsebo(oseba);
+            oseba.PosodobiOsebo();
         }
     }
 }
