@@ -137,6 +137,16 @@ namespace IPNMP
     /// </summary>
     public class Pacient : Oseba
     {
+        public Pacient()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name="EMSO">številka EMŠO</param>
+        public Pacient(int EMSO)
+        {
+            throw new System.NotImplementedException();
+        }
      
         /// <summary>
         /// Višina v centimetrih
@@ -180,6 +190,44 @@ namespace IPNMP
             set
             {
             }
+        }
+
+        /// <summary>
+        /// Vrne paciente iz podatkovne baze glede na številko ZZZS
+        /// </summary>
+        public Pacient VrniPacientZZZS()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Ustvari nov vnos v podatkovno bazo
+        /// </summary>
+        public Pacient UstvariPacient()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name="ZZZS">številka ZZZS</param>
+        public void IzbrisiPacient(int ZZZS)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Vrne vse paciente iz podatkovne baze
+        /// </summary>
+        public Pacient VrniVsePacient()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Posodobi podatke pacienta v podatkovni bazi
+        /// </summary>
+        public void PosodobiPacient()
+        {
+            throw new System.NotImplementedException();
         }
 
 
