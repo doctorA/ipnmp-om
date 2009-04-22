@@ -282,17 +282,17 @@ namespace IPNMP
         public String AkcijeReševalcev { set; get; }
         public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
 
-        public IPNMP.Poročilo[] VrniPorocilopoPacientu()
+        public IPNMP.Poročilo[] VrniPorociloPoPacientu()
         {
             throw new System.NotImplementedException();
         }
 
-        public Poročilo[] VrniPorocilopoZaposlenem()
+        public Poročilo[] VrniPorociloPoZaposlenem()
         {
             throw new System.NotImplementedException();
         }
 
-        public IPNMP.Poročilo[] VrniPorocilopoDatumu()
+        public IPNMP.Poročilo[] VrniPorociloPoDatumu()
         {
             throw new System.NotImplementedException();
         }
@@ -371,7 +371,7 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
-        public Zaposleni VrniVsepoTipu()
+        public Zaposleni VrniVsePoTipu()
         {
             throw new System.NotImplementedException();
         }

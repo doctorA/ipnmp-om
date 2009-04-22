@@ -15,14 +15,6 @@
         <Point X="8" Y="4.638" />
       </Path>
     </AssociationLine>
-    <AssociationLine Name="Poročilo" Type="IPNMP.Poročilo" ManuallyRouted="true">
-      <Path>
-        <Point X="12" Y="6.213" />
-        <Point X="12" Y="5.974" />
-        <Point X="16.75" Y="5.974" />
-        <Point X="16.75" Y="5.469" />
-      </Path>
-    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAkAgAIAAAQAAAACAAAAAAAAAQAAAAAAABggAABEA=</HashCode>
       <FileName>IPNMP.cs</FileName>
@@ -47,14 +39,14 @@
   <Class Name="IPNMP.Poročilo">
     <Position X="15.5" Y="3" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAACACAAAAAAAAABAAABAAAAQAAAAAQAAQAAAAAAAI=</HashCode>
+      <HashCode>AIAACAAAAAAEAAAAAAAABAAAAQAAAAAQAAQAAgAAAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
     <Position X="13.5" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAgAAAAAAAAACAACAAgBAAAAgAACAgEAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAgAACAgEAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
