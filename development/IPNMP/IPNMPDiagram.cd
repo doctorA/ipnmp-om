@@ -39,14 +39,14 @@
   <Class Name="IPNMP.Poročilo">
     <Position X="16.25" Y="3.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AIAACAAAAAAAAAAAAAAABAAAAQAAAAAQAAQAAAAAAAA=</HashCode>
+      <HashCode>AIAACAAAAAAAAAAAAAAABAAAAQACAAAQAAQAAAAAAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
-    <Position X="13.5" Y="3" Width="1.5" />
+    <Position X="13.25" Y="3" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAhAACAgEAAI=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAhAACgAEAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -66,7 +66,7 @@
   <Class Name="IPNMP.Vožnja">
     <Position X="14.25" Y="0.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAwABAAAAAABAAAAAAAAAAAAAAACAAABAAEAAAAAA=</HashCode>
+      <HashCode>AAAAwABAAAAAAAAAAAAAgAAAACAIACAAABAAGAAAAAA=</HashCode>
       <FileName>Vo+żnja.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>

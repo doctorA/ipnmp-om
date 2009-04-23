@@ -208,6 +208,9 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Izbriše pacienta iz podatkovne baze glede na njegovo številko ZZZS
+        /// </summary>
         /// <param name="ZZZS">številka ZZZS</param>
         public void IzbrisiPacient(int ZZZS)
         {
@@ -282,12 +285,29 @@ namespace IPNMP
         public String AkcijeReševalcev { set; get; }
         public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
 
+        public DateTime Datum
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        /// <summary>
+        /// Vrne vsa poročila glede na datum kreacije poročila
+        /// </summary>
         public IPNMP.Poročilo[] VrniPorociloPoDatumu()
         {
             throw new System.NotImplementedException();
         }
 
-        public void VrniVsaPorocila()
+        /// <summary>
+        /// Vrne vsa poročila iz podatkovne baze
+        /// </summary>
+        public IPNMP.Poročilo[] VrniVsaPorocila()
         {
             throw new System.NotImplementedException();
         }
@@ -319,17 +339,6 @@ namespace IPNMP
             }
         }
 
-        public Vožnja Vožnja
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
         public IPNMP.Poročilo[] Poročila
         {
             get
@@ -341,6 +350,9 @@ namespace IPNMP
             }
         }
 
+        /// <summary>
+        /// Vrne vse zaposlene iz podatkovne baze
+        /// </summary>
         public DataSet VrniVseZaposlene()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -357,28 +369,45 @@ namespace IPNMP
 
         }
 
+        /// <summary>
+        /// Ustvari nov vnos v podatkovni bzi
+        /// </summary>
         public void UstvariZaposlenega()
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Izbriše zaposlenega iz podatkovne baze
+        /// </summary>
         public void IzbrisiZaposlenega()
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Posodobi podatke zaposlenega
+        /// </summary>
         public void PosodobiZaposlenega()
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Vrne vse zaposlene glede na tip
+        /// </summary>
         public Zaposleni VrniVsePoTipu()
         {
             throw new System.NotImplementedException();
         }
 
-        public void VrniPorocilapoZaposlenem()
+        /// <summary>
+        /// Vrne vsa poročila iz podatkovne baze glede na zaposlenega
+        /// </summary>
+        public void VrniPorocilaPoZaposlenem()
         {
+            Ime priimek, emšo.
+
             throw new System.NotImplementedException();
         }
 
