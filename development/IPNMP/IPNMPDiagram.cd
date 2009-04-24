@@ -8,10 +8,10 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Pacient">
-    <Position X="11.25" Y="3.25" Width="1.5" />
+    <Position X="11" Y="3.25" Width="1.5" />
     <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="11.25" Y="4.638" />
+        <Point X="11" Y="4.638" />
         <Point X="8" Y="4.638" />
       </Path>
     </AssociationLine>
@@ -44,7 +44,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
-    <Position X="13.25" Y="3" Width="1.5" />
+    <Position X="13" Y="3" Width="2" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAhAACgAEAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
@@ -64,7 +64,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Vožnja">
-    <Position X="14.25" Y="0.75" Width="1.75" />
+    <Position X="13.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAwABAAAAAAAAAAAAAgAAAACAIACAAABAAGAAAAAA=</HashCode>
       <FileName>Vo+żnja.cs</FileName>

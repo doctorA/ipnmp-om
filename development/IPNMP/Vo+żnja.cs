@@ -15,6 +15,11 @@ namespace IPNMP
 
         public DateTime ČasDogodka { set; get; }
 
+        public  Vožnja()
+        {
+            
+        }
+
         public Naslov Naslov
         {
             get
@@ -80,5 +85,7 @@ namespace IPNMP
         {
             throw new System.NotImplementedException();
         }
+
+        
     }
 }

@@ -54,6 +54,10 @@ namespace WindowsFormsApplication1
             oseba.DatumRojstva = Convert.ToDateTime(textBox4.Text);
             oseba.Spol = textBox5.Text;
             oseba.PosodobiOsebo();
+            Poročilo v = new Poročilo();
+            List<Poročilo> vsaPoročila = new List<Poročilo>();
+            vsaPoročila = v.VrniPorociloPoDatumu();
+            
 
             
 

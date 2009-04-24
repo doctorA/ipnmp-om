@@ -299,7 +299,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vsa poročila glede na datum kreacije poročila
         /// </summary>
-        public IPNMP.Poročilo[] VrniPorociloPoDatumu()
+        public List<Poročilo> VrniPorociloPoDatumu()
         {
             throw new System.NotImplementedException();
         }
@@ -406,7 +406,7 @@ namespace IPNMP
         /// </summary>
         public void VrniPorocilaPoZaposlenem()
         {
-            Ime priimek, emšo.
+            
 
             throw new System.NotImplementedException();
         }
