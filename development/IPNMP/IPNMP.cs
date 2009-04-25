@@ -37,6 +37,17 @@ namespace IPNMP
 
         public String Spol { set; get; }
 
+        public Naslov Naslov
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
 
 
 
@@ -132,7 +143,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne osebo iz podatkovne baze glede na emšo
         /// </summary>
-        public void VrniOseboEmšo()
+        public Oseba VrniOseboEmšo()
         {
             throw new System.NotImplementedException();
         }
@@ -150,8 +161,8 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
-        /// <param name="EMSO">številka EMŠO</param>
-        public Pacient(int EMSO)
+        /// <param name="ZZZS">Napolni objekt iz baze s pomočjo zzzs številke</param>
+        public Pacient(int ZZZS)
         {
             throw new System.NotImplementedException();
         }
@@ -248,7 +259,18 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
-        public void VrniAlergije()
+        /// <summary>
+        /// Vrne vse alergije ki jih pacient ima (spada pod Diagnoze)
+        /// </summary>
+        public DataSet VrniAlergije()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Vrne vse operacije, ki jih je pacient imel(spada pod zdravljenje)
+        /// </summary>
+        public DataSet VrniOperacije()
         {
             throw new System.NotImplementedException();
         }
@@ -260,15 +282,8 @@ namespace IPNMP
     /// </summary>
     public class Kartoteka
     {
-        /// <summary>
-        /// Klic konstruktorja napolni kartoteko z arrayi Diagnoze[] Terapije[] in Preiskave[]
-        /// </summary>
-        public Kartoteka()
-        {
-            
-        }
 
-        public IPNMP.Terapija Terapije
+        public IPNMP.Zdravljenje Zdravljenja
         {
             get
             {
@@ -312,7 +327,27 @@ namespace IPNMP
             }
         }
 
-        public void VrniKartoteko()
+        public int ŠtevilkaKartoteke
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        /// <param name="ŠtevilkaKartoteke">Vrne kartoteko iz podatkovne baze glede na številko kartoteke</param>
+        public void VrniKartoteko(Kartoteka ŠtevilkaKartoteke)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Ustvari podatkovni zapis v bazi
+        /// </summary>
+        public void UstvariKartoteko()
         {
             throw new System.NotImplementedException();
         }
@@ -323,6 +358,7 @@ namespace IPNMP
     /// </summary>
     public class Poročilo
     {
+    
         public String OpisDogodka { set; get; }
         public String StanjePacientaObPrispetju { set; get; }
         public String AkcijeReševalcev { set; get; }
@@ -342,7 +378,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vsa poročila glede na datum kreacije poročila
         /// </summary>
-        public List<Poročilo> VrniPorociloPoDatumu()
+        public List<Poročilo> VrniPorocilaPoDatumu()
         {
             throw new System.NotImplementedException();
         }
@@ -354,9 +390,28 @@ namespace IPNMP
         {
             throw new System.NotImplementedException();
         }
+
+        /// <summary>
+        /// Ustvari poročilo v podatkovni bazi
+        /// </summary>
+        public void UstvariPoročilo()
+        {
+            throw new System.NotImplementedException();
+        }
     }
     public class Zaposleni : Oseba
     {
+        public Zaposleni()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name="EMŠO">Napolni objekt zaposleni iz baze, glede na podan emšo</param>
+        public Zaposleni(string EMŠO)
+        {
+            throw new System.NotImplementedException();
+        }
+    
         public DateTime DatumZaposlitve { set; get; }
         public String TipZaposlenega { set; get; }
 
@@ -439,7 +494,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene glede na tip
         /// </summary>
-        public Zaposleni VrniVsePoTipu()
+        public DataSet VrniVsePoTipu()
         {
             throw new System.NotImplementedException();
         }

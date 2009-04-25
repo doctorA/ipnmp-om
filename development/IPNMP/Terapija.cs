@@ -6,7 +6,7 @@ using System.Text;
 namespace IPNMP
 {
     /// <remarks></remarks>
-    public class Terapija
+    public class Zdravljenje
     {
         public int Tip
         {
@@ -41,7 +41,7 @@ namespace IPNMP
             }
         }
 
-        public void VrniVseTerapije()
+        public void VrniVsaZdravljenja()
         {
             throw new System.NotImplementedException();
         }

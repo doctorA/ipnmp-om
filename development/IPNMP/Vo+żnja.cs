@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace IPNMP
@@ -42,7 +44,7 @@ namespace IPNMP
             }
         }
 
-        public IPNMP.Zaposleni[] Ekipa
+        public Ekipa Ekipa
         {
             get
             {
@@ -56,7 +58,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse vožnje iz podatkovne baze glede na ekipo
         /// </summary>
-        public IPNMP.Vožnja[] VrniVoznjePoEkipi()
+        public DataSet VrniVoznjePoEkipi()
         {
             throw new System.NotImplementedException();
         }
@@ -64,7 +66,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse vožnje v podatkovni bazi
         /// </summary>
-        public Vožnja VrniVseVoznje()
+        public DataSet VrniVseVoznje()
         {
             throw new System.NotImplementedException();
         }
@@ -72,7 +74,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vožnje glede na čas dogodka
         /// </summary>
-        public IPNMP.Vožnja[] VrniVoznjePoCasuDogodka()
+        public DataSet VrniVoznjePoCasuDogodka()
         {
             throw new System.NotImplementedException();
         }
@@ -87,7 +89,7 @@ namespace IPNMP
         }
 
         /// <summary>
-        /// Izračuna časovno razliko, med prispetjem reševalcev in prispetjem v bolnišnico, ter vrne kot datetime
+        /// Izračuna časovno razliko, med prispetjem reševalcev na kraj nesreče in prispetjem v bolnišnico, ter vrne kot datetime
         /// </summary>
         public DateTime IzračunajČas()
         {
