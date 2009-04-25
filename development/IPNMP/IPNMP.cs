@@ -301,6 +301,17 @@ namespace IPNMP
             }
         }
 
+        public Medicinski_pripomočki Medicinski_pripomocki
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         public void VrniKartoteko()
         {
             throw new System.NotImplementedException();

@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="IPNMP.Oseba">
-    <Position X="6.25" Y="1" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAEAAAQgAEAAAABAAAAAAAAAAAAAAAAAAQAAIgAAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Pacient">
-    <Position X="11" Y="3.25" Width="1.5" />
+    <Position X="11" Y="4.5" Width="1.5" />
     <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="11" Y="4.914" />
-        <Point X="8" Y="4.914" />
+        <Point X="11" Y="5.66" />
+        <Point X="8.25" Y="5.66" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -25,9 +25,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Kartoteka">
-    <Position X="6.5" Y="4" Width="1.5" />
+    <Position X="6.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAACAAAAAAAAABAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <HashCode>AAAAgAACAAAAAAAAABAAAAAAAAAAAAAAAAAAIQAAAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -39,7 +39,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
-    <Position X="13" Y="3" Width="2" />
+    <Position X="13" Y="3.5" Width="2" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAgAAAAAAAAACAACAAgAAAAAhAACgAEAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
@@ -49,14 +49,14 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Naslov">
-    <Position X="8.5" Y="1.25" Width="1.5" />
+    <Position X="9.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Naslov.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Vožnja">
-    <Position X="13.5" Y="0.5" Width="2" />
+    <Position X="13" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAwABAAAAAAAAAAAAAgAAAACAIACAAABIgGAAAAAA=</HashCode>
       <FileName>Vo+żnja.cs</FileName>
@@ -67,21 +67,21 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Diagnoza">
-    <Position X="6.5" Y="6" Width="1.5" />
+    <Position X="6.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAABCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Diagnoza.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Preiskava">
-    <Position X="8.75" Y="6" Width="1.5" />
+    <Position X="8.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAgAAAAABAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Preiskava.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Terapija">
-    <Position X="4.5" Y="6" Width="1.5" />
+    <Position X="5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAQAAAAAAAAAAABCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Terapija.cs</FileName>
@@ -92,6 +92,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
       <FileName>Kraj.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IPNMP.Medicinski_pripomočki">
+    <Position X="5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABBAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Medicinski_pripomočki.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Tahoma" Size="8.25" />
