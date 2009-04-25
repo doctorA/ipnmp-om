@@ -40,5 +40,10 @@ namespace IPNMP
             {
             }
         }
+
+        public void VrniVseTerapije()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

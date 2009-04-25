@@ -39,5 +39,10 @@ namespace IPNMP
             {
             }
         }
+
+        public void VrniVsePreiskave()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

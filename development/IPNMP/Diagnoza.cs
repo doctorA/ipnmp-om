@@ -7,7 +7,7 @@ namespace IPNMP
 {
     public class Diagnoza
     {
-        public int Tip
+        public String Tip
         {
             get
             {
@@ -38,6 +38,11 @@ namespace IPNMP
             set
             {
             }
+        }
+
+        public void VrniVseDiagnoze()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

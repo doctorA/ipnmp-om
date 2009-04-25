@@ -129,6 +129,14 @@ namespace IPNMP
 
         }
 
+        /// <summary>
+        /// Vrne osebo iz podatkovne baze glede na emšo
+        /// </summary>
+        public void VrniOseboEmšo()
+        {
+            throw new System.NotImplementedException();
+        }
+
        
         
     }
@@ -156,7 +164,6 @@ namespace IPNMP
         /// Teža v gramih
         /// </summary>
         public int Teža { set; get; }
-        public Kartoteka[] KartotekaPacienta { set; get; }
         public String KrvnaSkupina { set; get; }
 
         public int ZZZS
@@ -233,6 +240,19 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Vrne starost v letih, izračunano s pomočjo datuma rojstva
+        /// </summary>
+        public String VrniStarost()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void VrniAlergije()
+        {
+            throw new System.NotImplementedException();
+        }
+
 
     }
     /// <summary>
@@ -240,8 +260,15 @@ namespace IPNMP
     /// </summary>
     public class Kartoteka
     {
+        /// <summary>
+        /// Klic konstruktorja napolni kartoteko z arrayi Diagnoze[] Terapije[] in Preiskave[]
+        /// </summary>
+        public Kartoteka()
+        {
+            
+        }
 
-        public IPNMP.Terapija[] Terapije
+        public IPNMP.Terapija Terapije
         {
             get
             {
@@ -252,7 +279,7 @@ namespace IPNMP
             }
         }
 
-        public IPNMP.Diagnoza[] Diagnoze
+        public IPNMP.Diagnoza Diagnoze
         {
             get
             {
@@ -263,7 +290,7 @@ namespace IPNMP
             }
         }
 
-        public IPNMP.Preiskava[] Preiskave
+        public IPNMP.Preiskava Preiskave
         {
             get
             {
@@ -272,6 +299,11 @@ namespace IPNMP
             set
             {
             }
+        }
+
+        public void VrniKartoteko()
+        {
+            throw new System.NotImplementedException();
         }
 
         }

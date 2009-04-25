@@ -28,16 +28,5 @@ namespace IPNMP
             {
             }
         }
-
-        public Oseba Oseba
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
     }
 }

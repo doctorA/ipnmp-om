@@ -86,6 +86,25 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Izračuna časovno razliko, med prispetjem reševalcev in prispetjem v bolnišnico, ter vrne kot datetime
+        /// </summary>
+        public DateTime IzračunajČas()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Kilometrina
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         
     }
 }
