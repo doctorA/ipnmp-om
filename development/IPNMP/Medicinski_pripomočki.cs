@@ -29,6 +29,9 @@ namespace IPNMP
             }
         }
 
+        /// <summary>
+        /// Vrne vse medicinske pripomočke iz podatkovne baze
+        /// </summary>
         public void VrniVseMedPrip()
         {
             throw new System.NotImplementedException();

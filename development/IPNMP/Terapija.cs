@@ -41,6 +41,9 @@ namespace IPNMP
             }
         }
 
+        /// <summary>
+        /// Vrne vse podatke o zdravljenju pacienta iz podatkovne baze
+        /// </summary>
         public void VrniVsaZdravljenja()
         {
             throw new System.NotImplementedException();

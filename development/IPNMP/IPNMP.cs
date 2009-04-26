@@ -51,6 +51,9 @@ namespace IPNMP
 
 
 
+        /// <summary>
+        /// Ustvari novo osebo v podatkovni bazi
+        /// </summary>
         public void UstvariOsebo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -113,6 +116,9 @@ namespace IPNMP
             return ds;
         }
 
+        /// <summary>
+        /// Posodobi podatke za osebo v podatkovni bazi
+        /// </summary>
         public void PosodobiOsebo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -338,6 +344,9 @@ namespace IPNMP
             }
         }
 
+        /// <summary>
+        /// Vrne kartoteko pacienta iz podatkovne baze
+        /// </summary>
         /// <param name="ŠtevilkaKartoteke">Vrne kartoteko iz podatkovne baze glede na številko kartoteke</param>
         public void VrniKartoteko(Kartoteka ŠtevilkaKartoteke)
         {

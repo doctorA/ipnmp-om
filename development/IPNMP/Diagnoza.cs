@@ -40,6 +40,9 @@ namespace IPNMP
             }
         }
 
+        /// <summary>
+        /// Vrne vse diagnoze pacienta iz podatkovne baze
+        /// </summary>
         public void VrniVseDiagnoze()
         {
             throw new System.NotImplementedException();
