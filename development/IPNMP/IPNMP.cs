@@ -258,9 +258,26 @@ namespace IPNMP
         /// <summary>
         /// Ustvari nov vnos v podatkovno bazo
         /// </summary>
-        public Pacient UstvariPacient()
+        public void UstvariPacient()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("PosodobiOsebo", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
+
+            ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
+            ukaz.Parameters["@Teža"].Value = this.Teža;
+            ukaz.Parameters["@Višina"].Value = this.Višina;
+            ukaz.Parameters["@ZZZS"].Value = this.ZZZS;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
 
         /// <summary>
@@ -269,15 +286,33 @@ namespace IPNMP
         /// <param name="ZZZS">številka ZZZS</param>
         public void IzbrisiPacient(int ZZZS)
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            SqlCommand ukaz = new SqlCommand("IzbrisiPacient", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
+            ukaz.Parameters["@ZZZS"].Value = ZZZS;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
 
         /// <summary>
         /// Vrne vse paciente iz podatkovne baze
         /// </summary>
-        public Pacient VrniVsePacient()
+        public DataSet VrniVsePacient()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVsePacient", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(ukaz);
+            DataSet ds = new DataSet();
+
+            da.Fill(ds, "Pacienti");
+            povezava.Close();
+
+            return ds;
         }
 
         /// <summary>
@@ -285,7 +320,24 @@ namespace IPNMP
         /// </summary>
         public void PosodobiPacient()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("PosodobiOsebo", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
+
+            ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
+            ukaz.Parameters["@Teža"].Value = this.Teža;
+            ukaz.Parameters["@Višina"].Value = this.Višina;
+            ukaz.Parameters["@ZZZS"].Value = this.ZZZS;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
 
         /// <summary>
