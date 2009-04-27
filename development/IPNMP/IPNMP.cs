@@ -27,7 +27,39 @@ namespace IPNMP
         /// <param name="EMŠO"></param>
         public Oseba(int EMŠO)
         {
-            
+            PotPovezave = Properties.Settings.Default.ConnectionString;
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("OsebaKonstruktor", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(ukaz);
+            DataSet ds = new DataSet();
+
+            da.Fill(ds, "Oseba");
+            povezava.Close();
+
+            DataRow vrstica;
+            vrstica = ds.Tables[0].Rows[0];
+            this.Ime = vrstica["Ime"].ToString();
+            this.Priimek = vrstica["Priimek"].ToString();
+            this.EMŠO = EMŠO;
+            this.DatumRojstva = (DateTime)vrstica["DatumRojstva"];
+            Naslov naslov_osebe = new Naslov();
+            String Naslovtext = vrstica["Naslov"].ToString();
+            int i;
+            for( i=0;i<=Naslovtext.Length;i++){
+                if(Char.IsNumber(Naslovtext[i])){
+                    break;
+                }
+
+            }
+            naslov_osebe.Ulica = Naslovtext.Substring(0, i);
+            naslov_osebe.HišnaŠtevilka = Naslovtext.Substring(i, Naslovtext.Length-i);
+            this.Naslov = naslov_osebe;
+            this.Spol = vrstica["Spol"].ToString();
 
         }
         public String Ime { set; get; }
@@ -39,13 +71,8 @@ namespace IPNMP
 
         public Naslov Naslov
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
 
@@ -63,12 +90,14 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Naslov", SqlDbType.NVarChar,255));
             ukaz.Parameters.Add(new SqlParameter("@DatumRojstva", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@Spol", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@Ime"].Value = this.Ime;
             ukaz.Parameters["@Priimek"].Value = this.Priimek;
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@Naslov"].Value = this.Naslov;
             ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
             ukaz.Parameters["@Spol"].Value = this.Spol;
 
@@ -128,12 +157,14 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Naslov", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@DatumRojstva", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@Spol", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@Ime"].Value = this.Ime;
             ukaz.Parameters["@Priimek"].Value = this.Priimek;
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@Naslov"].Value = this.Naslov;
             ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
             ukaz.Parameters["@Spol"].Value = this.Spol;
 
@@ -426,24 +457,14 @@ namespace IPNMP
 
         public int Specializacija
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public Ekipa Ekipa
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public IPNMP.Poročilo[] Poročila
@@ -489,7 +510,15 @@ namespace IPNMP
         /// </summary>
         public void IzbrisiZaposlenega()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            SqlCommand ukaz = new SqlCommand("IzbrisiZaposlenega", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
 
         /// <summary>
@@ -503,9 +532,22 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene glede na tip
         /// </summary>
-        public DataSet VrniVsePoTipu()
+        public DataSet VrniVsePoTipu(string TipZaposlenega)
         {
-            throw new System.NotImplementedException();
+            PotPovezave = Properties.Settings.Default.ConnectionString;
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar));
+            ukaz.Parameters["@TipZaposlenega"].Value = TipZaposlenega;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(ukaz);
+            DataSet ds = new DataSet();
+
+            da.Fill(ds, "Zaposleni");
+            povezava.Close();
+            return ds;
         }
 
         /// <summary>

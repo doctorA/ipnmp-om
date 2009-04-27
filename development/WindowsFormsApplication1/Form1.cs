@@ -63,5 +63,15 @@ namespace WindowsFormsApplication1
                
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            IPNMP.Oseba oseba = new Oseba(Convert.ToInt32(textBox3.Text));
+            textBox1.Text = oseba.Ime;
+            textBox2.Text = oseba.Priimek;
+            textBox4.Text = oseba.DatumRojstva.ToString();
+            textBox5.Text = oseba.Spol;
+            textBox6.Text = oseba.Naslov.ToString();
+        }
     }
 }

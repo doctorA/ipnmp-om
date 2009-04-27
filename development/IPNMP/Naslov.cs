@@ -7,26 +7,16 @@ namespace IPNMP
 {
     public class Naslov
     {
-        public int Ulica
+        public String Ulica
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            set;
+            get;
         }
 
-        public int HišnaŠtevilka
+        public String HišnaŠtevilka
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            set;
+            get;
         }
     }
 }
