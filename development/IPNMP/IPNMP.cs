@@ -415,6 +415,17 @@ namespace IPNMP
             }
         }
 
+        public string Avtor
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Vrne vsa poročila glede na datum kreacije poročila
         /// </summary>
@@ -435,6 +446,11 @@ namespace IPNMP
         /// Ustvari poročilo v podatkovni bazi
         /// </summary>
         public void UstvariPoročilo()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void VrniPorocilaPoAvtorju(Zaposleni avtor)
         {
             throw new System.NotImplementedException();
         }
@@ -490,7 +506,7 @@ namespace IPNMP
             SqlDataAdapter da = new SqlDataAdapter(ukaz);
             DataSet ds = new DataSet();
 
-            da.Fill(ds, "Osebe");
+            da.Fill(ds, "Zaposleni");
             povezava.Close();
 
             return ds;
@@ -502,7 +518,22 @@ namespace IPNMP
         /// </summary>
         public void UstvariZaposlenega()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("UstvariZaposlenega", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@DatumZaposlitve", SqlDbType.DateTime));    
+            ukaz.Parameters.Add(new SqlParameter("@Specializacija", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
+
+            ukaz.Parameters["@Specializacija"].Value = this.Naslov;
+            ukaz.Parameters["@DatumZaposlitve"].Value = this.DatumZaposlitve;
+            ukaz.Parameters["@TipZaposlenega"].Value = this.TipZaposlenega;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
 
         /// <summary>
@@ -526,7 +557,22 @@ namespace IPNMP
         /// </summary>
         public void PosodobiZaposlenega()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("PosodobiZaposlenega", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@DatumZaposlitve", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@Specializacija", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
+
+            ukaz.Parameters["@Specializacija"].Value = this.Naslov;
+            ukaz.Parameters["@DatumZaposlitve"].Value = this.DatumZaposlitve;
+            ukaz.Parameters["@TipZaposlenega"].Value = this.TipZaposlenega;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
 
         /// <summary>
