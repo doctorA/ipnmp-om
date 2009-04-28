@@ -28,3 +28,5 @@ C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\b
 C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\bin\Debug\IPNMP.dll
 C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\bin\Debug\IPNMP.pdb
 C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\ZiPi\Documents\Šola\R-IT 2008-09\SP\IPNMP\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\ZiPi\Documents\Šola\R-IT 2008-09\SP\IPNMP\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
