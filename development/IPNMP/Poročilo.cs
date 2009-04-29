@@ -29,38 +29,67 @@ namespace IPNMP
         /// <summary>
         /// Vrne vsa poročila glede na datum kreacije poročila
         /// </summary>
-        public static DataSet VrniPorocilaPoDatumu(DateTime datum)
+        public static Poročilo[] VrniPorocilaPoDatumu(DateTime datum)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsaPoročilaPoDatumu", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniPorocilaPoDatumu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.Date));
-            ukaz.Parameters["@Datum"].Value = datum;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            da.Fill(ds, "PoročilaPoDatumu");
+            List<Poročilo> seznam = new List<Poročilo>();
+
+            while (Bralec.Read())
+            {
+                Poročilo tmp = new Poročilo();
+                if ((DateTime)Bralec["Datum"] == datum)
+                {
+                    tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
+                    tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                    tmp.Datum = (DateTime)Bralec["Datum"];
+                    tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
+                    tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
+                    tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
+                    tmp.ŠtevilkaPoročila = (int)Bralec["ŠtevilkaPoročila"];
+                    seznam.Add(tmp);
+                }
+            }
+
+            Poročilo[] ds = seznam.ToArray();
             povezava.Close();
-
             return ds;
         }
 
         /// <summary>
         /// Vrne vsa poročila iz podatkovne baze
         /// </summary>
-        public static DataSet VrniVsaPorocila()
+        public static Poročilo[] VrniVsaPorocila()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsaPoročila", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniVsaPorocila", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            da.Fill(ds, "Poročila");
+            List<Poročilo> seznam = new List<Poročilo>();
+
+            while (Bralec.Read())
+            {
+                Poročilo tmp = new Poročilo();
+                tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
+                tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                tmp.Datum = (DateTime)Bralec["Datum"];
+                tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
+                tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
+                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
+                tmp.ŠtevilkaPoročila = (int)Bralec["ŠtevilkaPoročila"];
+                seznam.Add(tmp);
+            }
+
+            Poročilo[] ds = seznam.ToArray();
             povezava.Close();
-
             return ds;
         }
 
@@ -95,21 +124,36 @@ namespace IPNMP
         /// <summary>
         /// Metoda poišče poročila v podatkovni bazi glede na podanega avtorja(njegov emšo)
         /// </summary>
-        /// <returns>Vrne Dataset napolnjen z poročili, ki jih je avtor napisal</returns>
-        public static DataSet VrniPorocilaPoAvtorju(Zaposleni Avtor)
+        /// <returns>Vrne polje poročil napolnjen z poročili, ki jih je avtor napisal</returns>
+        public static Poročilo[] VrniPorocilaPoAvtorju(Zaposleni Avtor)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsaPoročilaPoAvtorju", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniPorocilaPoAvtorju", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.Int));
-            ukaz.Parameters["@Avtor"].Value = Avtor.EMŠO;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            da.Fill(ds, "PoročilaPoAvtorju");
+            List<Poročilo> seznam = new List<Poročilo>();
+
+            while (Bralec.Read())
+            {
+                Poročilo tmp = new Poročilo();
+                if ((Zaposleni)Bralec["Avtor"] == Avtor)
+                {
+                    tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
+                    tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                    tmp.Datum = (DateTime)Bralec["Datum"];
+                    tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
+                    tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
+                    tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
+                    tmp.ŠtevilkaPoročila = (int)Bralec["ŠtevilkaPoročila"];
+                    seznam.Add(tmp);
+                }
+            }
+
+            Poročilo[] ds = seznam.ToArray();
             povezava.Close();
-
             return ds;
         }
 

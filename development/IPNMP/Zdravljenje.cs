@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace IPNMP
@@ -44,9 +46,29 @@ namespace IPNMP
         /// <summary>
         /// Vrne vsa zdravljenja iz podatkovne baze
         /// </summary>
-        public static Zdravljenje VrniVsaZdravljenja()
+        public static Zdravljenje[] VrniVsaZdravljenja()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVsaZdravljenja", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Zdravljenje> seznam = new List<Zdravljenje>();
+
+            while (Bralec.Read())
+            {
+                Zdravljenje tmp = new Zdravljenje();
+                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+                tmp.Tip = (string)Bralec["Tip"];
+                tmp.Opis = (string)Bralec["Opis"];
+                seznam.Add(tmp);
+            }
+
+            Zdravljenje[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
         }
     }
 }

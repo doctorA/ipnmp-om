@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace IPNMP
@@ -8,7 +10,7 @@ namespace IPNMP
     public class Preiskava
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
-        public int Opis
+        public string Opis
         {
             get
             {
@@ -19,7 +21,7 @@ namespace IPNMP
             }
         }
 
-        public int Rezultati
+        public string Rezultati
         {
             get
             {
@@ -30,7 +32,7 @@ namespace IPNMP
             }
         }
 
-        public int DatumObiska
+        public DateTime DatumObiska
         {
             get
             {
@@ -44,9 +46,29 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse preiskave pacienta iz podatkovne baze
         /// </summary>
-        public static void VrniVsePreiskave()
+        public static Preiskava[] VrniVsePreiskave()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVsePreiskave", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Preiskava> seznam = new List<Preiskava>();
+
+            while (Bralec.Read())
+            {
+                Preiskava tmp = new Preiskava();
+                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+                tmp.Opis = (string)Bralec["Opis"];
+                tmp.Rezultati = (string)Bralec["Rezultati"];
+                seznam.Add(tmp);
+            }
+
+            Preiskava[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
         }
     }
 }

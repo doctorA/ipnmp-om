@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace IPNMP
@@ -33,9 +35,28 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse medicinske pripomočke iz podatkovne baze
         /// </summary>
-        public static void VrniVseMedPrip()
+        public static Medicinski_pripomočki[] VrniVseMedPrip()
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVseMedPrip", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Medicinski_pripomočki> seznam = new List<Medicinski_pripomočki>();
+
+            while (Bralec.Read())
+            {
+                Medicinski_pripomočki tmp = new Medicinski_pripomočki();
+                tmp.Kategorija = (string)Bralec["Kategorija"];
+                tmp.Naziv = (string)Bralec["Naziv"];
+                seznam.Add(tmp);
+            }
+
+            Medicinski_pripomočki[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
         }
     }
 }

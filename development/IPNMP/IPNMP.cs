@@ -309,16 +309,28 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse paciente iz podatkovne baze
         /// </summary>
-        public static DataSet VrniVsePacient()
+        public static Pacient[] VrniVsePacient()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVsePacient", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            da.Fill(ds, "Pacienti");
+            List<Pacient> seznam = new List<Pacient>();
+
+            while (Bralec.Read())
+            {
+                Pacient tmp = new Pacient();
+                tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
+                tmp.Teža = (int)Bralec["Teža"];
+                tmp.Višina = (int)Bralec["Višina"];
+                tmp.ZZZS = (int)Bralec["ZZZS"];
+                seznam.Add(tmp);
+            }
+
+            Pacient[] ds = seznam.ToArray();
             povezava.Close();
 
             return ds;
@@ -419,16 +431,28 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene iz podatkovne baze
         /// </summary>
-        public static DataSet VrniVseZaposlene()
+        public static Zaposleni[] VrniVseZaposlene()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVseZaposlene", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            da.Fill(ds, "Zaposleni");
+            List<Zaposleni> seznam = new List<Zaposleni>();
+
+            while (Bralec.Read())
+            {
+                Zaposleni tmp = new Zaposleni();
+                tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+                tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                tmp.Specializacija = (int)Bralec["Specializacija"];
+                tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+                seznam.Add(tmp);
+            }
+
+            Zaposleni[] ds = seznam.ToArray();
             povezava.Close();
 
             return ds;
@@ -500,19 +524,33 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene glede na tip
         /// </summary>
-        public static DataSet VrniVsePoTipu(string TipZaposlenega)
+        public static Zaposleni[] VrniVsePoTipu(string TipZaposlenega)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar));
-            ukaz.Parameters["@TipZaposlenega"].Value = TipZaposlenega;
+            SqlCommand ukaz = new SqlCommand("VrniVsePoTipu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            da.Fill(ds, "Zaposleni");
+            List<Zaposleni> seznam = new List<Zaposleni>();
+
+            while (Bralec.Read())
+            {
+                Zaposleni tmp = new Zaposleni();
+                if ((string)Bralec["TipZaposlenega"] == TipZaposlenega)
+                {
+                    tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+                    tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                    tmp.Specializacija = (int)Bralec["Specializacija"];
+                    tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+                    seznam.Add(tmp);
+                }
+            }
+
+            Zaposleni[] ds = seznam.ToArray();
             povezava.Close();
+
             return ds;
         }
 
