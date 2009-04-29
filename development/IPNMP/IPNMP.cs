@@ -444,13 +444,10 @@ namespace IPNMP
     public class Poročilo
     {
         protected string PotPovezave = "";
-
-        public String OpisDogodka { set; get; }
         public String StanjePacientaObPrispetju { set; get; }
-        public String AkcijeReševalcev { set; get; }
         public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
 
-        public DateTime Datum{            get;            set;        }
+        public DateTime Datum { set; get; }
 
         public Poročilo()
         {
@@ -485,7 +482,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vsa poročila iz podatkovne baze
         /// </summary>
-        public DataSet VrniVsaPorocila()
+        public static DataSet VrniVsaPorocila()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 

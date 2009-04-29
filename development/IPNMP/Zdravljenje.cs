@@ -7,16 +7,6 @@ namespace IPNMP
 {
     public class Zdravljenje
     {
-        public int DatumObiska
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
 
         public string Opis
         {

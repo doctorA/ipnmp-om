@@ -30,3 +30,5 @@ C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\b
 C:\Users\blaz\Documents\SP\IPNMP\ipnmp-om\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
 C:\Users\ZiPi\Documents\Šola\R-IT 2008-09\SP\IPNMP\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\ZiPi\Documents\Šola\R-IT 2008-09\SP\IPNMP\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Documents and Settings\Jebiga\My Documents\SP\checkout\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Documents and Settings\Jebiga\My Documents\SP\checkout\development\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

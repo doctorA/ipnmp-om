@@ -14,8 +14,8 @@
     <Position X="11" Y="4.5" Width="1.5" />
     <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="11" Y="5.66" />
-        <Point X="8.5" Y="5.66" />
+        <Point X="11" Y="5.561" />
+        <Point X="8.5" Y="5.561" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -30,7 +30,7 @@
   <Class Name="IPNMP.Kartoteka">
     <Position X="7" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAoAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAoAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAQAAAAI=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
   </Class>
