@@ -10,6 +10,7 @@ namespace IPNMP
     public class Oseba
     {
         protected static string PotPovezave =  Properties.Settings.Default.ConnectionString;
+        
         /// <summary>
         /// Privzeti konstruktor, ob klicanju pobere parametre, za vzpostavitev povezave z bazo
         /// </summary>
@@ -133,7 +134,9 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 object[] vrednosti = new object[Bralec.FieldCount];
-                Bralec.GetValues(vrednosti);
+                vrednosti[0] = Bralec[0];
+                vrednosti[1] = Bralec[1];
+                
 
             }
 
