@@ -123,7 +123,7 @@ namespace IPNMP
         /// Vrne vse osebe iz podatkovne baze
         /// </summary>
         /// <returns>Vrne napolnjen dataset</returns>
-        public static void VrniVseOsebe()
+        public static Oseba[] VrniVseOsebe()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -131,18 +131,26 @@ namespace IPNMP
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
+          
+            List<Oseba> seznam = new List<Oseba>();
+         
             while (Bralec.Read())
             {
-                object[] vrednosti = new object[Bralec.FieldCount];
-                vrednosti[0] = Bralec[0];
-                vrednosti[1] = Bralec[1];
+                Oseba tmp=new Oseba();
+                tmp.Ime= (string) Bralec["Ime"];
+                tmp.Priimek =(string) Bralec["Priimek"];
+                tmp.Spol = (string)Bralec["Spol"];
+                tmp.EMŠO = (int)Bralec["EMŠO"];
+                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                seznam.Add(tmp);
                 
 
             }
 
+            Oseba[] ds = seznam.ToArray();
             povezava.Close();
 
-            //return ds;
+            return ds;
         }
 
         /// <summary>
