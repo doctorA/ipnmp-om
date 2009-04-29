@@ -9,6 +9,7 @@ namespace IPNMP
 {
     public class Vožnja
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public DateTime ČasKlicanjaReševalcev { set; get; }
 
         public DateTime ČasPrispetjaReševalcev { set; get; }

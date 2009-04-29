@@ -7,7 +7,7 @@ namespace IPNMP
 {
     public class Kartoteka
     {
-
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public IPNMP.Zdravljenje Zdravljenja
         {
             get

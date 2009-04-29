@@ -7,6 +7,7 @@ namespace IPNMP
 {
     public class Preiskava
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public int Opis
         {
             get

@@ -7,6 +7,7 @@ namespace IPNMP
 {
     public class Naslov
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public String Ulica
         {
             set;

@@ -7,6 +7,7 @@ namespace IPNMP
 {
     public class Medicinski_pripomočki
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public string Naziv
         {
             get

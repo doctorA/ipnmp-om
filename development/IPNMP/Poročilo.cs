@@ -9,7 +9,7 @@ namespace IPNMP
 {
     public class Poročilo
     {
-        protected static string PotPovezave = "";
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public String StanjePacientaObPrispetju { set; get; }
         public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
         public String OpisDogodka { set;get;}
@@ -19,7 +19,6 @@ namespace IPNMP
 
         public Poročilo()
         {
-            PotPovezave = Properties.Settings.Default.ConnectionString;
         }
         public Zaposleni Avtor
         {

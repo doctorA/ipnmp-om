@@ -7,6 +7,7 @@ namespace IPNMP
 {
     public class Diagnoza
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public String Tip
         {
             get

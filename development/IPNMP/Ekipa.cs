@@ -7,6 +7,7 @@ namespace IPNMP
 {
     public class Ekipa
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public Zaposleni Vodja
         {
             get

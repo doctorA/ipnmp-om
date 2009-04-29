@@ -7,10 +7,6 @@ using System.Text;
 
 namespace IPNMP
 {
-   
-       
-        
-
     public class Oseba
     {
         protected static string PotPovezave =  Properties.Settings.Default.ConnectionString;
@@ -24,8 +20,6 @@ namespace IPNMP
         /// <param name="EMŠO"></param>
         public Oseba(int EMŠO)
         {
-            PotPovezave = Properties.Settings.Default.ConnectionString;
-
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("OsebaKonstruktor", povezava);
@@ -130,9 +124,6 @@ namespace IPNMP
         /// <returns>Vrne napolnjen dataset</returns>
         public static void VrniVseOsebe()
         {
-            
-
-
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVseOsebe", povezava);
@@ -199,6 +190,7 @@ namespace IPNMP
     /// </summary>
     public class Pacient : Oseba
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public Pacient()
         {
             throw new System.NotImplementedException();
@@ -266,7 +258,6 @@ namespace IPNMP
         /// </summary>
         public void UstvariPacient()
         {
-       
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("PosodobiOsebo", povezava);
@@ -376,6 +367,7 @@ namespace IPNMP
     
     public class Zaposleni : Oseba
     {
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public Zaposleni()
         {
             throw new System.NotImplementedException();
@@ -499,8 +491,6 @@ namespace IPNMP
         /// </summary>
         public static DataSet VrniVsePoTipu(string TipZaposlenega)
         {
-            PotPovezave = Properties.Settings.Default.ConnectionString;
-
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);

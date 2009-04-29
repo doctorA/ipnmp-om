@@ -7,7 +7,7 @@ namespace IPNMP
 {
     public class Zdravljenje
     {
-
+        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public string Opis
         {
             get
