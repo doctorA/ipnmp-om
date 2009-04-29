@@ -50,7 +50,6 @@
     <Compile Include="Diagnoza.cs" />
     <Compile Include="Ekipa.cs" />
     <Compile Include="IPNMP.cs" />
-    <Compile Include="IPNMPdb1.cs" />
     <Compile Include="Kartoteka.cs" />
     <Compile Include="Kraj.cs" />
     <Compile Include="Medicinski_pripomočki.cs" />
@@ -68,7 +67,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Terapija.cs" />
     <Compile Include="Vo+żnja.cs" />
     <Compile Include="Zdravljenje.cs" />
   </ItemGroup>

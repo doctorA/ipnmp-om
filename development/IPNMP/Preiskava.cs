@@ -43,7 +43,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse preiskave pacienta iz podatkovne baze
         /// </summary>
-        public void VrniVsePreiskave()
+        public static void VrniVsePreiskave()
         {
             throw new System.NotImplementedException();
         }

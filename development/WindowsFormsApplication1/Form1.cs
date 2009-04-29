@@ -39,8 +39,7 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Oseba tmp = new Oseba();
-            tmp.VrniVseOsebe();
+          
             
            
         }
@@ -54,14 +53,10 @@ namespace WindowsFormsApplication1
             oseba.DatumRojstva = Convert.ToDateTime(textBox4.Text);
             oseba.Spol = textBox5.Text;
             oseba.PosodobiOsebo();
-            Poročilo list = new Poročilo();
+            
 
             
-            Poročilo poročila = new Poročilo();
-            Zaposleni nekdo = new Zaposleni();
-            nekdo.Ime="wolf";
-            poročila.Avtor=nekdo;
-            nekdo.Poročila = poročila.VrniPorocilaPoAvtorju();
+            
             
 
             

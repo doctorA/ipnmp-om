@@ -8,20 +8,69 @@ namespace IPNMP
     public class Kartoteka
     {
 
+        public IPNMP.Zdravljenje Zdravljenja
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public IPNMP.Diagnoza Diagnoze
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public IPNMP.Preiskava Preiskave
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public Medicinski_pripomočki Medicinski_pripomocki
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public int ŠtevilkaKartoteke
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         /// <summary>
-        /// Ustvari novo kartoteko v podatkovni bazi
+        /// Vrne kartoteko pacienta iz podatkovne baze
         /// </summary>
-        public void UstvariKartoteko()
+        /// <param name="ŠtevilkaKartoteke">Vrne kartoteko iz podatkovne baze glede na številko kartoteke</param>
+        public static void VrniKartoteko(Kartoteka ŠtevilkaKartoteke)
         {
             throw new System.NotImplementedException();
         }
 
-        /// <summary>
-        /// Vrne kartoteko iz podatkovne baze
-        /// </summary>
-        public Kartoteka VrniKartoteko()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

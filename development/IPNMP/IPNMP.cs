@@ -13,7 +13,7 @@ namespace IPNMP
 
     public class Oseba
     {
-        protected string PotPovezave = "";
+        protected static string PotPovezave = "";
         /// <summary>
         /// Privzeti konstruktor, ob klicanju pobere parametre, za vzpostavitev povezave z bazo
         /// </summary>
@@ -130,7 +130,7 @@ namespace IPNMP
         /// Vrne vse osebe iz podatkovne baze
         /// </summary>
         /// <returns>Vrne napolnjen dataset</returns>
-        public DataSet VrniVseOsebe()
+        public static DataSet VrniVseOsebe()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -180,7 +180,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne osebo iz podatkovne baze glede na emšo
         /// </summary>
-        public Oseba VrniOseboEmšo()
+        public static Oseba VrniOseboEmšo()
         {
             throw new System.NotImplementedException();
         }
@@ -250,7 +250,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne paciente iz podatkovne baze glede na številko ZZZS
         /// </summary>
-        public Pacient VrniPacientZZZS()
+        public static Pacient VrniPacientZZZS()
         {
             throw new System.NotImplementedException();
         }
@@ -301,7 +301,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse paciente iz podatkovne baze
         /// </summary>
-        public DataSet VrniVsePacient()
+        public static DataSet VrniVsePacient()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -367,196 +367,7 @@ namespace IPNMP
 
 
     }
-    /// <summary>
-    /// Karoteka obiskov pri zdravniku
-    /// </summary>
-    public class Kartoteka
-    {
-
-        public IPNMP.Zdravljenje Zdravljenja
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public IPNMP.Diagnoza Diagnoze
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public IPNMP.Preiskava Preiskave
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public Medicinski_pripomočki Medicinski_pripomocki
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public int ŠtevilkaKartoteke
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        /// <summary>
-        /// Vrne kartoteko pacienta iz podatkovne baze
-        /// </summary>
-        /// <param name="ŠtevilkaKartoteke">Vrne kartoteko iz podatkovne baze glede na številko kartoteke</param>
-        public void VrniKartoteko(Kartoteka ŠtevilkaKartoteke)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        }
-    /// <summary>
-    /// Poročila ob prispetju reševalnega vozila
-    /// </summary>
-    public class Poročilo
-    {
-        protected string PotPovezave = "";
-        public String StanjePacientaObPrispetju { set; get; }
-        public String StanjePacientaObPrispetjuVBolnišnico { set; get; }
-
-        public DateTime Datum { set; get; }
-
-        public Poročilo()
-        {
-            PotPovezave = Properties.Settings.Default.ConnectionString;
-        }
-        public Zaposleni Avtor
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Vrne vsa poročila glede na datum kreacije poročila
-        /// </summary>
-        public DataSet VrniPorocilaPoDatumu()
-        {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
-
-            SqlCommand ukaz = new SqlCommand("VrniVsaPoročilaPoDatumu", povezava);
-            ukaz.CommandType = CommandType.StoredProcedure;
-            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.Date));
-            ukaz.Parameters["@Datum"].Value = this.Datum;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
-
-            da.Fill(ds, "PoročilaPoDatumu");
-            povezava.Close();
-
-            return ds;
-        }
-
-        /// <summary>
-        /// Vrne vsa poročila iz podatkovne baze
-        /// </summary>
-        public static DataSet VrniVsaPorocila()
-        {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
-
-            SqlCommand ukaz = new SqlCommand("VrniVsaPoročila", povezava);
-            ukaz.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
-
-            da.Fill(ds, "Poročila");
-            povezava.Close();
-
-            return ds;
-        }
-
-        /// <summary>
-        /// Ustvari poročilo v podatkovni bazi
-        /// </summary>
-        public void UstvariPorocilo()
-        {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
-
-            SqlCommand ukaz = new SqlCommand("UstvariPorocilo", povezava);
-
-            ukaz.Parameters.Add(new SqlParameter("@AkcijeResevalcev", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetjuVBolnisnico", SqlDbType.NVarChar));
-
-            ukaz.Parameters["@AkcijeResevalcev"].Value = this.AkcijeReševalcev;
-            ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
-            ukaz.Parameters["@Datum"].Value = this.Datum;
-            ukaz.Parameters["@OpisDogotka"].Value = this.OpisDogodka;
-            ukaz.Parameters["@StanjePacientaObPrispetju"].Value = this.StanjePacientaObPrispetju;
-            ukaz.Parameters["@StanjePacientaObPrispetjuVBolnisnico"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
-
-            ukaz.CommandType = CommandType.StoredProcedure;
-            povezava.Open();
-            ukaz.ExecuteNonQuery();
-            povezava.Close();
-        }
-        /// <summary>
-        /// Metoda poišče poročila v podatkovni bazi glede na podanega avtorja(njegov emšo)
-        /// </summary>
-        /// <returns>Vrne Dataset napolnjen z poročili, ki jih je avtor napisal</returns>
-        public DataSet VrniPorocilaPoAvtorju(Zaposleni Avtor)
-        {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
-
-            SqlCommand ukaz = new SqlCommand("VrniVsaPoročilaPoAvtorju", povezava);
-            ukaz.CommandType = CommandType.StoredProcedure;
-            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.Int));
-            ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
-
-            da.Fill(ds, "PoročilaPoAvtorju");
-            povezava.Close();
-
-            return ds;
-        }
-
-        public int ŠtevilkaPoročila
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-    }
+    
     public class Zaposleni : Oseba
     {
         public Zaposleni()
@@ -599,7 +410,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene iz podatkovne baze
         /// </summary>
-        public DataSet VrniVseZaposlene()
+        public static DataSet VrniVseZaposlene()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -680,7 +491,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene glede na tip
         /// </summary>
-        public DataSet VrniVsePoTipu(string TipZaposlenega)
+        public static DataSet VrniVsePoTipu(string TipZaposlenega)
         {
             PotPovezave = Properties.Settings.Default.ConnectionString;
 

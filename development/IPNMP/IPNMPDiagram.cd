@@ -14,8 +14,8 @@
     <Position X="11" Y="4.5" Width="1.5" />
     <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="11" Y="5.561" />
-        <Point X="8.5" Y="5.561" />
+        <Point X="11" Y="5.462" />
+        <Point X="8.5" Y="5.462" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -30,15 +30,17 @@
   <Class Name="IPNMP.Kartoteka">
     <Position X="7" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAoAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAQAAAAI=</HashCode>
-      <FileName>IPNMP.cs</FileName>
+      <HashCode>AAAAoAACAAAAAAAAABAAgAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Kartoteka.cs</FileName>
+      <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Poročilo">
     <Position X="16.25" Y="3.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AIAACAAAAAAAAAEBAAAARAAAAQACAAAQAAQAAAABAAA=</HashCode>
-      <FileName>IPNMP.cs</FileName>
+      <FileName>Poročilo.cs</FileName>
+      <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
@@ -87,7 +89,8 @@
     <Position X="5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAAABCAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
-      <FileName>Terapija.cs</FileName>
+      <FileName>Zdravljenje.cs</FileName>
+      <NewMemberFileName>Terapija.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Kraj">

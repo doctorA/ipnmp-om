@@ -30,10 +30,21 @@ namespace IPNMP
             }
         }
 
+        public DateTime DatumObiska
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Vrne vsa zdravljenja iz podatkovne baze
         /// </summary>
-        public Zdravljenje VrniVsaZdravljenja()
+        public static Zdravljenje VrniVsaZdravljenja()
         {
             throw new System.NotImplementedException();
         }

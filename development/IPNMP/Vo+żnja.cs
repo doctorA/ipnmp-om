@@ -58,7 +58,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse vožnje iz podatkovne baze glede na ekipo
         /// </summary>
-        public DataSet VrniVoznjePoEkipi()
+        public static DataSet VrniVoznjePoEkipi()
         {
             throw new System.NotImplementedException();
         }
@@ -66,7 +66,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse vožnje v podatkovni bazi
         /// </summary>
-        public DataSet VrniVseVoznje()
+        public static DataSet VrniVseVoznje()
         {
             throw new System.NotImplementedException();
         }
