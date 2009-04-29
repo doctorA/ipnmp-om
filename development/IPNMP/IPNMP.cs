@@ -13,14 +13,11 @@ namespace IPNMP
 
     public class Oseba
     {
-        protected static string PotPovezave = "";
+        protected static string PotPovezave =  Properties.Settings.Default.ConnectionString;
         /// <summary>
         /// Privzeti konstruktor, ob klicanju pobere parametre, za vzpostavitev povezave z bazo
         /// </summary>
-        public Oseba()
-        {
-            PotPovezave = Properties.Settings.Default.ConnectionString;
-        }
+        
         /// <summary>
         /// Nastavi parametre osebe glede na vpisani emšo
         /// </summary>
@@ -62,6 +59,7 @@ namespace IPNMP
             this.Spol = vrstica["Spol"].ToString();
 
         }
+        public Oseba() { }
         public String Ime { set; get; }
         public String Priimek { set; get; }
         public int EMŠO { set; get; }
@@ -130,19 +128,27 @@ namespace IPNMP
         /// Vrne vse osebe iz podatkovne baze
         /// </summary>
         /// <returns>Vrne napolnjen dataset</returns>
-        public static DataSet VrniVseOsebe()
+        public static void VrniVseOsebe()
         {
+            
+
+
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVseOsebe", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(ukaz);
-            DataSet ds = new DataSet();
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            while (Bralec.Read())
+            {
+                object[] vrednosti = new object[Bralec.FieldCount];
+                Bralec.GetValues(vrednosti);
 
-            da.Fill(ds, "Osebe");
+            }
+
             povezava.Close();
 
-            return ds;
+            //return ds;
         }
 
         /// <summary>
