@@ -59,25 +59,68 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse vožnje iz podatkovne baze glede na ekipo
         /// </summary>
-        public static DataSet VrniVoznjePoEkipi()
+        /// <param name="ImeEkipe">Ime ekipe, za katero želite dobiti vsa poročila</param>
+        public static IPNMP.Vožnja[] VrniVoznjePoEkipi(string ImeEkipe)
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVoznjePoEkipi", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Vožnja> seznam = new List<Vožnja>();
+
+            while (Bralec.Read())
+            {
+                Vožnja tmp = new Vožnja();
+                if ((string)Bralec["Ekipa"] == ImeEkipe)
+                {
+                    tmp.ČasDogodka = (DateTime)Bralec["ČasDogodka"];
+                    tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["ČasKlicanjaReševalcev"];
+                    tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["ČasPrispetjaReševalcev"];
+                    tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["ČasPrispetjaVBolnišnico"];
+                    tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                    tmp.Kilometrina = (int)Bralec["Kilometrina"];
+                    seznam.Add(tmp);
+                }
+            }
+
+            Vožnja[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
         }
+                
 
         /// <summary>
         /// Vrne vse vožnje v podatkovni bazi
         /// </summary>
-        public static DataSet VrniVseVoznje()
+        public static IPNMP.Vožnja[] VrniVseVoznje()
         {
-            throw new System.NotImplementedException();
-        }
+            SqlConnection povezava = new SqlConnection(PotPovezave);
 
-        /// <summary>
-        /// Vrne vožnje glede na čas dogodka
-        /// </summary>
-        public DataSet VrniVoznjePoCasuDogodka()
-        {
-            throw new System.NotImplementedException();
+            SqlCommand ukaz = new SqlCommand("VrniVseVoznje", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Vožnja> seznam = new List<Vožnja>();
+
+            while (Bralec.Read())
+            {
+                Vožnja tmp = new Vožnja();
+                mp.ČasDogodka = (DateTime)Bralec["ČasDogodka"];
+                tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["ČasKlicanjaReševalcev"];
+                tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["ČasPrispetjaReševalcev"];
+                tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["ČasPrispetjaVBolnišnico"];
+                tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                tmp.Kilometrina = (int)Bralec["Kilometrina"];
+                seznam.Add(tmp);
+            }
+
+            Vožnja[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
         }
 
         /// <summary>
@@ -86,7 +129,33 @@ namespace IPNMP
         /// <param name="cas_dogodka">Čas dogodka YYYY-MM-DD HH:MM:SS</param>
         public IPNMP.Vožnja[] VrniVoznjePoCasuDogodka(DateTime cas_dogodka)
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVoznjePoCasuDogodka", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Vožnja> seznam = new List<Vožnja>();
+
+            while (Bralec.Read())
+            {
+                Vožnja tmp = new Vožnja();
+                if ((DateTime)Bralec["ČasDogodka"] == cas_dogodka)
+                {
+                    tmp.ČasDogodka = (DateTime)Bralec["ČasDogodka"];
+                    tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["ČasKlicanjaReševalcev"];
+                    tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["ČasPrispetjaReševalcev"];
+                    tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["ČasPrispetjaVBolnišnico"];
+                    tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                    tmp.Kilometrina = (int)Bralec["Kilometrina"];
+                    seznam.Add(tmp);
+                }
+            }
+
+            Vožnja[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
         }
 
         /// <summary>

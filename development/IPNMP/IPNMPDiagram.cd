@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Poročilo">
-    <Position X="16.25" Y="3.25" Width="2.5" />
+    <Position X="16.25" Y="4" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AIAACAAAAAAAAAEBAAAARAAAAQACAAAQAAQAAAABAAA=</HashCode>
       <FileName>Poročilo.cs</FileName>
@@ -44,7 +44,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
-    <Position X="13" Y="3.5" Width="2" />
+    <Position X="13" Y="4" Width="2" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAgAAABAAAAACAACAAgAAAAAhAACAAEAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
@@ -72,21 +72,21 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Diagnoza">
-    <Position X="6.75" Y="6.5" Width="1.5" />
+    <Position X="7" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAABBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Diagnoza.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Preiskava">
-    <Position X="8.5" Y="6.5" Width="1.5" />
+    <Position X="8.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAgAAAABBAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Preiskava.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zdravljenje">
-    <Position X="5" Y="6.5" Width="1.5" />
+    <Position X="5.25" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAAABBCAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Zdravljenje.cs</FileName>
@@ -101,14 +101,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Ekipa">
-    <Position X="15.5" Y="1.25" Width="1.5" />
+    <Position X="15.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAIAAAAAAAAAABACAAAAAABQAAAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Ekipa.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Medicinski_pripomočki">
-    <Position X="5" Y="4.5" Width="1.5" />
+    <Position X="5.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAABBAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Medicinski_pripomočki.cs</FileName>
