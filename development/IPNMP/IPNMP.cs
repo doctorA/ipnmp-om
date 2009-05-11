@@ -102,15 +102,15 @@ namespace IPNMP
         }
 
         /// <summary>
-        /// Izbriše osebo iz podatkovne baze, glede na EMŠO
+        /// Izbriše osebo iz podatkovne baze, glede na EMŠO objekta
         /// </summary>
-        /// <param name="EMŠO">Unikatna številka Osebe ,tipa int</param>
-        public void IzbrisiOsebo(int EMŠO)
+        
+        public void IzbrisiOsebo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiOsebo", povezava);
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -411,7 +411,7 @@ namespace IPNMP
             set;
         }
 
-        public Ekipa Ekipa
+        public int ŠtevilkaEkipe
         {
             get;
             set;
@@ -446,7 +446,7 @@ namespace IPNMP
             {
                 Zaposleni tmp = new Zaposleni();
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-                tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                 tmp.Specializacija = (int)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
                 seznam.Add(tmp);
@@ -490,7 +490,7 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiZaposlenega", povezava);
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -541,13 +541,67 @@ namespace IPNMP
                 if ((string)Bralec["TipZaposlenega"] == TipZaposlenega)
                 {
                     tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-                    tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                    tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                     tmp.Specializacija = (int)Bralec["Specializacija"];
                     tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
                     seznam.Add(tmp);
                 }
             }
 
+            Zaposleni[] ds = seznam.ToArray();
+            povezava.Close();
+
+            return ds;
+        }
+
+        /// <summary>
+        /// Vrne zaposlenega iz baze glede na podano zzzs številko
+        /// </summary>
+        public static Zaposleni VrniZaposlenegaZZZS(int ZZZS)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniZaposlenegaZZZS", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
+            ukaz.Parameters["@ZZZS"].Value = ZZZS;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Zaposleni tmp = new Zaposleni();
+            Bralec.Read();
+                    tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+                    tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
+                    tmp.Specializacija = (int)Bralec["Specializacija"];
+                    tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+                    
+            povezava.Close();
+            return tmp;
+        }
+
+        public static IPNMP.Zaposleni[] VrniZaposlenePoEkipi(int ŠtevilkaEkipe)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniZaposlenePoEkipi", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaEkipe", SqlDbType.Int));
+            ukaz.Parameters["@ŠtevilkaEkipe"].Value = ŠtevilkaEkipe;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            List<Zaposleni> seznam = new List<Zaposleni>();
+
+            while (Bralec.Read())
+            {
+                Zaposleni tmp = new Zaposleni();
+                if ((int)Bralec["ŠtevilkaEkipe"] == ŠtevilkaEkipe)
+                {
+                    tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+                    tmp.ŠtevilkaEkipe = ŠtevilkaEkipe;
+                    tmp.Specializacija = (int)Bralec["Specializacija"];
+                    tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+                    seznam.Add(tmp);
+                }
+            }
             Zaposleni[] ds = seznam.ToArray();
             povezava.Close();
 

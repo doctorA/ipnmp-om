@@ -33,13 +33,15 @@ namespace WindowsFormsApplication1
         {
            int EMŠO = Convert.ToInt32(textBox3.Text);
            Oseba tmp = new Oseba();
-                tmp.IzbrisiOsebo(EMŠO);
-            
+           tmp.EMŠO = EMŠO;
+                tmp.IzbrisiOsebo();
+                Ekipa nekaj = new Ekipa();
+          
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Oseba.VrniVseOsebe();
+            Oseba[] lastnosti =Oseba.VrniVseOsebe();
             
            
         }

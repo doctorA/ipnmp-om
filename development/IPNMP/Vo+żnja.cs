@@ -45,7 +45,7 @@ namespace IPNMP
             }
         }
 
-        public Ekipa Ekipa
+        public int ŠtevilkaEkipe
         {
             get
             {
@@ -74,13 +74,13 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Vožnja tmp = new Vožnja();
-                if ((string)Bralec["Ekipa"] == ImeEkipe)
+                if ((string)Bralec["ŠtevilkaEkipe"] == ImeEkipe)
                 {
                     tmp.ČasDogodka = (DateTime)Bralec["ČasDogodka"];
                     tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["ČasKlicanjaReševalcev"];
                     tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["ČasPrispetjaReševalcev"];
                     tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["ČasPrispetjaVBolnišnico"];
-                    tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                    tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                     tmp.Kilometrina = (int)Bralec["Kilometrina"];
                     seznam.Add(tmp);
                 }
@@ -109,15 +109,15 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Vožnja tmp = new Vožnja();
-                mp.ČasDogodka = (DateTime)Bralec["ČasDogodka"];
+                tmp.ČasDogodka = (DateTime)Bralec["ČasDogodka"];
                 tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["ČasKlicanjaReševalcev"];
                 tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["ČasPrispetjaReševalcev"];
                 tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["ČasPrispetjaVBolnišnico"];
-                tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                 tmp.Kilometrina = (int)Bralec["Kilometrina"];
                 seznam.Add(tmp);
             }
-
+            
             Vožnja[] ds = seznam.ToArray();
             povezava.Close();
             return ds;
@@ -147,7 +147,7 @@ namespace IPNMP
                     tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["ČasKlicanjaReševalcev"];
                     tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["ČasPrispetjaReševalcev"];
                     tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["ČasPrispetjaVBolnišnico"];
-                    tmp.Ekipa = (Ekipa)Bralec["Ekipa"];
+                    tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                     tmp.Kilometrina = (int)Bralec["Kilometrina"];
                     seznam.Add(tmp);
                 }
