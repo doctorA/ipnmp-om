@@ -8,68 +8,51 @@ namespace IPNMP
     public class Kartoteka
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
-        public IPNMP.Zdravljenje Zdravljenja
+        public IPNMP.Zdravljenje[] Zdravljenja
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+
+            get;
+            set;
         }
 
         public IPNMP.Diagnoza Diagnoze
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
-        public IPNMP.Preiskava Preiskave
+        public IPNMP.Preiskava[] Preiskave
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
-        public Medicinski_pripomočki Medicinski_pripomocki
+        public IPNMP.Medicinski_pripomočki[] Medicinski_pripomocki
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public int ŠtevilkaKartoteke
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
+
+        
 
         /// <summary>
         /// Vrne kartoteko pacienta iz podatkovne baze
         /// </summary>
         /// <param name="ŠtevilkaKartoteke">Vrne kartoteko iz podatkovne baze glede na številko kartoteke</param>
-        public static void VrniKartoteko(Kartoteka ŠtevilkaKartoteke)
+        public static Kartoteka VrniKartoteko(int ŠtevilkaKartoteke)
         {
-            throw new System.NotImplementedException();
+            Kartoteka tmp = new Kartoteka();
+            tmp.Diagnoze = Diagnoza.VrniDiagnoze(ŠtevilkaKartoteke);
+            tmp.Zdravljenja = Zdravljenje.VrniZdravljenja(ŠtevilkaKartoteke);
+            tmp.Preiskave = Preiskava.VrniPreiskave(ŠtevilkaKartoteke);
+            tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniMedPrip(ŠtevilkaKartoteke);
+            return tmp;
         }
 
     }

@@ -12,24 +12,14 @@ namespace IPNMP
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public string Naziv
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public string Kategorija
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         /// <summary>

@@ -10,37 +10,22 @@ namespace IPNMP
     public class Diagnoza
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
-        public int Tip
+        public string Tip
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public string Opis
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         public DateTime DatumObiska
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -62,7 +47,7 @@ namespace IPNMP
                 Diagnoza tmp = new Diagnoza();
                 tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Opis = (string)Bralec["Opis"];
-                tmp.Tip = (int)Bralec["Tip"];
+                tmp.Tip = (string)Bralec["Tip"];
                 seznam.Add(tmp);
             }
 
