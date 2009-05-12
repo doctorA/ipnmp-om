@@ -46,7 +46,7 @@ namespace IPNMP
                 if ((DateTime)Bralec["Datum"] == datum)
                 {
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                    tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                    tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
                     tmp.Datum = (DateTime)Bralec["Datum"];
                     tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
@@ -79,7 +79,7 @@ namespace IPNMP
             {
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
                 tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     
