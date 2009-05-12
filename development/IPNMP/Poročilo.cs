@@ -20,6 +20,9 @@ namespace IPNMP
         public Poročilo()
         {
         }
+        /// <summary>
+        /// V podatkovni bazi je to emšo osebe
+        /// </summary>
         public Zaposleni Avtor
         {
             get;

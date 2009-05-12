@@ -20,29 +20,7 @@ namespace IPNMP
 
         public  Vožnja()
         {
-            
-        }
 
-        public Naslov Naslov
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
-
-        public IPNMP.Poročilo[] Poročila
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
         }
 
         public int ŠtevilkaEkipe
