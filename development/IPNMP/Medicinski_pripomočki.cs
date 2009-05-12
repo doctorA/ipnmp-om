@@ -53,7 +53,7 @@ namespace IPNMP
         /// Vrne vse medicinske pripomočke iz podatkovne baze glede na ID kartoteke
         /// </summary>
         /// <param name="StevilkaKartoteke">ID številka kartoteke</param>
-        public IPNMP.Medicinski_pripomočki[] VrniVseMedPripPoID(int StevilkaKartoteke)
+        public static IPNMP.Medicinski_pripomočki[] VrniVseMedPripPoID(int StevilkaKartoteke)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 

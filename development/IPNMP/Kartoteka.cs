@@ -15,7 +15,7 @@ namespace IPNMP
             set;
         }
 
-        public IPNMP.Diagnoza Diagnoze
+        public IPNMP.Diagnoza[] Diagnoze
         {
             get;
             set;
@@ -49,9 +49,9 @@ namespace IPNMP
         {
             Kartoteka tmp = new Kartoteka();
             tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
-            tmp.Zdravljenja = Zdravljenje.VrniZdravljenjaPoID(ŠtevilkaKartoteke);
-            tmp.Preiskave = Preiskava.VrniPreiskavePoID(ŠtevilkaKartoteke);
-            tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniMedPripPoID(ŠtevilkaKartoteke);
+            tmp.Zdravljenja = Zdravljenje.VrniVsaZdravljenjaPoID(ŠtevilkaKartoteke);
+            tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(ŠtevilkaKartoteke);
+            tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(ŠtevilkaKartoteke);
             return tmp;
         }
 

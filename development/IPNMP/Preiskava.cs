@@ -60,7 +60,7 @@ namespace IPNMP
         /// Vrne vse preiskave pacienta iz podatkovne baze glede na ID kartoteke
         /// </summary>
         /// <param name="StevilkaKartoteke">ID številka kartoteke</param>
-        public IPNMP.Preiskava[] VrniVsePreiskavePoID(int StevilkaKartoteke)
+        public static IPNMP.Preiskava[] VrniVsePreiskavePoID(int StevilkaKartoteke)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
