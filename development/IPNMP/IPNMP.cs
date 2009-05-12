@@ -83,14 +83,14 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@IDNaslova", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Naslov", SqlDbType.NVarChar,255));
             ukaz.Parameters.Add(new SqlParameter("@DatumRojstva", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@Spol", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@Ime"].Value = this.Ime;
             ukaz.Parameters["@Priimek"].Value = this.Priimek;
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
-            ukaz.Parameters["@IDNaslov"].Value = this.Naslov;
+            ukaz.Parameters["@Naslov"].Value = this.Naslov;
             ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
             ukaz.Parameters["@Spol"].Value = this.Spol;
 
@@ -202,11 +202,15 @@ namespace IPNMP
     public class Pacient : Oseba
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
-
-        /// <param name="ZZZS">Napolni objekt iz baze s pomočjo zzzs številke</param>
         public Pacient()
         {
-           
+            throw new System.NotImplementedException();
+        }
+
+        /// <param name="ZZZS">Napolni objekt iz baze s pomočjo zzzs številke</param>
+        public Pacient(int ZZZS)
+        {
+            throw new System.NotImplementedException();
         }
      
         /// <summary>
@@ -217,29 +221,40 @@ namespace IPNMP
         /// Teža v gramih
         /// </summary>
         public int Teža { set; get; }
-        /// <summary>
-        /// Krvna skupina 
-        /// </summary>
         public String KrvnaSkupina { set; get; }
-        /// <summary>
-        /// Številka zdravstvenega zavarovanja
-        /// </summary>
+
         public int ZZZS
         {
-            get;
-            set;
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
         }
 
-        /// <summary>
-        /// Kartoteka, ki pripada vsakemu pacientu
-        /// </summary>
         public IPNMP.Kartoteka Kartoteka
         {
-            get;
-            set;
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
         }
 
-       
+        public Poročilo Poročilo
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
 
         /// <summary>
         /// Vrne paciente iz podatkovne baze glede na številko ZZZS
@@ -261,12 +276,10 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
 
             ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@Teža"].Value = this.Teža;
-            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
             ukaz.Parameters["@Višina"].Value = this.Višina;
             ukaz.Parameters["@ZZZS"].Value = this.ZZZS;
 
@@ -277,15 +290,15 @@ namespace IPNMP
         }
 
         /// <summary>
-        /// Izbriše pacienta iz podatkovne baze glede na njegovo številko EMŠO
+        /// Izbriše pacienta iz podatkovne baze glede na njegovo številko ZZZS
         /// </summary>
-        /// <param name="EMŠO">številka EMŠO</param>
-        public void IzbrisiPacient(int EMŠO)
+        /// <param name="ZZZS">številka ZZZS</param>
+        public void IzbrisiPacient(int ZZZS)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiPacient", povezava);
             ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.Parameters["@ZZZS"].Value = ZZZS;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -296,11 +309,11 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse paciente iz podatkovne baze
         /// </summary>
-        public static Pacient[] VrniVsePaciente()
+        public static Pacient[] VrniVsePacient()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePaciente", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniVsePacient", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -314,7 +327,6 @@ namespace IPNMP
                 tmp.Teža = (int)Bralec["Teža"];
                 tmp.Višina = (int)Bralec["Višina"];
                 tmp.ZZZS = (int)Bralec["ZZZS"];
-                tmp.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
                 seznam.Add(tmp);
             }
 
@@ -337,11 +349,7 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
-         
 
- 
-            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
             ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@Teža"].Value = this.Teža;
             ukaz.Parameters["@Višina"].Value = this.Višina;
@@ -356,47 +364,31 @@ namespace IPNMP
         /// <summary>
         /// Vrne starost v letih, izračunano s pomočjo datuma rojstva
         /// </summary>
-        public void VrniStarost()
+        public String VrniStarost()
         {
-            
-            
-          
+            DateTime datum_roj = this.DatumRojstva;
+            DateTime trenutni_datum = DateTime.Today;
+
+            TimeSpan izracun = trenutni_datum - datum_roj;
+            int starost = (int)(izracun.TotalDays / 365.255);   //deljenje dni z 365.255 popravi problem prestopnega leta
+                                                                //0.25 za prestopna leta, 0.005 za ostale popravke (razna prestavljanja ur itd.)
+            return starost.ToString();
         }
 
         /// <summary>
         /// Vrne vse alergije ki jih pacient ima (spada pod Diagnoze)
         /// </summary>
-        public Diagnoza[] VrniAlergije()
+        public DataSet VrniAlergije()
         {
-            List<Diagnoza> seznam = new List<Diagnoza>();
-            foreach (Diagnoza d in this.Kartoteka.Diagnoze)
-            {
-                if (d.Tip == "Alergija")
-                {
-
-                    seznam.Add(d);
-                }
-
-            }
-            return seznam.ToArray();         
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
         /// Vrne vse operacije, ki jih je pacient imel(spada pod zdravljenje)
         /// </summary>
-        public Zdravljenje[] VrniOperacije()
+        public DataSet VrniOperacije()
         {
-            List<Zdravljenje> seznam = new List<Zdravljenje>();
-            foreach (Zdravljenje d in this.Kartoteka.Zdravljenja)
-            {
-                if (d.Tip == "Operacija")
-                {
-
-                    seznam.Add(d);
-                }
-
-            }
-            return seznam.ToArray();    
+            throw new System.NotImplementedException();
         }
 
 
