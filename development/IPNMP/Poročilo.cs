@@ -168,5 +168,41 @@ namespace IPNMP
             {
             }
         }
+
+        /// <summary>
+        /// Vrne poročilo iiz podatkovne baze glede na ID številko poročila
+        /// </summary>
+        /// <param name="StevilkaPorocila">ID številka poročila</param>
+        public static IPNMP.Poročilo[] VrniPorociloPoID(int StevilkaPorocila)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniPorociloPoID", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaPoročila", SqlDbType.Int));
+            ukaz.Parameters["@ŠtevilkaPoročila"].Value = StevilkaPorocila;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Poročilo> seznam = new List<Poročilo>();
+
+            while (Bralec.Read())
+            {
+                Poročilo tmp = new Poročilo();
+                tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
+                tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                tmp.Datum = (DateTime)Bralec["Datum"];
+                tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
+
+                tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
+                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
+                tmp.ŠtevilkaPoročila = (int)Bralec["ŠtevilkaPoročila"];
+                seznam.Add(tmp);
+            }
+
+            Poročilo[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
+        }
     }
 }
