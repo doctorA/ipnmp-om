@@ -55,5 +55,36 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+
+        /// <summary>
+        /// Vrne vsa zdravljenja iz podatkovne baze glede na ID kartoteke
+        /// </summary>
+        /// <param name="StevilkaKartoteke">ID številka kartoteke</param>
+        public static IPNMP.Zdravljenje[] VrniVsaZdravljenjaPoID(int StevilkaKartoteke)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVsaZdravljenjaPoID", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
+            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = StevilkaKartoteke;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Zdravljenje> seznam = new List<Zdravljenje>();
+
+            while (Bralec.Read())
+            {
+                Zdravljenje tmp = new Zdravljenje();
+                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+                tmp.Tip = (string)Bralec["Tip"];
+                tmp.Opis = (string)Bralec["Opis"];
+                seznam.Add(tmp);
+            }
+
+            Zdravljenje[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
+        }
     }
 }

@@ -48,10 +48,10 @@ namespace IPNMP
         public static Kartoteka VrniKartoteko(int ŠtevilkaKartoteke)
         {
             Kartoteka tmp = new Kartoteka();
-            tmp.Diagnoze = Diagnoza.VrniDiagnoze(ŠtevilkaKartoteke);
-            tmp.Zdravljenja = Zdravljenje.VrniZdravljenja(ŠtevilkaKartoteke);
-            tmp.Preiskave = Preiskava.VrniPreiskave(ŠtevilkaKartoteke);
-            tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniMedPrip(ŠtevilkaKartoteke);
+            tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
+            tmp.Zdravljenja = Zdravljenje.VrniZdravljenjaPoID(ŠtevilkaKartoteke);
+            tmp.Preiskave = Preiskava.VrniPreiskavePoID(ŠtevilkaKartoteke);
+            tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniMedPripPoID(ŠtevilkaKartoteke);
             return tmp;
         }
 
