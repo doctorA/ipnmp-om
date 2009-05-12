@@ -190,7 +190,7 @@ namespace IPNMP
             {
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                tmp.Avtor = (Zaposleni)Bralec["Avtor"];
+                tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
                 tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
 
