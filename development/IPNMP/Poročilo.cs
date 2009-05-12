@@ -60,6 +60,31 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+        public void PosodobiPorocilo()
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("PosodobiPorocilo", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@AkcijeResevalcev", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetjuVBolnisnico", SqlDbType.NVarChar));
+
+            ukaz.Parameters["@AkcijeResevalcev"].Value = this.AkcijeReševalcev;
+            ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
+            ukaz.Parameters["@Datum"].Value = this.Datum;
+            ukaz.Parameters["@OpisDogotka"].Value = this.OpisDogodka;
+            ukaz.Parameters["@StanjePacientaObPrispetju"].Value = this.StanjePacientaObPrispetju;
+            ukaz.Parameters["@StanjePacientaObPrispetjuVBolnisnico"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
 
         /// <summary>
         /// Vrne vsa poročila iz podatkovne baze
