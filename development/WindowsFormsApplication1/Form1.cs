@@ -25,6 +25,7 @@ namespace WindowsFormsApplication1
             oseba.EMŠO=Convert.ToInt32(textBox3.Text);
             oseba.DatumRojstva=Convert.ToDateTime(textBox4.Text);
             oseba.Spol=textBox5.Text;
+            Pacient pac = new Pacient();
            
             
         }
@@ -35,7 +36,7 @@ namespace WindowsFormsApplication1
            Oseba tmp = new Oseba();
            tmp.EMŠO = EMŠO;
                 tmp.IzbrisiOsebo();
-                Ekipa nekaj = new Ekipa();
+              
           
         }
 

@@ -30,7 +30,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AEAAkAgAAAEAQAABACAAAAAAAAAQAAAQAAABggAABAA=</HashCode>
+      <HashCode>AEAAkAgAAAEAQAABAAAAAAAAAAAQAAAQAAABggAABAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -66,7 +66,7 @@
   <Class Name="IPNMP.Naslov">
     <Position X="9.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAIAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAIAADAAAAAQAAAAAAAAAAAAAAAAAUAAA=</HashCode>
       <FileName>Naslov.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -97,13 +97,6 @@
       <HashCode>AAAAQAAAAAAAAQABBCAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Zdravljenje.cs</FileName>
       <NewMemberFileName>Terapija.cs</NewMemberFileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="IPNMP.Kraj">
-    <Position X="11.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
-      <FileName>Kraj.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Ekipa">

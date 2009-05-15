@@ -7,6 +7,7 @@ using System.Text;
 
 namespace IPNMP
 {
+    [Obsolete("Razred ni potreben", true)]
     public class Vožnja
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;

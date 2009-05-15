@@ -92,7 +92,7 @@ namespace IPNMP
             ukaz.Parameters["@Ime"].Value = this.Ime;
             ukaz.Parameters["@Priimek"].Value = this.Priimek;
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
-            ukaz.Parameters["@IDNaslov"].Value = this.Naslov;
+            ukaz.Parameters["@IDNaslova"].Value = this.Naslov.IDNaslova;
             ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
             ukaz.Parameters["@Spol"].Value = this.Spol;
 
@@ -143,6 +143,7 @@ namespace IPNMP
                 tmp.Priimek = (string)Bralec["Priimek"];
                 tmp.Spol = (string)Bralec["Spol"];
                 tmp.EMŠO = (int)Bralec["EMŠO"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["IDNaslova"]);
                 tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
                 seznam.Add(tmp);
 
@@ -167,14 +168,14 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@Naslov", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@IDNaslova", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@DatumRojstva", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@Spol", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@Ime"].Value = this.Ime;
             ukaz.Parameters["@Priimek"].Value = this.Priimek;
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
-            ukaz.Parameters["@Naslov"].Value = this.Naslov;
+            ukaz.Parameters["@Naslov"].Value = this.Naslov.IDNaslova;
             ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
             ukaz.Parameters["@Spol"].Value = this.Spol;
 
@@ -190,9 +191,26 @@ namespace IPNMP
         /// <summary>
         /// Vrne osebo iz podatkovne baze glede na emšo
         /// </summary>
-        public static Oseba VrniOseboEmšo()
+        public static Oseba VrniOseboEmšo(int EMŠO)
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniOseboEmšo", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Oseba tmp = new Oseba();
+            Bralec.Read();
+            tmp.Ime = (string)Bralec["Ime"];
+            tmp.Priimek = (string)Bralec["Priimek"];
+            tmp.Spol = (string)Bralec["Spol"];
+            tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+            tmp.Naslov = Naslov.VrniNaslov((int)Bralec["IDNaslova"]);
+
+            povezava.Close();
+            return tmp;
         }
 
 
@@ -246,9 +264,34 @@ namespace IPNMP
         /// <summary>
         /// Vrne paciente iz podatkovne baze glede na številko ZZZS
         /// </summary>
-        public static Pacient VrniPacientZZZS()
+        public static Pacient VrniPacientEMŠO(int EMŠO)
         {
-            throw new System.NotImplementedException();
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            Oseba tmp = new Oseba();
+            tmp = Oseba.VrniOseboEmšo(EMŠO);
+            SqlCommand ukaz = new SqlCommand("VrniPacientEmšo", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Pacient tmp2 = new Pacient();
+            Bralec.Read();
+
+            tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
+            tmp2.Teža = (int)Bralec["Teža"];
+            tmp2.Višina = (int)Bralec["Višina"];
+            tmp2.ZZZS = (int)Bralec["ZZZS"];
+            tmp2.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
+            tmp2.Ime = tmp.Ime;
+            tmp2.Priimek = tmp2.Priimek;
+            tmp2.Spol = tmp.Spol;
+            tmp2.Naslov = tmp.Naslov;
+            tmp2.DatumRojstva = tmp.DatumRojstva;
+
+            povezava.Close();
+            return tmp2;
+
         }
 
         /// <summary>
