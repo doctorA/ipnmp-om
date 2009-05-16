@@ -63,6 +63,9 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+        /// <summary>
+        /// posodobi poročilo v podatkovni bazi, glede na številko poročila objekta.
+        /// </summary>
         public void PosodobiPorocilo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -75,9 +78,12 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetjuVBolnisnico", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaPoročila", SqlDbType.Int));
+
 
             ukaz.Parameters["@AkcijeResevalcev"].Value = this.AkcijeReševalcev;
             ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
+            ukaz.Parameters["@ŠtevilkaPoročila"].Value = this.ŠtevilkaPoročila;
             ukaz.Parameters["@Datum"].Value = this.Datum;
             ukaz.Parameters["@OpisDogotka"].Value = this.OpisDogodka;
             ukaz.Parameters["@StanjePacientaObPrispetju"].Value = this.StanjePacientaObPrispetju;
@@ -168,7 +174,7 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Poročilo tmp = new Poročilo();
-                if ((Zaposleni)Bralec["Avtor"] == Avtor)
+                if (Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]).EMŠO == Avtor.EMŠO)
                 {
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
                     tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
@@ -188,13 +194,8 @@ namespace IPNMP
 
         public int ŠtevilkaPoročila
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
+            get;
+            set;
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace IPNMP
 {
     public class Oseba
     {
-        protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
+        private static string PotPovezave = Properties.Settings.Default.ConnectionString;
 
         /// <summary>
         /// Privzeti konstruktor, ob klicanju pobere parametre, za vzpostavitev povezave z bazo
@@ -301,7 +301,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("PosodobiOsebo", povezava);
+            SqlCommand ukaz = new SqlCommand("UstvariPacient", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
@@ -329,7 +329,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiPacient", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
 
             ukaz.CommandType = CommandType.StoredProcedure;
@@ -459,11 +459,7 @@ namespace IPNMP
             throw new System.NotImplementedException();
         }
 
-        /// <param name="EMŠO">Napolni objekt zaposleni iz baze, glede na podan emšo</param>
-        public Zaposleni(string EMŠO)
-        {
-            throw new System.NotImplementedException();
-        }
+     
 
         public DateTime DatumZaposlitve { set; get; }
         public String TipZaposlenega { set; get; }
@@ -641,6 +637,7 @@ namespace IPNMP
             return tmp;
         }
 
+       /* 
         public static IPNMP.Zaposleni[] VrniZaposlenePoEkipi(int ŠtevilkaEkipe)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -670,6 +667,8 @@ namespace IPNMP
 
             return ds;
         }
+        * */
+        
 
     }
     //Morebitni dodatki:

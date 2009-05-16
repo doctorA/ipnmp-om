@@ -56,7 +56,7 @@
   <Class Name="IPNMP.Zaposleni">
     <Position X="12.25" Y="4.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAAAAAgAAABAAAAACAACAAgAAAAAhAAAEIEAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAABAAAAACAACAAgAAAAAhAAAEAEAAA=</HashCode>
       <FileName>IPNMP.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -78,21 +78,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Diagnoza">
-    <Position X="7" Y="6.75" Width="1.5" />
+    <Position X="7" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAgAAAABBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Diagnoza.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Preiskava">
-    <Position X="8.75" Y="6.75" Width="1.5" />
+    <Position X="8.75" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAgEAAABBAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Preiskava.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zdravljenje">
-    <Position X="5.25" Y="6.75" Width="1.5" />
+    <Position X="5.25" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAAAAAQABBCAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Zdravljenje.cs</FileName>
@@ -107,7 +107,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Medicinski_pripomočki">
-    <Position X="5.25" Y="4.5" Width="1.5" />
+    <Position X="5.25" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAABBEAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Medicinski_pripomočki.cs</FileName>

@@ -35,7 +35,7 @@ namespace WindowsFormsApplication1
            int EMŠO = Convert.ToInt32(textBox3.Text);
            Oseba tmp = new Oseba();
            tmp.EMŠO = EMŠO;
-                tmp.IzbrisiOsebo();
+                
               
           
         }
@@ -56,8 +56,10 @@ namespace WindowsFormsApplication1
             oseba.DatumRojstva = Convert.ToDateTime(textBox4.Text);
             oseba.Spol = textBox5.Text;
             oseba.PosodobiOsebo();
-            
 
+            Pacient nekdo = new Pacient();
+            nekdo.VrniAlergije();
+           
             
             
             
