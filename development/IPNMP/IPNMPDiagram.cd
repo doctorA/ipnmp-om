@@ -7,34 +7,11 @@
     <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAQgAEAAAABAAAAAAQAAAAkAAAAAAAACJgAAAA=</HashCode>
-      <FileName>IPNMP.cs</FileName>
+      <FileName>Oseba.cs</FileName>
+      <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Naslov" />
-    </ShowAsAssociation>
-  </Class>
-  <Class Name="IPNMP.Pacient">
-    <Position X="10.5" Y="4.5" Width="1.5" />
-    <InheritanceLine Type="IPNMP.Oseba" FixedToPoint="true">
-      <Path>
-        <Point X="7.5" Y="3.724" />
-        <Point X="7.5" Y="4.024" />
-        <Point X="11.25" Y="4.024" />
-        <Point X="11.25" Y="4.5" />
-      </Path>
-    </InheritanceLine>
-    <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
-      <Path>
-        <Point X="10.5" Y="5.691" />
-        <Point X="8.5" Y="5.691" />
-      </Path>
-    </AssociationLine>
-    <TypeIdentifier>
-      <HashCode>IEAAAAgAAAEAAAABAAAAAAQAAAA0AAAQAAABihAAAAA=</HashCode>
-      <FileName>IPNMP.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Kartoteka" />
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Kartoteka">
@@ -55,18 +32,10 @@
   </Class>
   <Class Name="IPNMP.Zaposleni">
     <Position X="12.25" Y="4.75" Width="2" />
-    <InheritanceLine Type="IPNMP.Oseba" ManuallyRouted="true">
-      <Path>
-        <Point X="7.5" Y="3.724" />
-        <Point X="13.05" Y="3.724" />
-        <Point X="13.05" Y="4.417" />
-        <Point X="13.25" Y="4.417" />
-        <Point X="13.25" Y="4.75" />
-      </Path>
-    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAhAACFAAAAA=</HashCode>
-      <FileName>IPNMP.cs</FileName>
+      <FileName>Zaposleni.cs</FileName>
+      <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Poročila" />
@@ -121,6 +90,30 @@
       <HashCode>AAAAABBEAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Medicinski_pripomočki.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="IPNMP.Pacient">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <InheritanceLine Type="IPNMP.Oseba" FixedToPoint="true">
+      <Path>
+        <Point X="7.5" Y="3.724" />
+        <Point X="7.5" Y="4.024" />
+        <Point X="11.25" Y="4.024" />
+        <Point X="11.25" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
+      <Path>
+        <Point X="10.5" Y="5.691" />
+        <Point X="8.5" Y="5.691" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IEAAAAgAAAEAAAABAAAAAAQAAAA0AAAQAAABihAAAAA=</HashCode>
+      <FileName>Pacient.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Kartoteka" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>

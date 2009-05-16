@@ -54,6 +54,8 @@
     <Compile Include="Kraj.cs" />
     <Compile Include="Medicinski_pripomočki.cs" />
     <Compile Include="Naslov.cs" />
+    <Compile Include="Oseba.cs" />
+    <Compile Include="Pacient.cs" />
     <Compile Include="Poročilo.cs" />
     <Compile Include="Preiskava.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -67,6 +69,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Vo+żnja.cs" />
+    <Compile Include="Zaposleni.cs" />
     <Compile Include="Zdravljenje.cs" />
   </ItemGroup>
   <ItemGroup>
