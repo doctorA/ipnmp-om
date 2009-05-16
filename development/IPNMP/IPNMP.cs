@@ -76,7 +76,7 @@ namespace IPNMP
         /// <summary>
         /// Ustvari novo osebo v podatkovni bazi
         /// </summary>
-        public void UstvariOsebo()
+        public void Ustvari()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -107,7 +107,7 @@ namespace IPNMP
         /// Izbriše osebo iz podatkovne baze, glede na EMŠO objekta
         /// </summary>
 
-        public void IzbrisiOsebo()
+        public void Izbrisi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiOsebo", povezava);
@@ -125,7 +125,7 @@ namespace IPNMP
         /// Vrne vse osebe iz podatkovne baze
         /// </summary>
         /// <returns>Vrne napolnjen dataset</returns>
-        public static Oseba[] VrniVseOsebe()
+        public static Oseba[] VrniVse()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -159,7 +159,7 @@ namespace IPNMP
         /// <summary>
         /// Posodobi podatke za osebo v podatkovni bazi
         /// </summary>
-        public void PosodobiOsebo()
+        public void Posodobi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -191,11 +191,11 @@ namespace IPNMP
         /// <summary>
         /// Vrne osebo iz podatkovne baze glede na emšo
         /// </summary>
-        public static Oseba VrniOseboEmšo(int EMŠO)
+        public static Oseba VrniPoEmšo(int EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniOseboEmšo", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniPoEmšoOsebo", povezava);
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
             ukaz.CommandType = CommandType.StoredProcedure;
@@ -221,11 +221,27 @@ namespace IPNMP
     /// </summary>
     public class Pacient : Oseba
     {
+        
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
 
-        /// <param name="ZZZS">Napolni objekt iz baze s pomočjo zzzs številke</param>
+        
         public Pacient()
         {
+
+        }
+        /// <summary>
+        /// Kreira pacienta, z osnovnimi podatki iz osebe
+        /// </summary>
+        /// <param name="o">Objekt oseba z osnovnimi podatki</param>
+        public Pacient(Oseba o)
+        {
+            this.Ime = o.Ime;
+            this.Priimek = o.Priimek;
+            this.Spol = o.Spol;
+            this.Naslov = o.Naslov;
+            this.EMŠO = o.EMŠO;
+            this.DatumRojstva = o.DatumRojstva;
+
 
         }
 
@@ -262,13 +278,13 @@ namespace IPNMP
 
 
         /// <summary>
-        /// Vrne paciente iz podatkovne baze glede na številko ZZZS
+        /// Vrne paciente iz podatkovne baze glede na številko emšo
         /// </summary>
-        public static Pacient VrniPacientEMŠO(int EMŠO)
+        public static Pacient VrniPoEmšo(int EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             Oseba tmp = new Oseba();
-            tmp = Oseba.VrniOseboEmšo(EMŠO);
+            tmp = Oseba.VrniPoEmšo(EMŠO);
             SqlCommand ukaz = new SqlCommand("VrniPacientEmšo", povezava);
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
@@ -297,11 +313,11 @@ namespace IPNMP
         /// <summary>
         /// Ustvari nov vnos v podatkovno bazo
         /// </summary>
-        public void UstvariPacient()
+        public void Ustvari()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("UstvariPacient", povezava);
+            SqlCommand ukaz = new SqlCommand("UstvariPacienta", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
@@ -325,10 +341,10 @@ namespace IPNMP
         /// Izbriše pacienta iz podatkovne baze glede na njegovo številko EMŠO
         /// </summary>
         /// <param name="EMŠO">številka EMŠO</param>
-        public void IzbrisiPacient(int EMŠO)
+        public void Izbrisi(int EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("IzbrisiPacient", povezava);
+            SqlCommand ukaz = new SqlCommand("IzbrisiPacienta", povezava);
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
 
@@ -341,7 +357,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse paciente iz podatkovne baze
         /// </summary>
-        public static Pacient[] VrniVsePaciente()
+        public static Pacient[] VrniVse()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -351,10 +367,13 @@ namespace IPNMP
             SqlDataReader Bralec = ukaz.ExecuteReader();
 
             List<Pacient> seznam = new List<Pacient>();
+          
+            
 
             while (Bralec.Read())
             {
                 Pacient tmp = new Pacient();
+                
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["Teža"];
                 tmp.Višina = (int)Bralec["Višina"];
@@ -372,11 +391,11 @@ namespace IPNMP
         /// <summary>
         /// Posodobi podatke pacienta v podatkovni bazi
         /// </summary>
-        public void PosodobiPacient()
+        public void Posodobi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("PosodobiOsebo", povezava);
+            SqlCommand ukaz = new SqlCommand("PosodobiPacienta", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
@@ -448,6 +467,51 @@ namespace IPNMP
             return seznam.ToArray();
         }
 
+        /// <summary>
+        /// Vrne vse paciente, katerih ime se delno ali popolno ujema s vhodnim imenom in priimkom
+        /// </summary>
+        /// <param name="Ime">Ime pacienta, lahko je nepopolno</param>
+        /// <param name="Priimek">Priimek pacienta, lahko je nepopolen</param>
+        /// <returns>Array pacientov, ki ustrezajo imenu in priimkus</returns>
+        public static IPNMP.Pacient[] VrniVsePoImenu(string Ime, string Priimek)
+        {
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("VrniVsePacientePoImenu", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar,255));
+            ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
+
+
+            ukaz.Parameters["@Ime"].Value = Ime;
+            ukaz.Parameters["@Priimek"].Value = Ime;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            List<Pacient> seznam = new List<Pacient>();
+
+
+
+            while (Bralec.Read())
+            {
+                Pacient tmp = new Pacient();
+
+                tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
+                tmp.Teža = (int)Bralec["Teža"];
+                tmp.Višina = (int)Bralec["Višina"];
+                tmp.ZZZS = (int)Bralec["ZZZS"];
+                tmp.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
+                seznam.Add(tmp);
+            }
+
+            Pacient[] ds = seznam.ToArray();
+            povezava.Close();
+
+            return ds;
+            
+        }
+
 
     }
 
@@ -456,9 +520,20 @@ namespace IPNMP
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public Zaposleni()
         {
-            throw new System.NotImplementedException();
+            
         }
 
+        public Zaposleni(Oseba o)
+        {
+
+            this.Ime = o.Ime;
+            this.Priimek = o.Priimek;
+            this.Naslov = o.Naslov;
+            this.Spol = o.Spol;
+            this.EMŠO = o.EMŠO;
+            this.DatumRojstva = o.DatumRojstva;
+
+        }
      
 
         public DateTime DatumZaposlitve { set; get; }
@@ -490,7 +565,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse zaposlene iz podatkovne baze
         /// </summary>
-        public static Zaposleni[] VrniVseZaposlene()
+        public static Zaposleni[] VrniVse()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -521,7 +596,7 @@ namespace IPNMP
         /// <summary>
         /// Ustvari nov vnos v podatkovni bzi
         /// </summary>
-        public void UstvariZaposlenega()
+        public void Ustvari()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -544,7 +619,7 @@ namespace IPNMP
         /// <summary>
         /// Izbriše zaposlenega iz podatkovne baze
         /// </summary>
-        public void IzbrisiZaposlenega()
+        public void Izbrisi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiZaposlenega", povezava);
@@ -560,7 +635,7 @@ namespace IPNMP
         /// <summary>
         /// Posodobi podatke zaposlenega
         /// </summary>
-        public void PosodobiZaposlenega()
+        public void Posodobi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -587,7 +662,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePoTipu", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -614,15 +689,15 @@ namespace IPNMP
         }
 
         /// <summary>
-        /// Vrne zaposlenega iz baze glede na podano zzzs številko
+        /// Vrne zaposlenega iz baze glede na podano emšo številko
         /// </summary>
-        public static Zaposleni VrniZaposlenegaZZZS(int ZZZS)
+        public static Zaposleni VrniPoEmšo(int EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniZaposlenegaZZZS", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters["@ZZZS"].Value = ZZZS;
+            SqlCommand ukaz = new SqlCommand("VrniPoEmšoZaposlenega", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters["@EMŠO"].Value = EMŠO;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();

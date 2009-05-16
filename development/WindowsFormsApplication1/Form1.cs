@@ -25,8 +25,11 @@ namespace WindowsFormsApplication1
             oseba.EMŠO=Convert.ToInt32(textBox3.Text);
             oseba.DatumRojstva=Convert.ToDateTime(textBox4.Text);
             oseba.Spol=textBox5.Text;
-            Pacient pac = new Pacient();
-           
+            Pacient pac = new Pacient(oseba);
+
+            
+            
+            pac.KrvnaSkupina = "AB";
             
         }
 
@@ -35,14 +38,14 @@ namespace WindowsFormsApplication1
            int EMŠO = Convert.ToInt32(textBox3.Text);
            Oseba tmp = new Oseba();
            tmp.EMŠO = EMŠO;
-                
+          
               
           
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Oseba[] lastnosti =Oseba.VrniVseOsebe();
+            Oseba[] lastnosti =Oseba.VrniVse();
             
            
         }
@@ -55,7 +58,7 @@ namespace WindowsFormsApplication1
             oseba.EMŠO = Convert.ToInt32(textBox3.Text);
             oseba.DatumRojstva = Convert.ToDateTime(textBox4.Text);
             oseba.Spol = textBox5.Text;
-            oseba.PosodobiOsebo();
+            oseba.Posodobi();
 
             Pacient nekdo = new Pacient();
             nekdo.VrniAlergije();

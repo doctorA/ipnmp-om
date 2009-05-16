@@ -46,7 +46,7 @@ namespace IPNMP
             Bralec.Read();
             tmp.Vodja = (Zaposleni)Bralec["Vodja"];
             povezava.Close();
-            Zaposleni[] množica = IPNMP.Zaposleni.VrniVseZaposlene();
+            Zaposleni[] množica = IPNMP.Zaposleni.VrniVse();
             List<Zaposleni> seznam = new List<Zaposleni>();
 
             foreach (Zaposleni z in množica)
@@ -81,7 +81,7 @@ namespace IPNMP
             foreach (Zaposleni z in this._Zaposleni)
             {
                 z.ŠtevilkaEkipe = ŠtevilkaEkipe;
-                z.PosodobiZaposlenega();
+                z.Posodobi();
 
             }
        

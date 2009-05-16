@@ -49,7 +49,7 @@ namespace IPNMP
                 if ((DateTime)Bralec["Datum"] == datum)
                 {
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                    tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
+                    tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
                     tmp.Datum = (DateTime)Bralec["Datum"];
                     tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
@@ -113,7 +113,7 @@ namespace IPNMP
             {
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
+                tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
                 tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     
@@ -174,10 +174,10 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Poročilo tmp = new Poročilo();
-                if (Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]).EMŠO == Avtor.EMŠO)
+                if (Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]).EMŠO == Avtor.EMŠO)
                 {
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                    tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
+                    tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
                     tmp.Datum = (DateTime)Bralec["Datum"];
                     tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
@@ -219,7 +219,7 @@ namespace IPNMP
             {
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                tmp.Avtor = Zaposleni.VrniZaposlenegaZZZS((int)Bralec["Avtor"]);
+                tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
                 tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
 
