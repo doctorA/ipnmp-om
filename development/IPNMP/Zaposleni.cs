@@ -43,16 +43,7 @@ namespace IPNMP
             set;
         }
 
-        public IPNMP.Poročilo[] Poročila
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+     
 
         /// <summary>
         /// Vrne vse zaposlene iz podatkovne baze
@@ -70,7 +61,7 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((int)Bralec["EMŠO"]));
+                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                 tmp.Specializacija = (int)Bralec["Specializacija"];
@@ -107,7 +98,7 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@DatumZaposlitve", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@Specializacija", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
             ukaz.Parameters["@Specializacija"].Value = this.Specializacija;
@@ -129,7 +120,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("IzbrisiZaposlenega", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
 
             ukaz.CommandType = CommandType.StoredProcedure;
@@ -159,7 +150,7 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@DatumZaposlitve", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@Specializacija", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
             ukaz.Parameters["@Specializacija"].Value = this.Naslov;
@@ -188,9 +179,10 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((int)Bralec["EMŠO"]));
+                
                 if ((string)Bralec["TipZaposlenega"] == TipZaposlenega)
                 {
+                    Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
                     tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                     tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
                     tmp.Specializacija = (int)Bralec["Specializacija"];
@@ -208,17 +200,17 @@ namespace IPNMP
         /// <summary>
         /// Vrne zaposlenega iz baze glede na podano emšo številko
         /// </summary>
-        public static Zaposleni VrniPoEmšo(int EMŠO)
+        public static Zaposleni VrniPoEmšo(string EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniPoEmšoZaposlenega", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            SqlCommand ukaz = new SqlCommand("VrniPoEmšoZaposleni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
-            Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((int)Bralec["EMŠO"]));
+            Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
             Bralec.Read();
             tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
             tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
@@ -286,7 +278,7 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((int)Bralec["EMŠO"]));
+                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
 
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (int)Bralec["Specializacija"];

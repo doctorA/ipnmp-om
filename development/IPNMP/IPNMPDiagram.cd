@@ -33,13 +33,10 @@
   <Class Name="IPNMP.Zaposleni">
     <Position X="12.25" Y="4.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAhAACFAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAgAACFAAAAA=</HashCode>
       <FileName>Zaposleni.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="Poročila" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Naslov">
     <Position X="9.25" Y="1.25" Width="1.5" />

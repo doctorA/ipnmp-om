@@ -19,65 +19,68 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IPNMP.Oseba oseba = new Oseba();
-            oseba.Ime=textBox1.Text;
-            oseba.Priimek=textBox2.Text;
-            oseba.EMŠO=Convert.ToInt32(textBox3.Text);
-            oseba.DatumRojstva=Convert.ToDateTime(textBox4.Text);
-            oseba.Spol=textBox5.Text;
-            Pacient pac = new Pacient(oseba);
-
+            Zaposleni marija = Zaposleni.VrniPoEmšo("1231454646");
+            Poročilo[] zgodovina_del = Poročilo.VrniPorocilaPoAvtorju(marija);
             
-            
-            pac.KrvnaSkupina = "AB";
             
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-           int EMŠO = Convert.ToInt32(textBox3.Text);
-           Oseba tmp = new Oseba();
-           tmp.EMŠO = EMŠO;
-          
+            Oseba janez = new Oseba();
+            janez.Ime = "janez";
+            janez.Priimek = "Novak";
+            janez.Spol = "Ženski";
+            janez.DatumRojstva = Convert.ToDateTime("01.01.1944");
+            janez.EMŠO = "1234567";
+            janez.Naslov = Naslov.VrniNaslov(1);
+
+            Pacient bolan_janez = new Pacient(janez);
+            bolan_janez.KrvnaSkupina = "B";
+            bolan_janez.Teža = 200000;
+            bolan_janez.Višina = 19999;
+            bolan_janez.ZZZS = 987654321;
+            bolan_janez.Kartoteka = Kartoteka.VrniKartoteko(1);
+            bolan_janez.Ustvari();
+            bolan_janez.VrniStarost();
               
           
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Oseba[] lastnosti =Oseba.VrniVse();
+            Oseba[] spisek_oseb =Oseba.VrniVse();
             
            
         }
 
+
+        /// <summary>
+        /// Posodobi osebo v podat. bazi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             IPNMP.Oseba oseba = new Oseba();
             oseba.Ime = textBox1.Text;
             oseba.Priimek = textBox2.Text;
-            oseba.EMŠO = Convert.ToInt32(textBox3.Text);
+            oseba.EMŠO = textBox3.Text;
             oseba.DatumRojstva = Convert.ToDateTime(textBox4.Text);
             oseba.Spol = textBox5.Text;
             oseba.Posodobi();
 
-            Pacient nekdo = new Pacient();
-            nekdo.VrniAlergije();
-           
-            
-            
-            
-
-            
-
-            
-
-               
+   
 
         }
 
+        /// <summary>
+        /// Vrne osebo(po emšu)iz podatkovne baze in jo izpiše v text boxih
+        /// </summary>
+       
         private void button5_Click(object sender, EventArgs e)
         {
-            IPNMP.Oseba oseba = new Oseba(Convert.ToInt32(textBox3.Text));
+            Oseba oseba = IPNMP.Oseba.VrniPoEmšo(textBox3.Text);
             textBox1.Text = oseba.Ime;
             textBox2.Text = oseba.Priimek;
             textBox4.Text = oseba.DatumRojstva.ToString();

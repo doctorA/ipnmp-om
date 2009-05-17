@@ -68,13 +68,13 @@ namespace IPNMP
         /// <summary>
         /// Vrne paciente iz podatkovne baze glede na številko emšo
         /// </summary>
-        public static Pacient VrniPoEmšo(int EMŠO)
+        public static Pacient VrniPoEmšo(string EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             Oseba tmp = new Oseba();
             tmp = Oseba.VrniPoEmšo(EMŠO);
-            SqlCommand ukaz = new SqlCommand("VrniPacientEmšo", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            SqlCommand ukaz = new SqlCommand("VrniPoEmšoPacient", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -118,7 +118,7 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@Teža"].Value = this.Teža;
@@ -137,11 +137,11 @@ namespace IPNMP
         /// Izbriše pacienta iz podatkovne baze glede na njegovo številko EMŠO
         /// </summary>
         /// <param name="EMŠO">številka EMŠO</param>
-        public void Izbrisi(int EMŠO)
+        public void Izbrisi(string EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("IzbrisiPacienta", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            SqlCommand ukaz = new SqlCommand("IzbrišiPacienta", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
 
             ukaz.CommandType = CommandType.StoredProcedure;
@@ -168,7 +168,7 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Pacient tmp = new Pacient(Oseba.VrniPoEmšo((int)Bralec["EMŠO"]));
+                Pacient tmp = new Pacient(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
 
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["Teža"];
@@ -209,7 +209,7 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
 
 
@@ -305,7 +305,7 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Pacient tmp = new Pacient(Oseba.VrniPoEmšo((int)Bralec["EMŠO"]));
+                Pacient tmp = new Pacient(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
 
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["Teža"];

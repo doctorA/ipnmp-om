@@ -29,6 +29,12 @@ namespace IPNMP
             set;
         }
 
+        public int ŠtevilkaPoročila
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Vrne vsa poročila glede na datum kreacije poročila
         /// </summary>
@@ -45,11 +51,12 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Poročilo tmp = new Poročilo();
+                
                 if ((DateTime)Bralec["Datum"] == datum)
                 {
+                    Poročilo tmp = new Poročilo();
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                    tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
+                    tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
                     tmp.Datum = (DateTime)Bralec["Datum"];
                     tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
@@ -73,7 +80,7 @@ namespace IPNMP
             SqlCommand ukaz = new SqlCommand("PosodobiPorocilo", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@AkcijeResevalcev", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
@@ -113,7 +120,7 @@ namespace IPNMP
             {
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
+                tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
                 tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     
@@ -138,7 +145,7 @@ namespace IPNMP
             SqlCommand ukaz = new SqlCommand("UstvariPorocilo", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@AkcijeResevalcev", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
@@ -174,10 +181,10 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Poročilo tmp = new Poročilo();
-                if (Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]).EMŠO == Avtor.EMŠO)
+                if (Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]).EMŠO == Avtor.EMŠO)
                 {
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                    tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
+                    tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
                     tmp.Datum = (DateTime)Bralec["Datum"];
                     tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
@@ -192,11 +199,7 @@ namespace IPNMP
             return ds;
         }
 
-        public int ŠtevilkaPoročila
-        {
-            get;
-            set;
-        }
+      
 
         /// <summary>
         /// Vrne poročilo iiz podatkovne baze glede na ID številko poročila
@@ -219,7 +222,7 @@ namespace IPNMP
             {
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
-                tmp.Avtor = Zaposleni.VrniPoEmšo((int)Bralec["Avtor"]);
+                tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
                 tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
 
