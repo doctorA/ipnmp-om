@@ -40,6 +40,11 @@ namespace IPNMP
             set;
         }
 
+        /// <summary>
+        /// Vrne naslov glede na podan id naslova
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public static Naslov VrniNaslov(int ID)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);

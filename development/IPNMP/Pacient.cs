@@ -140,7 +140,7 @@ namespace IPNMP
         public void Izbrisi(string EMŠO)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("IzbrišiPacienta", povezava);
+            SqlCommand ukaz = new SqlCommand("IzbrisiPacienta", povezava);
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@EMŠO"].Value = EMŠO;
 

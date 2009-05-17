@@ -43,6 +43,8 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniPorocilaPoDatumu", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
+            ukaz.Parameters["@Datum"].Value = datum;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -52,18 +54,17 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 
-                if ((DateTime)Bralec["Datum"] == datum)
-                {
+             
                     Poročilo tmp = new Poročilo();
                     tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
                     tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
-                    tmp.Datum = (DateTime)Bralec["Datum"];
+                    tmp.Datum = datum;
                     tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
                     tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
                     tmp.ŠtevilkaPoročila = (int)Bralec["ŠtevilkaPoročila"];
                     seznam.Add(tmp);
-                }
+                
             }
 
             Poročilo[] ds = seznam.ToArray();

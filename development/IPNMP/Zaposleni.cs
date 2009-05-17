@@ -31,7 +31,7 @@ namespace IPNMP
         public DateTime DatumZaposlitve { set; get; }
         public String TipZaposlenega { set; get; }
 
-        public int Specializacija
+        public string Specializacija
         {
             get;
             set;
@@ -63,8 +63,7 @@ namespace IPNMP
             {
                 Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-                tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
-                tmp.Specializacija = (int)Bralec["Specializacija"];
+                tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
                 seznam.Add(tmp);
             }
@@ -171,6 +170,8 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
+            ukaz.Parameters["@TipZaposlenega"].Value = TipZaposlenega;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -180,15 +181,13 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 
-                if ((string)Bralec["TipZaposlenega"] == TipZaposlenega)
-                {
+                
                     Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
                     tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-                    tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
-                    tmp.Specializacija = (int)Bralec["Specializacija"];
-                    tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+                    tmp.Specializacija = (string)Bralec["Specializacija"];
+                    tmp.TipZaposlenega = TipZaposlenega;
                     seznam.Add(tmp);
-                }
+              
             }
 
             Zaposleni[] ds = seznam.ToArray();
@@ -213,8 +212,7 @@ namespace IPNMP
             Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
             Bralec.Read();
             tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-            tmp.ŠtevilkaEkipe = (int)Bralec["ŠtevilkaEkipe"];
-            tmp.Specializacija = (int)Bralec["Specializacija"];
+            tmp.Specializacija = (string)Bralec["Specializacija"];
             tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
 
             povezava.Close();
@@ -281,7 +279,7 @@ namespace IPNMP
                 Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
 
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-                tmp.Specializacija = (int)Bralec["Specializacija"];
+                tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
                 seznam.Add(tmp);
             }
