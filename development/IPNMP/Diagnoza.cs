@@ -35,7 +35,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseDiagnoze", povezava);
+            SqlCommand ukaz = new SqlCommand("diagnoza_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();

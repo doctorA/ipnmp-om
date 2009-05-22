@@ -73,9 +73,9 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
             Oseba tmp = new Oseba();
             tmp = Oseba.VrniPoEmšo(EMŠO);
-            SqlCommand ukaz = new SqlCommand("VrniPoEmšoPacient", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            SqlCommand ukaz = new SqlCommand("pacient_vrni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_p", SqlDbType.Int));
+            ukaz.Parameters["@id_p"].Value =tmp.IDOseba;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -83,8 +83,8 @@ namespace IPNMP
             Bralec.Read();
 
             tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
-            tmp2.Teža = (int)Bralec["Teža"];
-            tmp2.Višina = (int)Bralec["Višina"];
+            tmp2.Teža = (int)Bralec["teza"];
+            tmp2.Višina = (int)Bralec["visina"];
             tmp2.ZZZS = (int)Bralec["ZZZS"];
             tmp2.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
            
@@ -137,12 +137,12 @@ namespace IPNMP
         /// Izbriše pacienta iz podatkovne baze glede na njegovo številko EMŠO
         /// </summary>
         /// <param name="EMŠO">številka EMŠO</param>
-        public void Izbrisi(string EMŠO)
+        public void Izbrisi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("IzbrisiPacienta", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            SqlCommand ukaz = new SqlCommand("pacient_brisi", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_p", SqlDbType.Int));
+            ukaz.Parameters["@id_p"].Value = this.IDOseba;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -168,11 +168,18 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Pacient tmp = new Pacient(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
+                Pacient tmp = new Pacient();
 
+                tmp.Ime = (string)Bralec["Ime"];
+                tmp.Priimek = (string)Bralec["Priimek"];
+                tmp.Spol = (string)Bralec["Spol"];
+                tmp.EMŠO = (string)Bralec["EMSO"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                tmp.IDOseba = (int)Bralec["id"];
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
-                tmp.Teža = (int)Bralec["Teža"];
-                tmp.Višina = (int)Bralec["Višina"];
+                tmp.Teža = (int)Bralec["teza"];
+                tmp.Višina = (int)Bralec["visina"];
                 tmp.ZZZS = (int)Bralec["ZZZS"];
                 tmp.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
                 seznam.Add(tmp);
@@ -305,11 +312,17 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Pacient tmp = new Pacient(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
-
+                Pacient tmp = new Pacient();
+                tmp.Ime = (string)Bralec["Ime"];
+                tmp.Priimek = (string)Bralec["Priimek"];
+                tmp.Spol = (string)Bralec["Spol"];
+                tmp.EMŠO = (string)Bralec["EMSO"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                tmp.IDOseba = (int)Bralec["id"];
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
-                tmp.Teža = (int)Bralec["Teža"];
-                tmp.Višina = (int)Bralec["Višina"];
+                tmp.Teža = (int)Bralec["teza"];
+                tmp.Višina = (int)Bralec["visina"];
                 tmp.ZZZS = (int)Bralec["ZZZS"];
                 tmp.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
                 seznam.Add(tmp);

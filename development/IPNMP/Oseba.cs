@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using csUnit;
 
 namespace IPNMP
 {
+    [TestFixture]
     public class Oseba
     {
         private static string PotPovezave = Properties.Settings.Default.ConnectionString;
@@ -26,9 +28,15 @@ namespace IPNMP
             set;
         }
 
+        public int IDOseba
+        {
+            get;
+            set;
+        }
 
 
 
+        [Test]
         /// <summary>
         /// Ustvari novo osebo v podatkovni bazi
         /// </summary>
@@ -36,21 +44,21 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("UstvariOsebo", povezava);
+            SqlCommand ukaz = new SqlCommand("oseba_dodaj", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@IDNaslova", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@DatumRojstva", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@Spol", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@ime_osebe", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@priimek_osebe", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@naslovID", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@roj_osebe", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@spol_osebe", SqlDbType.NVarChar, 255));
 
-            ukaz.Parameters["@Ime"].Value = this.Ime;
-            ukaz.Parameters["@Priimek"].Value = this.Priimek;
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
-            ukaz.Parameters["@IDNaslova"].Value = this.Naslov.IDNaslova;
-            ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
-            ukaz.Parameters["@Spol"].Value = this.Spol;
+            ukaz.Parameters["@ime_osebe"].Value = this.Ime;
+            ukaz.Parameters["@priimek_osebe"].Value = this.Priimek;
+            ukaz.Parameters["@emso"].Value = this.EMŠO;
+            ukaz.Parameters["@naslovID"].Value = this.Naslov.IDNaslova;
+            ukaz.Parameters["@roj_osebe"].Value = this.DatumRojstva;
+            ukaz.Parameters["@spol_osebe"].Value = this.Spol;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -66,9 +74,9 @@ namespace IPNMP
         public void Izbrisi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("IzbrisiOsebo", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            SqlCommand ukaz = new SqlCommand("oseba_brisi", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
+            ukaz.Parameters["@id_osebe"].Value = this.IDOseba;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -85,7 +93,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseOsebe", povezava);
+            SqlCommand ukaz = new SqlCommand("oseba_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -98,9 +106,10 @@ namespace IPNMP
                 tmp.Ime = (string)Bralec["Ime"];
                 tmp.Priimek = (string)Bralec["Priimek"];
                 tmp.Spol = (string)Bralec["Spol"];
-                tmp.EMŠO = (string)Bralec["EMŠO"];
-                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["IDNaslova"]);
+                tmp.EMŠO = (string)Bralec["EMSO"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
                 tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                tmp.IDOseba = (int)Bralec["id"];
                 seznam.Add(tmp);
 
 
@@ -121,19 +130,21 @@ namespace IPNMP
 
             SqlCommand ukaz = new SqlCommand("PosodobiOsebo", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@IDNaslova", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@DatumRojstva", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@Spol", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@ime_osebe", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@priimek_osebe", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@naslovID", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@roj_osebe", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@spol_osebe", SqlDbType.NVarChar, 255));
 
-            ukaz.Parameters["@Ime"].Value = this.Ime;
-            ukaz.Parameters["@Priimek"].Value = this.Priimek;
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@ime_osebe"].Value = this.Ime;
+            ukaz.Parameters["@priimek_osebe"].Value = this.Priimek;
+            ukaz.Parameters["@emso"].Value = this.EMŠO;
+            ukaz.Parameters["@id_osebe"].Value = this.IDOseba;
             ukaz.Parameters["@Naslov"].Value = this.Naslov.IDNaslova;
-            ukaz.Parameters["@DatumRojstva"].Value = this.DatumRojstva;
-            ukaz.Parameters["@Spol"].Value = this.Spol;
+            ukaz.Parameters["@roj_osebe"].Value = this.DatumRojstva;
+            ukaz.Parameters["@spol_osebe"].Value = this.Spol;
+
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -152,8 +163,8 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniPoEmšoOseba", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
+            ukaz.Parameters["@emso"].Value = EMŠO;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -163,7 +174,31 @@ namespace IPNMP
             tmp.Priimek = (string)Bralec["Priimek"];
             tmp.Spol = (string)Bralec["Spol"];
             tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-            tmp.Naslov = Naslov.VrniNaslov((int)Bralec["IDNaslova"]);
+            tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+            tmp.IDOseba = (int)Bralec["id"];
+
+            povezava.Close();
+            return tmp;
+        }
+
+        public static Oseba VrniPoIDOsebe(int IDOseba)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("oseba_vrni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
+            ukaz.Parameters["@id_osebe"].Value = IDOseba;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Oseba tmp = new Oseba();
+            Bralec.Read();
+            tmp.Ime = (string)Bralec["Ime"];
+            tmp.Priimek = (string)Bralec["Priimek"];
+            tmp.Spol = (string)Bralec["Spol"];
+            tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+            tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+            tmp.IDOseba = (int)Bralec["id"];
 
             povezava.Close();
             return tmp;

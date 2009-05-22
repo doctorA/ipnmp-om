@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -80,22 +80,22 @@ namespace IPNMP
 
             SqlCommand ukaz = new SqlCommand("PosodobiPorocilo", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@AkcijeResevalcev", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetjuVBolnisnico", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaPoročila", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetju_porocila", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetjuvbolnisnico_porocila", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@id_porocila", SqlDbType.Int));
 
 
-            ukaz.Parameters["@AkcijeResevalcev"].Value = this.AkcijeReševalcev;
+            ukaz.Parameters["@akcijeresevalcev_porocila"].Value = this.AkcijeReševalcev;
             ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
-            ukaz.Parameters["@ŠtevilkaPoročila"].Value = this.ŠtevilkaPoročila;
+            ukaz.Parameters["@id_porocila"].Value = this.ŠtevilkaPoročila;
             ukaz.Parameters["@Datum"].Value = this.Datum;
-            ukaz.Parameters["@OpisDogotka"].Value = this.OpisDogodka;
-            ukaz.Parameters["@StanjePacientaObPrispetju"].Value = this.StanjePacientaObPrispetju;
-            ukaz.Parameters["@StanjePacientaObPrispetjuVBolnisnico"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
+            ukaz.Parameters["@opisdogodka_porocila"].Value = this.OpisDogodka;
+            ukaz.Parameters["@stanjepacientaobprispetju_porocila"].Value = this.StanjePacientaObPrispetju;
+            ukaz.Parameters["@stanjepacientaobprispetjuvbolnisnico_porocila"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -145,19 +145,19 @@ namespace IPNMP
 
             SqlCommand ukaz = new SqlCommand("UstvariPorocilo", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@AkcijeResevalcev", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@OpisDogotka", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetju", SqlDbType.NVarChar));
-            ukaz.Parameters.Add(new SqlParameter("@StanjePacientaObPrispetjuVBolnisnico", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetju_porocila", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetjuvbolnisnico_porocila", SqlDbType.NVarChar));
 
-            ukaz.Parameters["@AkcijeResevalcev"].Value = this.AkcijeReševalcev;
+            ukaz.Parameters["@akcijeresevalcev_porocila"].Value = this.AkcijeReševalcev;
             ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
             ukaz.Parameters["@Datum"].Value = this.Datum;
-            ukaz.Parameters["@OpisDogotka"].Value = this.OpisDogodka;
-            ukaz.Parameters["@StanjePacientaObPrispetju"].Value = this.StanjePacientaObPrispetju;
-            ukaz.Parameters["@StanjePacientaObPrispetjuVBolnisnico"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
+            ukaz.Parameters["@opisdogodka_porocila"].Value = this.OpisDogodka;
+            ukaz.Parameters["@stanjepacientaobprispetju_porocila"].Value = this.StanjePacientaObPrispetju;
+            ukaz.Parameters["@stanjepacientaobprispetjuvbolnisnico_porocila"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -211,8 +211,8 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniPorociloPoID", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaPoročila", SqlDbType.Int));
-            ukaz.Parameters["@ŠtevilkaPoročila"].Value = StevilkaPorocila;
+            ukaz.Parameters.Add(new SqlParameter("@id_porocila", SqlDbType.Int));
+            ukaz.Parameters["@id_porocila"].Value = StevilkaPorocila;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();

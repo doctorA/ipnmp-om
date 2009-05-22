@@ -49,18 +49,18 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniNaslov", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@IDNaslova", SqlDbType.Int));
-            ukaz.Parameters["@IDNaslova"].Value = ID;
+            SqlCommand ukaz = new SqlCommand("naslov_vrni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_naslova", SqlDbType.Int));
+            ukaz.Parameters["@id_naslova"].Value = ID;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
             Naslov tmp = new Naslov();
             Bralec.Read();
-            tmp.HišnaŠtevilka = (string)Bralec["HišnaŠtevilka"];
+            tmp.HišnaŠtevilka = (string)Bralec["HisnaStevilka"];
             tmp.Ulica = (string)Bralec["Ulica"];
             tmp.Mesto = (string)Bralec["Mesto"];
-            tmp.PoštnaŠtevilka = (int)Bralec["PoštnaŠtevilka"];
+            tmp.PoštnaŠtevilka = (int)Bralec["PostnaStevilka"];
 
             povezava.Close();
             return tmp;

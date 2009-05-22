@@ -80,7 +80,7 @@ namespace WindowsFormsApplication1
        
         private void button5_Click(object sender, EventArgs e)
         {
-            Oseba oseba = IPNMP.Oseba.VrniPoEmšo(textBox3.Text);
+            Oseba oseba = IPNMP.Oseba.VrniPoIDOsebe(Convert.ToInt32(textBox3.Text));
             textBox1.Text = oseba.Ime;
             textBox2.Text = oseba.Priimek;
             textBox4.Text = oseba.DatumRojstva.ToString();

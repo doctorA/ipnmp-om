@@ -61,7 +61,14 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
+                Zaposleni tmp = new Zaposleni();
+                tmp.Ime = (string)Bralec["Ime"];
+                tmp.Priimek = (string)Bralec["Priimek"];
+                tmp.Spol = (string)Bralec["Spol"];
+                tmp.EMŠO = (string)Bralec["EMSO"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                tmp.IDOseba = (int)Bralec["id"];
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
