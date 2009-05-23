@@ -21,13 +21,13 @@ namespace IPNMP
             get;
             set;
         }
-
+/*
         public DateTime DatumObiska
         {
             get;
             set;
         }
-
+        */
         /// <summary>
         /// Vrne vse diagnoze pacienta iz podatkovne baze
         /// </summary>
@@ -45,7 +45,7 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Diagnoza tmp = new Diagnoza();
-                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+               // tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Opis = (string)Bralec["Opis"];
                 tmp.Tip = (string)Bralec["Tip"];
                 seznam.Add(tmp);
@@ -76,7 +76,7 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Diagnoza tmp = new Diagnoza();
-                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+             //   tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Opis = (string)Bralec["Opis"];
                 tmp.Tip = (string)Bralec["Tip"];
                 seznam.Add(tmp);

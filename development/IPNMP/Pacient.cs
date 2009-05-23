@@ -269,10 +269,10 @@ namespace IPNMP
         /// <summary>
         /// Vrne vse operacije, ki jih je pacient imel(spada pod zdravljenje)
         /// </summary>
-        public Zdravljenje[] VrniOperacije()
+        public Terapija[] VrniOperacije()
         {
-            List<Zdravljenje> seznam = new List<Zdravljenje>();
-            foreach (Zdravljenje d in this.Kartoteka.Zdravljenja)
+            List<Terapija> seznam = new List<Terapija>();
+            foreach (Terapija d in this.Kartoteka.terapije)
             {
                 if (d.Tip == "Operacija")
                 {

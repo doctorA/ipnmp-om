@@ -37,12 +37,6 @@ namespace IPNMP
             set;
         }
 
-        public int ŠtevilkaEkipe
-        {
-            get;
-            set;
-        }
-
      
 
         /// <summary>
@@ -52,7 +46,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseZaposlene", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -125,9 +119,9 @@ namespace IPNMP
         public void Izbrisi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("IzbrisiZaposlenega", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            SqlCommand ukaz = new SqlCommand("zaposleni_brisi", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_zapos", SqlDbType.Int));
+            ukaz.Parameters["@id_zapos"].Value = this.IDOseba;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();

@@ -8,7 +8,7 @@ namespace IPNMP
     public class Kartoteka
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
-        public IPNMP.Zdravljenje[] Zdravljenja
+        public IPNMP.Terapija[] terapije
         {
 
             get;
@@ -49,7 +49,7 @@ namespace IPNMP
         {
             Kartoteka tmp = new Kartoteka();
             tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
-            tmp.Zdravljenja = Zdravljenje.VrniVsaZdravljenjaPoID(ŠtevilkaKartoteke);
+            tmp.terapije = Terapija.VrniVseTerapijePoIdKartoteke(ŠtevilkaKartoteke);
             tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(ŠtevilkaKartoteke);
             tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(ŠtevilkaKartoteke);
             return tmp;

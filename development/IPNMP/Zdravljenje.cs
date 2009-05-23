@@ -7,7 +7,7 @@ using System.Text;
 
 namespace IPNMP
 {
-    public class Zdravljenje
+    public class Terapija
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
         public string Opis
@@ -21,37 +21,37 @@ namespace IPNMP
             get;
             set;
         }
-
+/*
         public DateTime DatumObiska
         {
             get;
             set;
         }
-
+*/
         /// <summary>
         /// Vrne vsa zdravljenja iz podatkovne baze
         /// </summary>
-        public static Zdravljenje[] VrniVsaZdravljenja()
+        public static Terapija[] VrniVseTerapije()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsaZdravljenja", povezava);
+            SqlCommand ukaz = new SqlCommand("terapija_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            List<Zdravljenje> seznam = new List<Zdravljenje>();
+            List<Terapija> seznam = new List<Terapija>();
 
             while (Bralec.Read())
             {
-                Zdravljenje tmp = new Zdravljenje();
-                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+                Terapija tmp = new Terapija();
+        //        tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Tip = (string)Bralec["Tip"];
                 tmp.Opis = (string)Bralec["Opis"];
                 seznam.Add(tmp);
             }
 
-            Zdravljenje[] ds = seznam.ToArray();
+            Terapija[] ds = seznam.ToArray();
             povezava.Close();
             return ds;
         }
@@ -60,29 +60,29 @@ namespace IPNMP
         /// Vrne vsa zdravljenja iz podatkovne baze glede na ID kartoteke
         /// </summary>
         /// <param name="StevilkaKartoteke">ID številka kartoteke</param>
-        public static IPNMP.Zdravljenje[] VrniVsaZdravljenjaPoID(int StevilkaKartoteke)
+        public static IPNMP.Terapija[] VrniVseTerapijePoIdKartoteke(int StevilkaKartoteke)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsaZdravljenjaPoID", povezava);
+            SqlCommand ukaz = new SqlCommand("VrniVseTerapijePoIdKartoteke", povezava);
             ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
             ukaz.Parameters["@ŠtevilkaKartoteke"].Value = StevilkaKartoteke;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
 
-            List<Zdravljenje> seznam = new List<Zdravljenje>();
+            List<Terapija> seznam = new List<Terapija>();
 
             while (Bralec.Read())
             {
-                Zdravljenje tmp = new Zdravljenje();
-                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+                Terapija tmp = new Terapija();
+            //    tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Tip = (string)Bralec["Tip"];
                 tmp.Opis = (string)Bralec["Opis"];
                 seznam.Add(tmp);
             }
 
-            Zdravljenje[] ds = seznam.ToArray();
+            Terapija[] ds = seznam.ToArray();
             povezava.Close();
             return ds;
         }

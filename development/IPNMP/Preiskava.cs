@@ -21,12 +21,13 @@ namespace IPNMP
             get;
             set;
         }
-
+        /*
         public DateTime DatumObiska
         {
             get;
             set;
         }
+         * */
 
         /// <summary>
         /// Vrne vse preiskave pacienta iz podatkovne baze
@@ -35,7 +36,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePreiskave", povezava);
+            SqlCommand ukaz = new SqlCommand("preiskava_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -45,7 +46,7 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Preiskava tmp = new Preiskava();
-                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+             //   tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Opis = (string)Bralec["Opis"];
                 tmp.Rezultati = (string)Bralec["Rezultati"];
                 seznam.Add(tmp);
@@ -76,7 +77,7 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Preiskava tmp = new Preiskava();
-                tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+             //   tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Opis = (string)Bralec["Opis"];
                 tmp.Rezultati = (string)Bralec["Rezultati"];
                 seznam.Add(tmp);

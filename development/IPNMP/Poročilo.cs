@@ -145,7 +145,7 @@ namespace IPNMP
 
             SqlCommand ukaz = new SqlCommand("UstvariPorocilo", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
