@@ -64,9 +64,9 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseDiagnozePoID", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
-            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = StevilkaKartoteke;
+            SqlCommand ukaz = new SqlCommand("diagnoza_vrnipoIDkartoteka", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_kartoteka", SqlDbType.Int));
+            ukaz.Parameters["@id_kartoteka"].Value = StevilkaKartoteke;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();

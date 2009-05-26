@@ -112,17 +112,18 @@ namespace IPNMP
             o.DatumRojstva = this.DatumRojstva;
 
             o.Posodobi();
-
+            Oseba o2= Oseba.VrniPoEmšo(this.EMŠO);
+            this.IDOseba = o2.IDOseba;
             ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
 
             ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@Teža"].Value = this.Teža;
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@EMŠO"].Value = this.IDOseba;
             ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
             ukaz.Parameters["@Višina"].Value = this.Višina;
             ukaz.Parameters["@ZZZS"].Value = this.ZZZS;

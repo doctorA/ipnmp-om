@@ -17,7 +17,7 @@
   <Class Name="IPNMP.Kartoteka">
     <Position X="7" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAoAACAAAAAAABABAAgAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAgAACAAAAAAABABAAgAAAAAAAAAAAAAAAAQAAACA=</HashCode>
       <FileName>Kartoteka.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -33,7 +33,7 @@
   <Class Name="IPNMP.Zaposleni">
     <Position X="12.25" Y="4.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAgAACFAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAgAACBAAAAA=</HashCode>
       <FileName>Zaposleni.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -55,23 +55,15 @@
   <Class Name="IPNMP.Diagnoza">
     <Position X="7" Y="6.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAgAAAABBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAAAABBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Diagnoza.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Preiskava">
     <Position X="8.75" Y="6.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAAAAgEAAABBAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgEAAABBAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Preiskava.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="IPNMP.Zdravljenje">
-    <Position X="5.25" Y="6.75" Width="1.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAAQABBCAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
-      <FileName>Zdravljenje.cs</FileName>
-      <NewMemberFileName>Terapija.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Ekipa">
@@ -111,6 +103,13 @@
     <ShowAsAssociation>
       <Property Name="Kartoteka" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="IPNMP.Terapija">
+    <Position X="5.25" Y="6.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAAAAAAABBCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Zdravljenje.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Tahoma" Size="8.25" />
 </ClassDiagram>
