@@ -95,15 +95,15 @@ namespace IPNMP
 
             SqlCommand ukaz = new SqlCommand("UstvariZaposlenega", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@DatumZaposlitve", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@Specializacija", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@datum_zapos", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@spec", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@tip_zapos", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
-            ukaz.Parameters["@Specializacija"].Value = this.Specializacija;
-            ukaz.Parameters["@DatumZaposlitve"].Value = this.DatumZaposlitve;
-            ukaz.Parameters["@TipZaposlenega"].Value = this.TipZaposlenega;
+            ukaz.Parameters["@spec"].Value = this.Specializacija;
+            ukaz.Parameters["@datum_zapos"].Value = this.DatumZaposlitve;
+            ukaz.Parameters["@tip_zapos"].Value = this.TipZaposlenega;
             
 
 
@@ -147,15 +147,15 @@ namespace IPNMP
             o.Posodobi();
             SqlCommand ukaz = new SqlCommand("PosodobiZaposlenega", povezava);
 
-            ukaz.Parameters.Add(new SqlParameter("@DatumZaposlitve", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@Specializacija", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@datum_zap", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@specializacija", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
-            ukaz.Parameters["@Specializacija"].Value = this.Naslov;
-            ukaz.Parameters["@DatumZaposlitve"].Value = this.DatumZaposlitve;
-            ukaz.Parameters["@TipZaposlenega"].Value = this.TipZaposlenega;
+            ukaz.Parameters["@specializacija"].Value = this.Naslov;
+            ukaz.Parameters["@datum_zap"].Value = this.DatumZaposlitve;
+            ukaz.Parameters["@tip"].Value = this.TipZaposlenega;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -171,8 +171,8 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
             SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@TipZaposlenega", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@TipZaposlenega"].Value = TipZaposlenega;
+            ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
+            ukaz.Parameters["@tip"].Value = TipZaposlenega;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
