@@ -135,6 +135,7 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@naslovID", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@roj_osebe", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@spol_osebe", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@ime_osebe"].Value = this.Ime;
@@ -162,7 +163,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("oseba_vrniPoEmso", povezava);
+            SqlCommand ukaz = new SqlCommand("oseba_vrnipoemso", povezava);
             ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@emso"].Value = EMŠO;
             ukaz.CommandType = CommandType.StoredProcedure;

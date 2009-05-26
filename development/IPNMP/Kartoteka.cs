@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
+
 
 namespace IPNMP
 {
@@ -47,14 +48,65 @@ namespace IPNMP
         /// Vrne kartoteko pacienta iz podatkovne baze
         /// </summary>
         /// <param name="ŠtevilkaKartoteke">Vrne kartoteko iz podatkovne baze glede na številko kartoteke</param>
-        public static Kartoteka VrniKartoteko(int ŠtevilkaKartoteke)
+        public static Kartoteka[] VrniKartotekePoIdPacienta(int idPacienta)
         {
-            Kartoteka tmp = new Kartoteka();
-            tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
-            tmp.terapije = Terapija.VrniVseTerapijePoIdKartoteke(ŠtevilkaKartoteke);
-            tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(ŠtevilkaKartoteke);
-            tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(ŠtevilkaKartoteke);
-            return tmp;
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            int ŠtevilkaKartoteke = 0;
+            SqlCommand ukaz = new SqlCommand("kartoteka_vrnivse", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            List<Kartoteka> seznam = new List<Kartoteka>();
+
+
+
+            while (Bralec.Read())
+            {
+
+                if ((int)Bralec["idPacient"] == idPacienta)
+                {
+                    ŠtevilkaKartoteke = (int)Bralec["id"];
+                    Kartoteka tmp = new Kartoteka();
+                    tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
+                    tmp.terapije = Terapija.VrniVseTerapijePoIdKartoteke(ŠtevilkaKartoteke);
+                    tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(ŠtevilkaKartoteke);
+                    tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(ŠtevilkaKartoteke);
+                    seznam.Add(tmp);
+
+                }
+                
+            }
+            Kartoteka[] ds = seznam.ToArray();
+            return ds;
+
+            
         }
+        public static int VrniStevilkoKartotekePoIdPacienta(int idPacienta)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            int stevilkaKartoteke = 0;
+            SqlCommand ukaz = new SqlCommand("kartoteka_vrnivse", povezava);
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+           
+
+            while (Bralec.Read())
+            {
+             
+                if ((int)Bralec["idPacient"] == idPacienta)
+                {
+                    stevilkaKartoteke=(int)Bralec["id"];
+
+
+                }
+              
+            }
+
+            return stevilkaKartoteke;
+
+        }
+
     }
 }

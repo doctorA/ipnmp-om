@@ -48,7 +48,7 @@ namespace IPNMP
         /// <summary>
         /// Številka zdravstvenega zavarovanja
         /// </summary>
-        public int ZZZS
+        public string ZZZS
         {
             get;
             set;
@@ -57,7 +57,7 @@ namespace IPNMP
         /// <summary>
         /// Kartoteka, ki pripada vsakemu pacientu
         /// </summary>
-        public IPNMP.Kartoteka Kartoteka
+        public IPNMP.Kartoteka[] Kartoteke
         {
             get;
             set;
@@ -82,11 +82,18 @@ namespace IPNMP
             Pacient tmp2 = new Pacient(tmp);
             Bralec.Read();
 
+            tmp2.Ime = (string)Bralec["Ime"];
+            tmp2.Priimek = (string)Bralec["Priimek"];
+            tmp2.Spol = (string)Bralec["Spol"];
+            tmp2.EMŠO = (string)Bralec["EMSO"];
+            tmp2.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+            tmp2.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+            tmp2.IDOseba = (int)Bralec["IDOseba"];
             tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
             tmp2.Teža = (int)Bralec["teza"];
             tmp2.Višina = (int)Bralec["visina"];
-            tmp2.ZZZS = (int)Bralec["ZZZS"];
-            tmp2.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
+            tmp2.ZZZS = (string)Bralec["ZZZS"];
+            tmp2.Kartoteke = Kartoteka.VrniKartotekePoIdPacienta((int)Bralec["id"]);
            
 
             povezava.Close();
@@ -117,14 +124,13 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
+            
             ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar,255));
             ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
 
             ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@teza_p"].Value = this.Teža;
             ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
-            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
             ukaz.Parameters["@visina_p"].Value = this.Višina;
             ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
 
@@ -158,12 +164,15 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("pacient_vrniVse", povezava);
+            SqlCommand ukaz = new SqlCommand("pacient_vrnivse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
 
             List<Pacient> seznam = new List<Pacient>();
+
+
+            
             
 
 
@@ -177,12 +186,12 @@ namespace IPNMP
                 tmp.EMŠO = (string)Bralec["EMSO"];
                 tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
                 tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["id"];
+                tmp.IDOseba = (int)Bralec["IDOseba"];
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["teza"];
                 tmp.Višina = (int)Bralec["visina"];
-                tmp.ZZZS = (int)Bralec["ZZZS"];
-                tmp.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
+                tmp.ZZZS = (string)Bralec["ZZZS"];
+                tmp.Kartoteke = Kartoteka.VrniKartotekePoIdPacienta((int)Bralec["id"]);
                 seznam.Add(tmp);
             }
 
@@ -218,12 +227,8 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
-
-
-
-            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+           
             ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@teza_p"].Value = this.Teža;
             ukaz.Parameters["@visina_p"].Value = this.Višina;
@@ -256,14 +261,19 @@ namespace IPNMP
         public Diagnoza[] VrniAlergije()
         {
             List<Diagnoza> seznam = new List<Diagnoza>();
-            foreach (Diagnoza d in this.Kartoteka.Diagnoze)
+            foreach (Kartoteka k in this.Kartoteke)
             {
-                if (d.Tip == "Alergija")
+
+
+                foreach (Diagnoza d in k.Diagnoze)
                 {
+                    if (d.Tip == "Alergija")
+                    {
 
-                    seznam.Add(d);
+                        seznam.Add(d);
+                    }
+
                 }
-
             }
             return seznam.ToArray();
         }
@@ -274,14 +284,18 @@ namespace IPNMP
         public Terapija[] VrniOperacije()
         {
             List<Terapija> seznam = new List<Terapija>();
-            foreach (Terapija d in this.Kartoteka.terapije)
+            foreach (Kartoteka k in this.Kartoteke)
             {
-                if (d.Tip == "Operacija")
+
+                foreach (Terapija d in k.terapije)
                 {
+                    if (d.Tip == "Operacija")
+                    {
 
-                    seznam.Add(d);
+                        seznam.Add(d);
+                    }
+
                 }
-
             }
             return seznam.ToArray();
         }
@@ -297,7 +311,7 @@ namespace IPNMP
 
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("pacient_vrniPoImenu", povezava);
+            SqlCommand ukaz = new SqlCommand("pacient_vrnipoimenu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
@@ -321,12 +335,12 @@ namespace IPNMP
                 tmp.EMŠO = (string)Bralec["EMSO"];
                 tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
                 tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["id"];
+                tmp.IDOseba = (int)Bralec["IDOseba"];
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["teza"];
                 tmp.Višina = (int)Bralec["visina"];
-                tmp.ZZZS = (int)Bralec["ZZZS"];
-                tmp.Kartoteka = Kartoteka.VrniKartoteko((int)Bralec["ŠtevilkaKartoteke"]);
+                tmp.ZZZS = (string)Bralec["ZZZS"];
+                tmp.Kartoteke = Kartoteka.VrniKartotekePoIdPacienta((int)Bralec["id"]);
                 seznam.Add(tmp);
             }
 

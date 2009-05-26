@@ -62,7 +62,7 @@ namespace IPNMP
                 tmp.EMŠO = (string)Bralec["EMSO"];
                 tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
                 tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["id"];
+                tmp.IDOseba = (int)Bralec["idosebe"];
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
@@ -92,15 +92,17 @@ namespace IPNMP
             o.DatumRojstva = this.DatumRojstva;
 
             o.Posodobi();
+            Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
+            this.IDOseba = o2.IDOseba;
 
             SqlCommand ukaz = new SqlCommand("zaposleni_dodaj", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@datum_zapos", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@spec", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@tip_zapos", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
 
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
             ukaz.Parameters["@spec"].Value = this.Specializacija;
             ukaz.Parameters["@datum_zapos"].Value = this.DatumZaposlitve;
             ukaz.Parameters["@tip_zapos"].Value = this.TipZaposlenega;
@@ -120,10 +122,9 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
             SqlCommand ukaz = new SqlCommand("zaposleni_brisi", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@id_zapos", SqlDbType.Int));
-            ukaz.Parameters["@id_zapos"].Value = this.IDOseba;
-
-            ukaz.CommandType = CommandType.StoredProcedure;
+            ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
+            ukaz.Parameters["@id_osebe"].Value = this.IDOseba;
+             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             ukaz.ExecuteNonQuery();
             povezava.Close();
@@ -136,6 +137,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
+
             Oseba o = new Oseba();
             o.Ime = this.Ime;
             o.Priimek = this.Priimek;
@@ -145,14 +147,16 @@ namespace IPNMP
             o.DatumRojstva = this.DatumRojstva;
 
             o.Posodobi();
+            Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
+            this.IDOseba = o2.IDOseba;
             SqlCommand ukaz = new SqlCommand("zaposleni_uredi", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@datum_zap", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@specializacija", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
 
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@id"].Value = this.IDOseba;
             ukaz.Parameters["@specializacija"].Value = this.Naslov;
             ukaz.Parameters["@datum_zap"].Value = this.DatumZaposlitve;
             ukaz.Parameters["@tip"].Value = this.TipZaposlenega;
@@ -170,11 +174,11 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("zaposleni_vrniPoTipu", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrnipotipu", povezava);
             ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@tip"].Value = TipZaposlenega;
             ukaz.CommandType = CommandType.StoredProcedure;
-            povezava.Open();
+            povezava.Open();    
             SqlDataReader Bralec = ukaz.ExecuteReader();
 
             List<Zaposleni> seznam = new List<Zaposleni>();
@@ -183,10 +187,17 @@ namespace IPNMP
             {
                 
                 
-                    Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
+                    Zaposleni tmp = new Zaposleni();
+                    tmp.Ime = (string)Bralec["Ime"];
+                    tmp.Priimek = (string)Bralec["Priimek"];
+                    tmp.Spol = (string)Bralec["Spol"];
+                    tmp.EMŠO = (string)Bralec["EMSO"];
+                    tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+                    tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                    tmp.IDOseba = (int)Bralec["idosebe"];
                     tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                     tmp.Specializacija = (string)Bralec["Specializacija"];
-                    tmp.TipZaposlenega = TipZaposlenega;
+                    tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
                     seznam.Add(tmp);
               
             }
@@ -202,22 +213,26 @@ namespace IPNMP
         /// </summary>
         public static Zaposleni VrniPoEmšo(string EMŠO)
         {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
+            
 
-            SqlCommand ukaz = new SqlCommand("VrniPoEmšoZaposleni", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
-            ukaz.Parameters["@EMŠO"].Value = EMŠO;
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            Oseba tmp = new Oseba();
+            tmp = Oseba.VrniPoEmšo(EMŠO);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_zapos", SqlDbType.Int));
+            ukaz.Parameters["@id_zapos"].Value = tmp.IDOseba;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
-            Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
+            Zaposleni tmp2 = new Zaposleni(tmp);
             Bralec.Read();
-            tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
-            tmp.Specializacija = (string)Bralec["Specializacija"];
-            tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+
+            tmp2.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+            tmp2.Specializacija = (string)Bralec["Specializacija"];
+            tmp2.TipZaposlenega = (string)Bralec["TipZaposlenega"];
 
             povezava.Close();
-            return tmp;
+            return tmp2;
         }
 
         /* 
@@ -260,7 +275,7 @@ namespace IPNMP
 
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("zaposleni_vrniPoImenu", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_poimenu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
@@ -277,8 +292,15 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni(Oseba.VrniPoEmšo((string)Bralec["EMŠO"]));
+                Zaposleni tmp = new Zaposleni();
 
+                tmp.Ime = (string)Bralec["Ime"];
+                tmp.Priimek = (string)Bralec["Priimek"];
+                tmp.Spol = (string)Bralec["Spol"];
+                tmp.EMŠO = (string)Bralec["EMSO"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+                tmp.IDOseba = (int)Bralec["idosebe"];
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];

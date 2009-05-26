@@ -71,7 +71,7 @@
     </Compile>
     <Compile Include="Vo+żnja.cs" />
     <Compile Include="Zaposleni.cs" />
-    <Compile Include="Zdravljenje.cs" />
+    <Compile Include="Terapija.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -17,7 +17,7 @@
   <Class Name="IPNMP.Kartoteka">
     <Position X="7" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAACAAAAAAABABAAgAAAAAAAAAAAAAAAAQAAACA=</HashCode>
+      <HashCode>AAAAgAACAAAAAAABAAAAgAAAAAAAAAAAAAAAAUAAACI=</HashCode>
       <FileName>Kartoteka.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -31,7 +31,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Zaposleni">
-    <Position X="12.25" Y="4.75" Width="2" />
+    <Position X="12.25" Y="4.5" Width="2" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAgAACBAAAAA=</HashCode>
       <FileName>Zaposleni.cs</FileName>
@@ -90,10 +90,10 @@
         <Point X="11.25" Y="4.5" />
       </Path>
     </InheritanceLine>
-    <AssociationLine Name="Kartoteka" Type="IPNMP.Kartoteka" FixedToPoint="true">
+    <AssociationLine Name="Kartoteke" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="10.5" Y="5.691" />
-        <Point X="8.5" Y="5.691" />
+        <Point X="10.5" Y="5.79" />
+        <Point X="8.5" Y="5.79" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -101,14 +101,14 @@
       <FileName>Pacient.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Kartoteka" />
+      <Property Name="Kartoteke" />
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Terapija">
     <Position X="5.25" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>QAQAAAAAAAAAAAABBCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Zdravljenje.cs</FileName>
+      <FileName>Terapija.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Tahoma" Size="8.25" />
