@@ -93,7 +93,7 @@ namespace IPNMP
 
             o.Posodobi();
 
-            SqlCommand ukaz = new SqlCommand("UstvariZaposlenega", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_dodaj", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@datum_zapos", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@spec", SqlDbType.NVarChar, 255));
@@ -145,7 +145,7 @@ namespace IPNMP
             o.DatumRojstva = this.DatumRojstva;
 
             o.Posodobi();
-            SqlCommand ukaz = new SqlCommand("PosodobiZaposlenega", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_uredi", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@datum_zap", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@specializacija", SqlDbType.NVarChar, 255));
@@ -170,7 +170,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePoTipuZaposlenega", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrniPoTipu", povezava);
             ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
             ukaz.Parameters["@tip"].Value = TipZaposlenega;
             ukaz.CommandType = CommandType.StoredProcedure;
@@ -260,7 +260,7 @@ namespace IPNMP
 
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseZaposlenePoImenu", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrniPoImenu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));

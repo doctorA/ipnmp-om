@@ -101,7 +101,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("UstvariPacienta", povezava);
+            SqlCommand ukaz = new SqlCommand("pacient_dodaj", povezava);
 
             Oseba o = new Oseba();
             o.Ime = this.Ime;
@@ -158,7 +158,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePaciente", povezava);
+            SqlCommand ukaz = new SqlCommand("pacient_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -297,7 +297,7 @@ namespace IPNMP
 
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsePacientePoImenu", povezava);
+            SqlCommand ukaz = new SqlCommand("pacient_vrniPoImenu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));

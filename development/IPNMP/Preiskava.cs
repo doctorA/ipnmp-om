@@ -65,7 +65,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("preiskava_vrnipoidkartoteka", povezava);
+            SqlCommand ukaz = new SqlCommand("preiskava_vrniPoIDKartoteka", povezava);
             ukaz.Parameters.Add(new SqlParameter("@id_kartoteka", SqlDbType.Int));
             ukaz.Parameters["@id_kartoteka"].Value = StevilkaKartoteke;
             ukaz.CommandType = CommandType.StoredProcedure;

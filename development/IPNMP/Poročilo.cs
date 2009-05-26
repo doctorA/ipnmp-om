@@ -78,7 +78,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("PosodobiPorocilo", povezava);
+            SqlCommand ukaz = new SqlCommand("porocilo_uredi", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
@@ -110,7 +110,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVsaPorocila", povezava);
+            SqlCommand ukaz = new SqlCommand("porocilo_vrniVse", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -143,7 +143,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("UstvariPorocilo", povezava);
+            SqlCommand ukaz = new SqlCommand("porocilo_dodaj", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar));
             //ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
