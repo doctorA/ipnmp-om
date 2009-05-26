@@ -114,19 +114,19 @@ namespace IPNMP
             o.Posodobi();
             Oseba o2= Oseba.VrniPoEmšo(this.EMŠO);
             this.IDOseba = o2.IDOseba;
-            ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar,255));
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
 
-            ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
-            ukaz.Parameters["@Teža"].Value = this.Teža;
-            ukaz.Parameters["@EMŠO"].Value = this.IDOseba;
+            ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
+            ukaz.Parameters["@teza_p"].Value = this.Teža;
+            ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
             ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
-            ukaz.Parameters["@Višina"].Value = this.Višina;
-            ukaz.Parameters["@ZZZS"].Value = this.ZZZS;
+            ukaz.Parameters["@visina_p"].Value = this.Višina;
+            ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -199,7 +199,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("PosodobiPacienta", povezava);
+            SqlCommand ukaz = new SqlCommand("pacient_uredi", povezava);
 
 
             Oseba o = new Oseba();
@@ -211,23 +211,24 @@ namespace IPNMP
             o.DatumRojstva = this.DatumRojstva;
 
             o.Posodobi();
+            Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
+            this.IDOseba = o2.IDOseba;
 
-
-            ukaz.Parameters.Add(new SqlParameter("@KrvnaSkupina", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Teža", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@Višina", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@ZZZS", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@EMŠO", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
 
 
 
             ukaz.Parameters["@ŠtevilkaKartoteke"].Value = this.Kartoteka.ŠtevilkaKartoteke;
-            ukaz.Parameters["@KrvnaSkupina"].Value = this.KrvnaSkupina;
-            ukaz.Parameters["@Teža"].Value = this.Teža;
-            ukaz.Parameters["@Višina"].Value = this.Višina;
-            ukaz.Parameters["@ZZZS"].Value = this.ZZZS;
-            ukaz.Parameters["@EMŠO"].Value = this.EMŠO;
+            ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
+            ukaz.Parameters["@teza_p"].Value = this.Teža;
+            ukaz.Parameters["@visina_p"].Value = this.Višina;
+            ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
+            ukaz.Parameters["@id_oseba"].Value = this.EMŠO;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
