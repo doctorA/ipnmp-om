@@ -81,8 +81,8 @@ namespace IPNMP
             SqlCommand ukaz = new SqlCommand("porocilo_uredi", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
+       //     ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
+        //    ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetju_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetjuvbolnisnico_porocila", SqlDbType.NVarChar));
@@ -90,9 +90,9 @@ namespace IPNMP
 
 
             ukaz.Parameters["@akcijeresevalcev_porocila"].Value = this.AkcijeReševalcev;
-            ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
+      //      ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
             ukaz.Parameters["@id_porocila"].Value = this.ŠtevilkaPoročila;
-            ukaz.Parameters["@Datum"].Value = this.Datum;
+      //      ukaz.Parameters["@Datum"].Value = this.Datum;
             ukaz.Parameters["@opisdogodka_porocila"].Value = this.OpisDogodka;
             ukaz.Parameters["@stanjepacientaobprispetju_porocila"].Value = this.StanjePacientaObPrispetju;
             ukaz.Parameters["@stanjepacientaobprispetjuvbolnisnico_porocila"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
@@ -120,13 +120,13 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Poročilo tmp = new Poročilo();
-                tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
+                tmp.AkcijeReševalcev = (string)Bralec["AkcijeResevalcev"];
                 //tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
-                tmp.Datum = (DateTime)Bralec["Datum"];
+            //    tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     
                 tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
-                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
+                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 seznam.Add(tmp);
             }
@@ -147,14 +147,14 @@ namespace IPNMP
 
             ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar));
             //ukaz.Parameters.Add(new SqlParameter("@Avtor", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
+            //ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetju_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetjuvbolnisnico_porocila", SqlDbType.NVarChar));
 
             ukaz.Parameters["@akcijeresevalcev_porocila"].Value = this.AkcijeReševalcev;
             //ukaz.Parameters["@Avtor"].Value = this.Avtor.EMŠO;
-            ukaz.Parameters["@Datum"].Value = this.Datum;
+         //   ukaz.Parameters["@Datum"].Value = this.Datum;
             ukaz.Parameters["@opisdogodka_porocila"].Value = this.OpisDogodka;
             ukaz.Parameters["@stanjepacientaobprispetju_porocila"].Value = this.StanjePacientaObPrispetju;
             ukaz.Parameters["@stanjepacientaobprispetjuvbolnisnico_porocila"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
@@ -222,13 +222,13 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Poročilo tmp = new Poročilo();
-                tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
+                tmp.AkcijeReševalcev = (string)Bralec["AkcijeResevalcev"];
                // tmp.Avtor = Zaposleni.VrniPoEmšo((string)Bralec["Avtor"]);
-                tmp.Datum = (DateTime)Bralec["Datum"];
+                //tmp.Datum = (DateTime)Bralec["Datum"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
 
                 tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
-                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
+                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 seznam.Add(tmp);
             }

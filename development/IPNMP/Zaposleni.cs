@@ -121,7 +121,7 @@ namespace IPNMP
         public void Izbrisi()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
-            SqlCommand ukaz = new SqlCommand("zaposleni_brisi", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_brisipoidosebe", povezava);
             ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
             ukaz.Parameters["@id_osebe"].Value = this.IDOseba;
              ukaz.CommandType = CommandType.StoredProcedure;
@@ -218,9 +218,9 @@ namespace IPNMP
             SqlConnection povezava = new SqlConnection(PotPovezave);
             Oseba tmp = new Oseba();
             tmp = Oseba.VrniPoEmšo(EMŠO);
-            SqlCommand ukaz = new SqlCommand("zaposleni_vrni", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@id_zapos", SqlDbType.Int));
-            ukaz.Parameters["@id_zapos"].Value = tmp.IDOseba;
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrnipoidosebe", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+            ukaz.Parameters["@id_oseba"].Value = tmp.IDOseba;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
