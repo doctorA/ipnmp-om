@@ -58,12 +58,46 @@ namespace IPNMP
             Naslov tmp = new Naslov();
             Bralec.Read();
             tmp.HišnaŠtevilka = (string)Bralec["HisnaStevilka"];
+            tmp.IDNaslova = (int)Bralec["id"];
+
             tmp.Ulica = (string)Bralec["Ulica"];
             tmp.Mesto = (string)Bralec["Mesto"];
             tmp.PoštnaŠtevilka = (int)Bralec["PostnaStevilka"];
 
             povezava.Close();
             return tmp;
+        }
+
+        public void Ustvari(){
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("naslov_ustvari", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_naslova", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_naslova", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_naslova", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_naslova", SqlDbType.Int));
+
+            ukaz.Parameters["@id_naslova"].Value = this.HišnaŠtevilka;
+            ukaz.Parameters["@id_naslova"].Value = this.Mesto;
+            ukaz.Parameters["@id_naslova"].Value = this.PoštnaŠtevilka;
+            ukaz.Parameters["@id_naslova"].Value = this.Ulica;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Naslov tmp = new Naslov();
+            Bralec.Read();
+            tmp.HišnaŠtevilka = (string)Bralec["HisnaStevilka"];
+            tmp.Ulica = (string)Bralec["Ulica"];
+            tmp.Mesto = (string)Bralec["Mesto"];
+            tmp.PoštnaŠtevilka = (int)Bralec["PostnaStevilka"];
+
+            povezava.Close();
+            
+
+
+
+
         }
     }
 }

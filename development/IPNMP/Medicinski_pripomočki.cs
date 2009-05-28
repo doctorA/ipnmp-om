@@ -29,7 +29,7 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseMedPrip", povezava);
+            SqlCommand ukaz = new SqlCommand("terapija_vrnimedprip", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -39,8 +39,8 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Medicinski_pripomočki tmp = new Medicinski_pripomočki();
-                tmp.Kategorija = (string)Bralec["Kategorija"];
-                tmp.Naziv = (string)Bralec["Naziv"];
+                tmp.Kategorija = (string)Bralec["opis"];
+                tmp.Naziv = (string)Bralec["kaj"];
                 seznam.Add(tmp);
             }
 
@@ -57,9 +57,9 @@ namespace IPNMP
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("VrniVseMedPripPoID", povezava);
-            ukaz.Parameters.Add(new SqlParameter("@ŠtevilkaKartoteke", SqlDbType.Int));
-            ukaz.Parameters["@ŠtevilkaKartoteke"].Value = StevilkaKartoteke;
+            SqlCommand ukaz = new SqlCommand("terapija_vrnimedprippoidkartoteka", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_kartoteke", SqlDbType.Int));
+            ukaz.Parameters["@id_kartoteke"].Value = StevilkaKartoteke;
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -69,8 +69,8 @@ namespace IPNMP
             while (Bralec.Read())
             {
                 Medicinski_pripomočki tmp = new Medicinski_pripomočki();
-                tmp.Kategorija = (string)Bralec["Kategorija"];
-                tmp.Naziv = (string)Bralec["Naziv"];
+                tmp.Kategorija = (string)Bralec["opis"];
+                tmp.Naziv = (string)Bralec["kaj"];
                 seznam.Add(tmp);
             }
 

@@ -32,6 +32,8 @@ namespace IPNMP
         /// <summary>
         /// Vrne določeno ekipo zaposlenih iz podatkovne baze
         /// </summary>
+        /// 
+        /*
         public static Ekipa VrniEkipoŠt(int ŠtevilkaEkipe)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -62,10 +64,12 @@ namespace IPNMP
             
             return tmp;
         }
-
+        */
         /// <summary>
         /// Ustvari novo ekipo zaposlenih v podatkovni bazi
         /// </summary>
+        /// 
+        /*
         public void UstvariEkipo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
@@ -106,5 +110,6 @@ namespace IPNMP
             ukaz.ExecuteNonQuery();
             povezava.Close();
         }
+         * */
     }
 }

@@ -176,6 +176,7 @@ namespace IPNMP
             tmp.Spol = (string)Bralec["Spol"];
             tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
             tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+            tmp.EMŠO = EMŠO;
             tmp.IDOseba = (int)Bralec["id"];
 
             povezava.Close();
@@ -199,6 +200,7 @@ namespace IPNMP
             tmp.Spol = (string)Bralec["Spol"];
             tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
             tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+            tmp.EMŠO = (string)Bralec["emso"];
             tmp.IDOseba = (int)Bralec["id"];
 
             povezava.Close();
