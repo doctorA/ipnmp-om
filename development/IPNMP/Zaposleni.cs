@@ -24,6 +24,7 @@ namespace IPNMP
             this.Spol = o.Spol;
             this.EMŠO = o.EMŠO;
             this.DatumRojstva = o.DatumRojstva;
+            this.IDOseba = o.IDOseba;
 
         }
 
@@ -55,14 +56,12 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni();
-                tmp.Ime = (string)Bralec["Ime"];
-                tmp.Priimek = (string)Bralec["Priimek"];
-                tmp.Spol = (string)Bralec["Spol"];
-                tmp.EMŠO = (string)Bralec["EMSO"];
-                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
-                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["idosebe"];
+                int IDOsebe = (int)Bralec["IDOseba"];
+                Oseba tmp2 = Oseba.VrniPoIDOsebe(IDOsebe);
+
+                Zaposleni tmp = new Zaposleni(tmp2);
+
+                tmp.IDOseba = IDOsebe;
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
@@ -91,7 +90,7 @@ namespace IPNMP
             o.EMŠO = this.EMŠO;
             o.DatumRojstva = this.DatumRojstva;
 
-            o.Posodobi();
+            o.Ustvari();
             Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
             this.IDOseba = o2.IDOseba;
 
@@ -154,10 +153,10 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@datum_zap", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@specializacija", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+            //ukaz.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
 
-            ukaz.Parameters["@id"].Value = this.IDOseba;
-            ukaz.Parameters["@specializacija"].Value = this.Naslov;
+          //  ukaz.Parameters["@id"].Value = this.IDOseba;
+            ukaz.Parameters["@specializacija"].Value = this.Specializacija;
             ukaz.Parameters["@datum_zap"].Value = this.DatumZaposlitve;
             ukaz.Parameters["@tip"].Value = this.TipZaposlenega;
 
@@ -185,16 +184,13 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                
-                
-                    Zaposleni tmp = new Zaposleni();
-                    tmp.Ime = (string)Bralec["Ime"];
-                    tmp.Priimek = (string)Bralec["Priimek"];
-                    tmp.Spol = (string)Bralec["Spol"];
-                    tmp.EMŠO = (string)Bralec["EMSO"];
-                    tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
-                    tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                    tmp.IDOseba = (int)Bralec["idosebe"];
+
+                int IDOsebe = (int)Bralec["IDOseba"];
+                Oseba tmp2 = Oseba.VrniPoIDOsebe(IDOsebe);
+
+                Zaposleni tmp = new Zaposleni(tmp2);
+
+                tmp.IDOseba = IDOsebe;
                     tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                     tmp.Specializacija = (string)Bralec["Specializacija"];
                     tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
@@ -275,7 +271,7 @@ namespace IPNMP
 
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
-            SqlCommand ukaz = new SqlCommand("zaposleni_poimenu", povezava);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrniPoImenu", povezava);
             ukaz.CommandType = CommandType.StoredProcedure;
             ukaz.Parameters.Add(new SqlParameter("@Ime", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@Priimek", SqlDbType.NVarChar, 255));
@@ -292,15 +288,12 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Zaposleni tmp = new Zaposleni();
+                int IDOsebe = (int)Bralec["IDOseba"];
+                Oseba tmp2 = Oseba.VrniPoIDOsebe(IDOsebe);
 
-                tmp.Ime = (string)Bralec["Ime"];
-                tmp.Priimek = (string)Bralec["Priimek"];
-                tmp.Spol = (string)Bralec["Spol"];
-                tmp.EMŠO = (string)Bralec["EMSO"];
-                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
-                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["idosebe"];
+                Zaposleni tmp = new Zaposleni(tmp2);
+
+                tmp.IDOseba = IDOsebe;
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];

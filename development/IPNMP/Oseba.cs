@@ -48,16 +48,16 @@ namespace IPNMP
 
             ukaz.Parameters.Add(new SqlParameter("@ime_osebe", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@priimek_osebe", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@emso_osebe", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@naslovID", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@roj_osebe", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@roj_datum_osebe", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@spol_osebe", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@ime_osebe"].Value = this.Ime;
             ukaz.Parameters["@priimek_osebe"].Value = this.Priimek;
-            ukaz.Parameters["@emso"].Value = this.EMŠO;
+            ukaz.Parameters["@emso_osebe"].Value = this.EMŠO;
             ukaz.Parameters["@naslovID"].Value = this.Naslov.IDNaslova;
-            ukaz.Parameters["@roj_osebe"].Value = this.DatumRojstva;
+            ukaz.Parameters["@roj_datum_osebe"].Value = this.DatumRojstva;
             ukaz.Parameters["@spol_osebe"].Value = this.Spol;
 
             ukaz.CommandType = CommandType.StoredProcedure;
@@ -132,18 +132,18 @@ namespace IPNMP
 
             ukaz.Parameters.Add(new SqlParameter("@ime_osebe", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@priimek_osebe", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@emso", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@naslovID", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@roj_osebe", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@emso_osebe", SqlDbType.NVarChar, 255));
+            ukaz.Parameters.Add(new SqlParameter("@id_naslov", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@roj_datum_osebe", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@spol_osebe", SqlDbType.NVarChar, 255));
 
             ukaz.Parameters["@ime_osebe"].Value = this.Ime;
             ukaz.Parameters["@priimek_osebe"].Value = this.Priimek;
-            ukaz.Parameters["@emso"].Value = this.EMŠO;
+            ukaz.Parameters["@emso_osebe"].Value = this.EMŠO;
             ukaz.Parameters["@id_osebe"].Value = this.IDOseba;
-            ukaz.Parameters["@Naslov"].Value = this.Naslov.IDNaslova;
-            ukaz.Parameters["@roj_osebe"].Value = this.DatumRojstva;
+            ukaz.Parameters["@id_naslov"].Value = this.Naslov.IDNaslova;
+            ukaz.Parameters["@roj_datum_osebe"].Value = this.DatumRojstva;
             ukaz.Parameters["@spol_osebe"].Value = this.Spol;
 
 

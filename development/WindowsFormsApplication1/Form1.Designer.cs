@@ -139,21 +139,21 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(254, 78);
+            this.button2.Location = new System.Drawing.Point(254, 97);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(121, 20);
             this.button2.TabIndex = 11;
-            this.button2.Text = "Primer Pacienta";
+            this.button2.Text = "test osebe";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(254, 108);
+            this.button3.Location = new System.Drawing.Point(254, 123);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(65, 21);
+            this.button3.Size = new System.Drawing.Size(121, 21);
             this.button3.TabIndex = 12;
-            this.button3.Text = "Vse";
+            this.button3.Text = "test kartoteke";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -161,19 +161,19 @@
             // 
             this.button4.Location = new System.Drawing.Point(254, 152);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(64, 24);
+            this.button4.Size = new System.Drawing.Size(121, 24);
             this.button4.TabIndex = 13;
-            this.button4.Text = "posodobi";
+            this.button4.Text = "test zaposlenega";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(254, 196);
+            this.button5.Location = new System.Drawing.Point(254, 182);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(121, 23);
             this.button5.TabIndex = 14;
-            this.button5.Text = "Primer osebe";
+            this.button5.Text = "test pacienta";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

@@ -29,6 +29,7 @@ namespace IPNMP
             this.Naslov = o.Naslov;
             this.EMŠO = o.EMŠO;
             this.DatumRojstva = o.DatumRojstva;
+            this.IDOseba = o.IDOseba;
 
 
         }
@@ -82,12 +83,8 @@ namespace IPNMP
             Pacient tmp2 = new Pacient(tmp);
             Bralec.Read();
 
-            tmp2.Ime = (string)Bralec["Ime"];
-            tmp2.Priimek = (string)Bralec["Priimek"];
-            tmp2.Spol = (string)Bralec["Spol"];
-            tmp2.EMŠO = (string)Bralec["EMSO"];
-            tmp2.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
-            tmp2.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
+           
+            
             tmp2.IDOseba = (int)Bralec["IDOseba"];
             tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
             tmp2.Teža = (int)Bralec["teza"];
@@ -118,17 +115,19 @@ namespace IPNMP
             o.EMŠO = this.EMŠO;
             o.DatumRojstva = this.DatumRojstva;
 
-            o.Posodobi();
+            o.Ustvari();
             Oseba o2= Oseba.VrniPoEmšo(this.EMŠO);
             this.IDOseba = o2.IDOseba;
             ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
             
+            
             ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar,255));
             ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
 
             ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
+            
             ukaz.Parameters["@teza_p"].Value = this.Teža;
             ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
             ukaz.Parameters["@visina_p"].Value = this.Višina;
@@ -178,15 +177,14 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Pacient tmp = new Pacient();
+                int IDOsebe = (int)Bralec["IDOseba"];
+                Oseba tmp2 = Oseba.VrniPoIDOsebe(IDOsebe);
 
-                tmp.Ime = (string)Bralec["Ime"];
-                tmp.Priimek = (string)Bralec["Priimek"];
-                tmp.Spol = (string)Bralec["Spol"];
-                tmp.EMŠO = (string)Bralec["EMSO"];
-                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
-                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["IDOseba"];
+
+                Pacient tmp = new Pacient(tmp2);
+                tmp.IDOseba = IDOsebe;
+               
+                
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["teza"];
                 tmp.Višina = (int)Bralec["visina"];
@@ -219,21 +217,21 @@ namespace IPNMP
             o.EMŠO = this.EMŠO;
             o.DatumRojstva = this.DatumRojstva;
 
-            o.Posodobi();
+            o.Ustvari();
             Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
             this.IDOseba = o2.IDOseba;
 
             ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
            
             ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@teza_p"].Value = this.Teža;
             ukaz.Parameters["@visina_p"].Value = this.Višina;
             ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
-            ukaz.Parameters["@id_oseba"].Value = this.EMŠO;
+            ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -244,7 +242,7 @@ namespace IPNMP
         /// <summary>
         /// Vrne starost v letih, izračunano s pomočjo datuma rojstva
         /// </summary>
-        public string VrniStarost()
+        public int VrniStarost()
         {
             DateTime datum_roj = this.DatumRojstva;
             DateTime trenutni_datum = DateTime.Today;
@@ -252,7 +250,7 @@ namespace IPNMP
             TimeSpan izracun = trenutni_datum - datum_roj;
             int starost = (int)(izracun.TotalDays / 365.255);   //deljenje dni z 365.255 popravi problem prestopnega leta
             //0.25 za prestopna leta, 0.005 za ostale popravke (razna prestavljanja ur itd.)
-            return starost.ToString();
+            return starost;
         }
 
         /// <summary>
@@ -328,14 +326,12 @@ namespace IPNMP
 
             while (Bralec.Read())
             {
-                Pacient tmp = new Pacient();
-                tmp.Ime = (string)Bralec["Ime"];
-                tmp.Priimek = (string)Bralec["Priimek"];
-                tmp.Spol = (string)Bralec["Spol"];
-                tmp.EMŠO = (string)Bralec["EMSO"];
-                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
-                tmp.DatumRojstva = (DateTime)Bralec["DatumRojstva"];
-                tmp.IDOseba = (int)Bralec["IDOseba"];
+                int IDOsebe = (int)Bralec["IDOseba"];
+                Oseba tmp2 = Oseba.VrniPoIDOsebe(IDOsebe);
+
+
+                Pacient tmp = new Pacient(tmp2);
+                tmp.IDOseba = IDOsebe;
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["teza"];
                 tmp.Višina = (int)Bralec["visina"];
