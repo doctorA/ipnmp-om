@@ -64,6 +64,12 @@ namespace IPNMP
             set;
         }
 
+        public int IdPacienta
+        {
+            get;
+            set;
+        }
+
 
 
         /// <summary>
@@ -83,8 +89,8 @@ namespace IPNMP
             Pacient tmp2 = new Pacient(tmp);
             Bralec.Read();
 
-           
-            
+
+            tmp2.IdPacienta = (int)Bralec["id"];
             tmp2.IDOseba = (int)Bralec["IDOseba"];
             tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
             tmp2.Teža = (int)Bralec["teza"];
@@ -183,8 +189,8 @@ namespace IPNMP
 
                 Pacient tmp = new Pacient(tmp2);
                 tmp.IDOseba = IDOsebe;
-               
-                
+
+                tmp.IdPacienta = (int)Bralec["id"];
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["teza"];
                 tmp.Višina = (int)Bralec["visina"];
@@ -332,6 +338,7 @@ namespace IPNMP
 
                 Pacient tmp = new Pacient(tmp2);
                 tmp.IDOseba = IDOsebe;
+                tmp.IdPacienta = (int)Bralec["id"];
                 tmp.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
                 tmp.Teža = (int)Bralec["teza"];
                 tmp.Višina = (int)Bralec["visina"];
@@ -344,6 +351,39 @@ namespace IPNMP
             povezava.Close();
 
             return ds;
+
+        }
+
+        public static Pacient VrniPoIdPacient(int idP)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+           
+            SqlCommand ukaz = new SqlCommand("pacient_vrni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_p", SqlDbType.Int));
+            ukaz.Parameters["@id_p"].Value = idP;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            Bralec.Read();
+            Oseba tmp = new Oseba();
+            tmp = Oseba.VrniPoIDOsebe((int)Bralec["IDOseba"]);
+            Pacient tmp2 = new Pacient(tmp);
+         
+
+
+            tmp2.IdPacienta = (int)Bralec["id"];
+            tmp2.IDOseba = (int)Bralec["IDOseba"];
+           
+            tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
+            tmp2.Teža = (int)Bralec["teza"];
+            tmp2.Višina = (int)Bralec["visina"];
+            tmp2.ZZZS = (string)Bralec["ZZZS"];
+            tmp2.Kartoteke = Kartoteka.VrniKartotekePoIdPacienta((int)Bralec["id"]);
+
+
+            povezava.Close();
+            return tmp2;
 
         }
 
