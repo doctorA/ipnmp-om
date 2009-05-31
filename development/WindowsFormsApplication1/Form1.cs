@@ -61,10 +61,28 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-           
+            //TestKartotekaVrniID(); vrne error, glej funkcijo
+            TestKartotekaVrniIDpoID(); //pri testnih parametrih (int = 12) vrne vrednost 120 => metoda dela
            
         }
 
+        /// <summary>
+        /// Testiranje metod za kartoteko
+        /// </summary>
+
+        public void TestKartotekaVrniID()
+        {
+            //Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression.
+
+            int id_test = 12; 
+            Kartoteka[] rezultat = Kartoteka.VrniKartotekePoIdPacienta(id_test);
+        }
+
+        public void TestKartotekaVrniIDpoID()
+        {
+            int id_test = 12;
+            int rezultat = Kartoteka.VrniStevilkoKartotekePoIdPacienta(id_test);
+        }
 
 
         /// <summary>
@@ -80,6 +98,7 @@ namespace WindowsFormsApplication1
            // TestPacientVrniVse();
             TestPacientPosodobi();
         }
+
 
         public void TestPacientUstvari()
         {
