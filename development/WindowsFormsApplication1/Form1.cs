@@ -241,8 +241,8 @@ namespace WindowsFormsApplication1
         private void button6_Click(object sender, EventArgs e)
         {
             //TestPorociloPosodobi(); //storage procedure so napačno spisane
-            //TestPorociloUstvari(); //ne dela zaradi IDja, ki se ne inkrementira samodejno
-            TestPorociloVrniVse(); //dela
+            TestPorociloUstvari(); //ne dela zaradi IDja, ki se ne inkrementira samodejno
+            //TestPorociloVrniVse(); //dela
         }
 
         public void TestPorociloPosodobi()
@@ -262,7 +262,8 @@ namespace WindowsFormsApplication1
             porocilo.StanjePacientaObPrispetju = "Pacient mrtev, pulz 0";
             porocilo.StanjePacientaObPrispetjuVBolnišnico = "Pacient mrtev, pulz 0";
             porocilo.AkcijeReševalcev = "Razgrnitev mrtvaške vrečke, pobiranje človeških udov v obsegu 150 m od nesreče";
-            porocilo.ŠtevilkaPacienta = id;
+            porocilo.Pacient = Pacient.VrniPoEmšo("1305281500333");
+
 
             porocilo.UstvariPorocilo();
         }
@@ -291,6 +292,46 @@ namespace WindowsFormsApplication1
             int id = 130;
 
             Preiskava[] vsi = Preiskava.VrniVsePreiskavePoID(id);
+        }
+        /// <summary>
+        /// Testiranje medicinskih pripomočkov
+        /// </summary>
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //TestMedPrimVrniVse(); //dela
+            TestMedPrimVrniID(); //deluje
+        }
+
+        public void TestMedPrimVrniVse()
+        {
+            Medicinski_pripomočki[] vsi = Medicinski_pripomočki.VrniVseMedPrip();
+        }
+        public void TestMedPrimVrniID()
+        {
+            int id = 120;
+
+            Medicinski_pripomočki[] vsi = Medicinski_pripomočki.VrniVseMedPripPoID(id);
+        }
+        /// <summary>
+        /// Testiranje razreda Diagnoza
+        /// </summary>
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //TestDiagnozaVrniVse(); //deluje
+            TestDiagnozaVrniPoID(); //deluje
+        }
+
+        public void TestDiagnozaVrniVse()
+        {
+            Diagnoza[] vse = Diagnoza.VrniVseDiagnoze();
+        }
+
+        public void TestDiagnozaVrniPoID()
+        {
+            int id = 120;
+
+            Diagnoza[] vsi = Diagnoza.VrniDiagnozePoID(id);
         }
     }
 }
