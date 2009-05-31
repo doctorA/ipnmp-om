@@ -61,8 +61,8 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //TestKartotekaVrniID(); vrne error, glej funkcijo
-            TestKartotekaVrniIDpoID(); //pri testnih parametrih (int = 12) vrne vrednost 120 => metoda dela
+            TestKartotekaVrniID();
+            //TestKartotekaVrniIDpoID(); //pri testnih parametrih (int = 12) vrne vrednost 120 => metoda dela
            
         }
 
@@ -235,6 +235,63 @@ namespace WindowsFormsApplication1
 
         }
 
+        /// <summary>
+        /// Testiranje metode Poročilo
+        /// </summary>
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //TestPorociloPosodobi(); //storage procedure so napačno spisane
+            //TestPorociloUstvari(); //ne dela zaradi IDja, ki se ne inkrementira samodejno
+            TestPorociloVrniVse(); //dela
+        }
+
+        public void TestPorociloPosodobi()
+        {
+            int id = 13;
+            Poročilo[] test = Poročilo.VrniPorociloPoID(id);
+            test[0].OpisDogodka = "padec po stopnicah nato nalet v okno ter padec iz 3. nadstropja";
+            test[0].PosodobiPorocilo();
+        }
+
+        public void TestPorociloUstvari()
+        {
+            Poročilo porocilo = new Poročilo();
+            int id = 12;
+
+            porocilo.OpisDogodka = "Kolaterarna škoda, ki je nastala zaradi Chuck Norrisovega roundhouse kicka";
+            porocilo.StanjePacientaObPrispetju = "Pacient mrtev, pulz 0";
+            porocilo.StanjePacientaObPrispetjuVBolnišnico = "Pacient mrtev, pulz 0";
+            porocilo.AkcijeReševalcev = "Razgrnitev mrtvaške vrečke, pobiranje človeških udov v obsegu 150 m od nesreče";
+            porocilo.ŠtevilkaPacienta = id;
+
+            porocilo.UstvariPorocilo();
+        }
+
+        public void TestPorociloVrniVse()
+        {
+            Poročilo[] vsi = Poročilo.VrniVsaPorocila();
+        }
+
+        /// <summary>
+        /// Testiranje preiskave
+        /// </summary>
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //TestPreiskavaVrniVse(); //deluje
+            TestPreiskavaVrniPoID(); //deluje
+        }
+
+        public void TestPreiskavaVrniVse()
+        {
+            Preiskava[] vsi = Preiskava.VrniVsePreiskave();
+        }
+
+        public void TestPreiskavaVrniPoID()
+        {
+            int id = 130;
+
+            Preiskava[] vsi = Preiskava.VrniVsePreiskavePoID(id);
+        }
     }
 }
 

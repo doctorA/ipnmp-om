@@ -45,6 +45,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -193,11 +195,33 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "NASLOV";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(254, 211);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(116, 26);
+            this.button6.TabIndex = 17;
+            this.button6.Text = "test poročila";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(258, 249);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(111, 31);
+            this.button7.TabIndex = 18;
+            this.button7.Text = "test preiskava";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 315);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.button5);
@@ -241,6 +265,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 
