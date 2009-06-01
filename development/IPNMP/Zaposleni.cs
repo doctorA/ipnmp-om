@@ -87,7 +87,7 @@ namespace IPNMP
         /// </summary>
         public void Ustvari()
         {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
+            
 
             Oseba o = new Oseba();
             o.Ime = this.Ime;
@@ -100,26 +100,35 @@ namespace IPNMP
             o.Ustvari();
             Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
             this.IDOseba = o2.IDOseba;
+            if (Zaposleni.VrniPoIDOsebe(IDOseba) == null)
+            {
+                SqlConnection povezava = new SqlConnection(PotPovezave);
+                SqlCommand ukaz = new SqlCommand("zaposleni_dodaj", povezava);
 
-            SqlCommand ukaz = new SqlCommand("zaposleni_dodaj", povezava);
+                ukaz.Parameters.Add(new SqlParameter("@datum_zapos", SqlDbType.DateTime));
+                ukaz.Parameters.Add(new SqlParameter("@spec", SqlDbType.NVarChar, 255));
+                ukaz.Parameters.Add(new SqlParameter("@tip_zapos", SqlDbType.NVarChar, 255));
+                ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
 
-            ukaz.Parameters.Add(new SqlParameter("@datum_zapos", SqlDbType.DateTime));
-            ukaz.Parameters.Add(new SqlParameter("@spec", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@tip_zapos", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+                ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
+                ukaz.Parameters["@spec"].Value = this.Specializacija;
+                ukaz.Parameters["@datum_zapos"].Value = this.DatumZaposlitve;
+                ukaz.Parameters["@tip_zapos"].Value = this.TipZaposlenega;
 
-            ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
-            ukaz.Parameters["@spec"].Value = this.Specializacija;
-            ukaz.Parameters["@datum_zapos"].Value = this.DatumZaposlitve;
-            ukaz.Parameters["@tip_zapos"].Value = this.TipZaposlenega;
+
+
+                ukaz.CommandType = CommandType.StoredProcedure;
+                povezava.Open();
+                ukaz.ExecuteNonQuery();
+                povezava.Close();
+            }
             
-
-
-            ukaz.CommandType = CommandType.StoredProcedure;
-            povezava.Open();
-            ukaz.ExecuteNonQuery();
-            povezava.Close();
+            else
+            {
+                this.Posodobi();
+            }
         }
+       
 
         /// <summary>
         /// Izbriše zaposlenega iz podatkovne baze
@@ -274,7 +283,42 @@ namespace IPNMP
          * */
 
 
+        public static Zaposleni VrniPoIDOsebe(int idOsebe)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
 
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrnipoidosebe", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+            ukaz.Parameters["@id_oseba"].Value = idOsebe;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            Bralec.Read();
+            Oseba tmp = new Oseba();
+            tmp = Oseba.VrniPoIDOsebe(idOsebe);
+            Zaposleni tmp2 = new Zaposleni(tmp);
+
+
+            try
+            {
+                tmp2.IdZaposleni = (int)Bralec["id"];
+                tmp2.IDOseba = (int)Bralec["IDOseba"];
+
+                tmp2.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+                tmp2.Specializacija = (string)Bralec["Specializacija"];
+                tmp2.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+            }
+            catch (Exception e)
+            {
+                povezava.Close();
+                return null;
+            }
+
+            povezava.Close();
+            return tmp2;
+
+        }
 
         public static IPNMP.Zaposleni[] VrniVsePoImenu(string Ime, string Priimek)
         {

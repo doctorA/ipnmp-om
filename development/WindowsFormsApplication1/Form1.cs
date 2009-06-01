@@ -180,7 +180,7 @@ namespace WindowsFormsApplication1
         private void button4_Click(object sender, EventArgs e)
         {
 
-             //TestZaposleniUstvari();  //ne dela
+             TestZaposleniUstvari();  //ne dela
              //TestZaposleniPosodobi();  
             //TestZaposleniBrisi();
             //TestZaposleniVrniPoEmso();
@@ -248,9 +248,10 @@ namespace WindowsFormsApplication1
         /// </summary>
         private void button6_Click(object sender, EventArgs e)
         {
-            TestPorociloPosodobi(); //storage procedure so napačno spisane
+            //TestPorociloPosodobi(); //storage procedure so napačno spisane
             //TestPorociloUstvari(); //dela
             //TestPorociloVrniVse(); //dela
+            TestPorociloPoPacientu();
         }
 
         public void TestPorociloPosodobi()
@@ -279,6 +280,12 @@ namespace WindowsFormsApplication1
         public void TestPorociloVrniVse()
         {
             Poročilo[] vsi = Poročilo.VrniVsaPorocila();
+        }
+
+        public void TestPorociloPoPacientu()
+        {
+            Pacient joze = Pacient.VrniPoEmšo("2903965500999");
+            Poročilo[] pacienti = Poročilo.VrniPorocilaPoPacientu(joze);
         }
 
         /// <summary>
