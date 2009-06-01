@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using csUnit;
+
 
 namespace IPNMP
 {
-    [TestFixture]
+    
     public class Oseba
     {
         private static string PotPovezave = Properties.Settings.Default.ConnectionString;
@@ -36,7 +36,7 @@ namespace IPNMP
 
 
 
-        [Test]
+        
         /// <summary>
         /// Ustvari novo osebo v podatkovni bazi
         /// </summary>
@@ -82,6 +82,8 @@ namespace IPNMP
             povezava.Open();
             ukaz.ExecuteNonQuery();
             povezava.Close();
+           
+           
 
         }
 

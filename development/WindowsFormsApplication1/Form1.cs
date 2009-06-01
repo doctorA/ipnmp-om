@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using IPNMP;
+using csUnit;
 
 namespace WindowsFormsApplication1
 {
+    [TestFixture]
     public partial class Form1 : Form
     {
         public Form1()
@@ -51,7 +53,7 @@ namespace WindowsFormsApplication1
             achmed = Oseba.VrniPoEmšo("1234");
             achmed = Oseba.VrniPoIDOsebe(40);
             Oseba[] achmedi = Oseba.VrniVse();
-            achmed.Priimek = "kosica";
+            achmed.Priimek = "kosica2";
             achmed.Posodobi();
             //achmed.Izbrisi();
 
@@ -91,22 +93,24 @@ namespace WindowsFormsApplication1
        
         private void button5_Click(object sender, EventArgs e)
         {
-
+            
            // TestPacientVrniPoEmšo();
             //TestPacientVrniPoImenu();
             //TestPacientLokalneMetode();
            // TestPacientVrniVse();
-            TestPacientPosodobi();
+           // TestPacientPosodobi();
+           // TestPacientIzbrisi();  //ne dela
+            TestPacientUstvari();
         }
 
-
+        [Test]
         public void TestPacientUstvari()
         {
             Pacient marija = new Pacient();
-            marija.Ime = "Marija";
-            marija.Priimek = "Klobasa";
+            marija.Ime = "Marija2";
+            marija.Priimek = "Klobasa3";
             marija.Spol = "ženski";
-            marija.EMŠO = "123456789";
+            marija.EMŠO = "12345678932";
             marija.DatumRojstva = Convert.ToDateTime("01.01.1950");
             marija.KrvnaSkupina = "AB-";
             marija.Naslov = Naslov.VrniNaslov(122);
@@ -115,13 +119,14 @@ namespace WindowsFormsApplication1
             marija.ZZZS = "99494";
             marija.Ustvari();
                     }
-
+        [Test]
         public void TestPacientVrniPoEmšo()
         {
             Pacient emsek = new Pacient();
             emsek = Pacient.VrniPoEmšo("2807976505444");
-            
 
+
+            Assert.NotNull(emsek);
         }
 
         public void TestPacientVrniPoImenu()
@@ -150,9 +155,12 @@ namespace WindowsFormsApplication1
 
         public void TestPacientIzbrisi()
         {
-            //še ni testirano, saj ne dela dodajanje, v bazi pa so samo trije pacienti
+            Pacient tst = new Pacient();
+            tst = Pacient.VrniPoIdPacient(17);
+            tst.Izbrisi();
         }
 
+        [Test]
         public void TestPacientPosodobi()
         {
             Pacient emsek = new Pacient();
@@ -173,12 +181,12 @@ namespace WindowsFormsApplication1
         {
 
              //TestZaposleniUstvari();  //ne dela
-             //TestZaposleniPosodobi();  //ne dela
+             //TestZaposleniPosodobi();  
             //TestZaposleniBrisi();
             //TestZaposleniVrniPoEmso();
             //TestZaposleniVrniVse();
             //TestZaposleniVrniPoTipu();
-            TestZaposleniVrniPoImenu();
+            //TestZaposleniVrniPoImenu();
 
 
         }
@@ -203,7 +211,7 @@ namespace WindowsFormsApplication1
         public void TestZaposleniPosodobi()
         {
             Zaposleni lol = Zaposleni.VrniPoEmšo("1605969500555");
-            lol.Specializacija = "dr.ek";
+            lol.Specializacija = "dr.ek2";
             lol.Posodobi();
         }
         public void TestZaposleniBrisi()
@@ -240,23 +248,23 @@ namespace WindowsFormsApplication1
         /// </summary>
         private void button6_Click(object sender, EventArgs e)
         {
-            //TestPorociloPosodobi(); //storage procedure so napačno spisane
-            TestPorociloUstvari(); //ne dela zaradi IDja, ki se ne inkrementira samodejno
+            TestPorociloPosodobi(); //storage procedure so napačno spisane
+            //TestPorociloUstvari(); //dela
             //TestPorociloVrniVse(); //dela
         }
 
         public void TestPorociloPosodobi()
         {
-            int id = 13;
-            Poročilo[] test = Poročilo.VrniPorociloPoID(id);
-            test[0].OpisDogodka = "padec po stopnicah nato nalet v okno ter padec iz 3. nadstropja";
-            test[0].PosodobiPorocilo();
+            int id = 5310;
+            Poročilo test = Poročilo.VrniPorociloPoID(id);
+            test.OpisDogodka = "padec po stopnicah, nato nalet v okno ter padec iz 3. nadstropja na gradbišče v cement";
+            test.PosodobiPorocilo();
         }
 
         public void TestPorociloUstvari()
         {
             Poročilo porocilo = new Poročilo();
-            int id = 12;
+           
 
             porocilo.OpisDogodka = "Kolaterarna škoda, ki je nastala zaradi Chuck Norrisovega roundhouse kicka";
             porocilo.StanjePacientaObPrispetju = "Pacient mrtev, pulz 0";

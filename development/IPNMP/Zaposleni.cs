@@ -38,6 +38,12 @@ namespace IPNMP
             set;
         }
 
+        public int IdZaposleni
+        {
+            get;
+            set;
+        }
+
      
 
         /// <summary>
@@ -62,6 +68,7 @@ namespace IPNMP
                 Zaposleni tmp = new Zaposleni(tmp2);
 
                 tmp.IDOseba = IDOsebe;
+                tmp.IdZaposleni = (int)Bralec["id"];
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
@@ -153,12 +160,14 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@datum_zap", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@specializacija", SqlDbType.NVarChar, 255));
             ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar, 255));
-            //ukaz.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_osebe", SqlDbType.Int));
 
-          //  ukaz.Parameters["@id"].Value = this.IDOseba;
+            ukaz.Parameters["@id"].Value = this.IdZaposleni;
             ukaz.Parameters["@specializacija"].Value = this.Specializacija;
             ukaz.Parameters["@datum_zap"].Value = this.DatumZaposlitve;
             ukaz.Parameters["@tip"].Value = this.TipZaposlenega;
+            ukaz.Parameters["@id_osebe"].Value = this.IDOseba;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -191,6 +200,7 @@ namespace IPNMP
                 Zaposleni tmp = new Zaposleni(tmp2);
 
                 tmp.IDOseba = IDOsebe;
+                tmp.IdZaposleni = (int)Bralec["id"];
                     tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                     tmp.Specializacija = (string)Bralec["Specializacija"];
                     tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];
@@ -222,7 +232,7 @@ namespace IPNMP
             SqlDataReader Bralec = ukaz.ExecuteReader();
             Zaposleni tmp2 = new Zaposleni(tmp);
             Bralec.Read();
-
+            tmp2.IdZaposleni = (int)Bralec["id"];
             tmp2.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
             tmp2.Specializacija = (string)Bralec["Specializacija"];
             tmp2.TipZaposlenega = (string)Bralec["TipZaposlenega"];
@@ -294,6 +304,7 @@ namespace IPNMP
                 Zaposleni tmp = new Zaposleni(tmp2);
 
                 tmp.IDOseba = IDOsebe;
+                tmp.IdZaposleni = (int)Bralec["id"];
                 tmp.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
                 tmp.Specializacija = (string)Bralec["Specializacija"];
                 tmp.TipZaposlenega = (string)Bralec["TipZaposlenega"];

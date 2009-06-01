@@ -42,6 +42,18 @@ namespace IPNMP
             set;
         }
 
+        public string Simptomi
+        {
+            get;
+            set;
+        }
+
+        public DateTime DatumObiska
+        {
+            get;
+            set;
+        }
+
         
 
         /// <summary>
@@ -65,12 +77,15 @@ namespace IPNMP
 
                 if ((int)Bralec["idPacient"] == idPacienta)
                 {
-                    ŠtevilkaKartoteke = (int)Bralec["id"];
+                    
                     Kartoteka tmp = new Kartoteka();
+                    tmp.ŠtevilkaKartoteke = (int)Bralec["id"];
                     tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
                     tmp.terapije = Terapija.VrniVseTerapijePoIdKartoteke(ŠtevilkaKartoteke);
                     tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(ŠtevilkaKartoteke);
                     tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(ŠtevilkaKartoteke);
+                    tmp.DatumObiska = (DateTime)Bralec["datumObiska"];
+                    tmp.Simptomi = (string)Bralec["simptomi"];
                     seznam.Add(tmp);
 
                 }

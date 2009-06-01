@@ -43,8 +43,8 @@ namespace IPNMP
         //    SqlConnection povezava = new SqlConnection(PotPovezave);
 
         //    SqlCommand ukaz = new SqlCommand("VrniPorocilaPoDatumu", povezava);
-        //    ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
-        //    ukaz.Parameters["@Datum"].Value = datum;
+        //    ukaz.Parameters.Add(new SqlParameter("@DatumObiska", SqlDbType.DateTime));
+        //    ukaz.Parameters["@DatumObiska"].Value = datum;
         //    ukaz.CommandType = CommandType.StoredProcedure;
         //    povezava.Open();
         //    SqlDataReader Bralec = ukaz.ExecuteReader();
@@ -58,7 +58,7 @@ namespace IPNMP
         //            Poročilo tmp = new Poročilo();
         //            tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
         //            //tmp.Pacient = Zaposleni.VrniPoEmšo((string)Bralec["Pacient"]);
-        //            tmp.Datum = datum;
+        //            tmp.DatumObiska = datum;
         //            tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
         //            tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
         //            tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
@@ -81,8 +81,8 @@ namespace IPNMP
             SqlCommand ukaz = new SqlCommand("porocilo_uredi", povezava);
 
             ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@IdPacient_porocila", SqlDbType.Int));
-        //    ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
+          //  ukaz.Parameters.Add(new SqlParameter("@IdPacient_porocila", SqlDbType.Int));
+        //    ukaz.Parameters.Add(new SqlParameter("@DatumObiska", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetju_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetjuvbolnisnico_porocila", SqlDbType.NVarChar));
@@ -90,9 +90,9 @@ namespace IPNMP
 
 
             ukaz.Parameters["@akcijeresevalcev_porocila"].Value = this.AkcijeReševalcev;
-            ukaz.Parameters["@IdPacient_porocila"].Value = this.Pacient.IdPacienta;
+           // ukaz.Parameters["@IdPacient_porocila"].Value = this.Pacient.IdPacienta;
             ukaz.Parameters["@id_porocila"].Value = this.ŠtevilkaPoročila;
-      //      ukaz.Parameters["@Datum"].Value = this.Datum;
+      //      ukaz.Parameters["@DatumObiska"].Value = this.DatumObiska;
             ukaz.Parameters["@opisdogodka_porocila"].Value = this.OpisDogodka;
             ukaz.Parameters["@stanjepacientaobprispetju_porocila"].Value = this.StanjePacientaObPrispetju;
             ukaz.Parameters["@stanjepacientaobprispetjuvbolnisnico_porocila"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
@@ -122,7 +122,7 @@ namespace IPNMP
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeResevalcev"];
                 //tmp.Pacient = Zaposleni.VrniPoEmšo((string)Bralec["Pacient"]);
-            //    tmp.Datum = (DateTime)Bralec["Datum"];
+            //    tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
                     
                 tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
@@ -148,14 +148,14 @@ namespace IPNMP
 
             ukaz.Parameters.Add(new SqlParameter("@akcijeresevalcev_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@IdPacient_porocila", SqlDbType.Int));
-            //ukaz.Parameters.Add(new SqlParameter("@Datum", SqlDbType.DateTime));
+            //ukaz.Parameters.Add(new SqlParameter("@DatumObiska", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@opisdogodka_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetju_porocila", SqlDbType.NVarChar));
             ukaz.Parameters.Add(new SqlParameter("@stanjepacientaobprispetjuvbolnisnico_porocila", SqlDbType.NVarChar));
 
             ukaz.Parameters["@akcijeresevalcev_porocila"].Value = this.AkcijeReševalcev;
             ukaz.Parameters["@IdPacient_porocila"].Value = this.Pacient.IdPacienta;
-         //   ukaz.Parameters["@Datum"].Value = this.Datum;
+         //   ukaz.Parameters["@DatumObiska"].Value = this.DatumObiska;
             ukaz.Parameters["@opisdogodka_porocila"].Value = this.OpisDogodka;
             ukaz.Parameters["@stanjepacientaobprispetju_porocila"].Value = this.StanjePacientaObPrispetju;
             ukaz.Parameters["@stanjepacientaobprispetjuvbolnisnico_porocila"].Value = this.StanjePacientaObPrispetjuVBolnišnico;
@@ -187,7 +187,7 @@ namespace IPNMP
         //        {
         //            tmp.AkcijeReševalcev = (string)Bralec["AkcijeReševalcev"];
         //            tmp.Pacient = Zaposleni.VrniPoEmšo((string)Bralec["Pacient"]);
-        //            tmp.Datum = (DateTime)Bralec["Datum"];
+        //            tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
         //            tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
         //            tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
         //            tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnišnico"];
@@ -207,7 +207,7 @@ namespace IPNMP
         /// Vrne poročilo iz podatkovne baze glede na ID številko poročila
         /// </summary>
         /// <param name="StevilkaPorocila">ID številka poročila</param>
-        public static IPNMP.Poročilo[] VrniPorociloPoID(int StevilkaPorocila)
+        public static IPNMP.Poročilo VrniPorociloPoID(int StevilkaPorocila)
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -217,27 +217,20 @@ namespace IPNMP
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             SqlDataReader Bralec = ukaz.ExecuteReader();
-
-            List<Poročilo> seznam = new List<Poročilo>();
-
-            while (Bralec.Read())
-            {
+            Bralec.Read();
+           
                 Poročilo tmp = new Poročilo();
                 tmp.AkcijeReševalcev = (string)Bralec["AkcijeResevalcev"];
                // tmp.Pacient = Zaposleni.VrniPoEmšo((string)Bralec["Pacient"]);
-                //tmp.Datum = (DateTime)Bralec["Datum"];
+                //tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
 
                 tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
                 tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
-                seznam.Add(tmp);
-            }
-
-            Poročilo[] ds = seznam.ToArray();
-            povezava.Close();
-            return ds;
+          
+            return tmp;
         }
     }
 }

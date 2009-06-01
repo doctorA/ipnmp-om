@@ -109,10 +109,6 @@ namespace IPNMP
         /// </summary>
         public void Ustvari()
         {
-            SqlConnection povezava = new SqlConnection(PotPovezave);
-
-            SqlCommand ukaz = new SqlCommand("pacient_dodaj", povezava);
-
             Oseba o = new Oseba();
             o.Ime = this.Ime;
             o.Priimek = this.Priimek;
@@ -122,27 +118,43 @@ namespace IPNMP
             o.DatumRojstva = this.DatumRojstva;
 
             o.Ustvari();
-            Oseba o2= Oseba.VrniPoEmšo(this.EMŠO);
+            Oseba o2 = Oseba.VrniPoEmšo(this.EMŠO);
             this.IDOseba = o2.IDOseba;
-            ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
-            ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
-            
-            
-            ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar,255));
-            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+           
+            if (Pacient.VrniPoIDOsebe(IDOseba) == null)
+            {
 
-            ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
-            
-            ukaz.Parameters["@teza_p"].Value = this.Teža;
-            ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
-            ukaz.Parameters["@visina_p"].Value = this.Višina;
-            ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
 
-            ukaz.CommandType = CommandType.StoredProcedure;
-            povezava.Open();
-            ukaz.ExecuteNonQuery();
-            povezava.Close();
+
+                SqlConnection povezava = new SqlConnection(PotPovezave);
+
+                SqlCommand ukaz = new SqlCommand("pacient_dodaj", povezava);
+
+
+                ukaz.Parameters.Add(new SqlParameter("@krvnaS", SqlDbType.NVarChar, 255));
+                ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
+                ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
+
+
+                ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar, 255));
+                ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+
+                ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
+
+                ukaz.Parameters["@teza_p"].Value = this.Teža;
+                ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
+                ukaz.Parameters["@visina_p"].Value = this.Višina;
+                ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
+
+                ukaz.CommandType = CommandType.StoredProcedure;
+                povezava.Open();
+                ukaz.ExecuteNonQuery();
+                povezava.Close();
+            }
+            else
+            {
+                this.Posodobi();
+            }
         }
 
         /// <summary>
@@ -231,13 +243,15 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@teza_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@visina_p", SqlDbType.Int));
             ukaz.Parameters.Add(new SqlParameter("@st_zzzs", SqlDbType.NVarChar, 255));
-            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+           // ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_pacienta", SqlDbType.Int));
            
             ukaz.Parameters["@krvnaS"].Value = this.KrvnaSkupina;
             ukaz.Parameters["@teza_p"].Value = this.Teža;
             ukaz.Parameters["@visina_p"].Value = this.Višina;
             ukaz.Parameters["@st_zzzs"].Value = this.ZZZS;
-            ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
+           // ukaz.Parameters["@id_oseba"].Value = this.IDOseba;
+            ukaz.Parameters["@id_pacienta"].Value = this.IdPacienta;
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
@@ -258,6 +272,8 @@ namespace IPNMP
             //0.25 za prestopna leta, 0.005 za ostale popravke (razna prestavljanja ur itd.)
             return starost;
         }
+
+
 
         /// <summary>
         /// Vrne vse alergije ki jih pacient ima (spada pod Diagnoze)
@@ -381,6 +397,45 @@ namespace IPNMP
             tmp2.ZZZS = (string)Bralec["ZZZS"];
             tmp2.Kartoteke = Kartoteka.VrniKartotekePoIdPacienta((int)Bralec["id"]);
 
+
+            povezava.Close();
+            return tmp2;
+
+        }
+
+        public static Pacient VrniPoIDOsebe(int idOsebe)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("pacient_vrnipoidosebe", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_oseba", SqlDbType.Int));
+            ukaz.Parameters["@id_oseba"].Value = idOsebe;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+            Bralec.Read();
+            Oseba tmp = new Oseba();
+            tmp = Oseba.VrniPoIDOsebe(idOsebe);
+            Pacient tmp2 = new Pacient(tmp);
+
+
+            try
+            {
+                tmp2.IdPacienta = (int)Bralec["id"];
+                tmp2.IDOseba = (int)Bralec["IDOseba"];
+
+                tmp2.KrvnaSkupina = (string)Bralec["KrvnaSkupina"];
+                tmp2.Teža = (int)Bralec["teza"];
+                tmp2.Višina = (int)Bralec["visina"];
+                tmp2.ZZZS = (string)Bralec["ZZZS"];
+                tmp2.Kartoteke = Kartoteka.VrniKartotekePoIdPacienta((int)Bralec["id"]);
+            }
+            catch (Exception e)
+            {
+                povezava.Close();
+                return null;
+            }
 
             povezava.Close();
             return tmp2;

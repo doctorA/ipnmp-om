@@ -17,7 +17,7 @@
   <Class Name="IPNMP.Kartoteka">
     <Position X="7" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAgAACAAAAAAABAAAAgAAAAAAAAAAAAAAAAUAAACI=</HashCode>
+      <HashCode>AAAAwAACAAAAAAABAAAAgAAAAAAAAAAAAAAAAUEAACI=</HashCode>
       <FileName>Kartoteka.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -33,7 +33,7 @@
   <Class Name="IPNMP.Zaposleni">
     <Position X="12.25" Y="4.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAgAACBAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAgAAABAAAAAAQAAAAkAAAAAgAQCBAAAAA=</HashCode>
       <FileName>Zaposleni.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -92,12 +92,12 @@
     </InheritanceLine>
     <AssociationLine Name="Kartoteke" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="10.5" Y="5.79" />
-        <Point X="8.5" Y="5.79" />
+        <Point X="10.5" Y="5.987" />
+        <Point X="8.5" Y="5.987" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>IEAAAAgAAAEAAAABAAAAACQAAAA0AAAQAAABqhAAAAA=</HashCode>
+      <HashCode>IEAAAAgAAAEAAAABAAAAACQAACA0AAAQAAABqhAAAAA=</HashCode>
       <FileName>Pacient.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
