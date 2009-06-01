@@ -269,5 +269,39 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+
+        public static IPNMP.Poročilo[] VrniPorocilaPoZaposlenem(Zaposleni zaposleni)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("porocilo_vrnipoidzaposleni", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_zaposleni", SqlDbType.Int));
+            ukaz.Parameters["@id_zaposleni"].Value = zaposleni.IdZaposleni;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+
+            List<Poročilo> seznam = new List<Poročilo>();
+
+            while (Bralec.Read())
+            {
+                Poročilo tmp = new Poročilo();
+                tmp.AkcijeReševalcev = (string)Bralec["AkcijeResevalcev"];
+                //tmp.Pacient = Zaposleni.VrniPoEmšo((string)Bralec["Pacient"]);
+                //    tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
+                tmp.OpisDogodka = (string)Bralec["OpisDogodka"];
+
+                tmp.StanjePacientaObPrispetju = (string)Bralec["StanjePacientaObPrispetju"];
+                tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
+                tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
+                tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
+                seznam.Add(tmp);
+            }
+
+            Poročilo[] ds = seznam.ToArray();
+            povezava.Close();
+            return ds;
+        }
     }
 }

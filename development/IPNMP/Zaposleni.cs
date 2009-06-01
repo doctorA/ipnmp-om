@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 
 namespace IPNMP
 {
+  
     public class Zaposleni : Oseba
     {
         protected static string PotPovezave = Properties.Settings.Default.ConnectionString;
