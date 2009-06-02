@@ -86,5 +86,26 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+
+        /// <summary>
+        /// Ustvari nov vnos diagnoze v podatkovno bazo
+        /// </summary>
+        public void UstvariDiagnozo()
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("diagnoza_dodaj", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.Text));
+            ukaz.Parameters.Add(new SqlParameter("@opis", SqlDbType.Text));
+
+            ukaz.Parameters["@tip"].Value = this.Tip;
+            ukaz.Parameters["@opis"].Value = this.Opis;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
     }
 }

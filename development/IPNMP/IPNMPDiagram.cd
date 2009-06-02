@@ -53,16 +53,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Diagnoza">
-    <Position X="7" Y="6.75" Width="1.75" />
+    <Position X="6.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAABBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAAAADBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Diagnoza.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Preiskava">
-    <Position X="8.75" Y="6.75" Width="1.75" />
+    <Position X="8.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgEAAABBAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgEAAABBAACAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Preiskava.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -92,8 +92,8 @@
     </InheritanceLine>
     <AssociationLine Name="Kartoteke" Type="IPNMP.Kartoteka" FixedToPoint="true">
       <Path>
-        <Point X="10.5" Y="5.987" />
-        <Point X="8.5" Y="5.987" />
+        <Point X="10.5" Y="6.086" />
+        <Point X="8.5" Y="6.086" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -105,9 +105,9 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="IPNMP.Terapija">
-    <Position X="5.25" Y="6.75" Width="1.75" />
+    <Position X="4.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>QAQAAAAAAAAAAAABBCAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>QAQAAAAAAAAEAAABBCAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Terapija.cs</FileName>
     </TypeIdentifier>
   </Class>

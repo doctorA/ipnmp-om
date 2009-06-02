@@ -87,5 +87,26 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+
+        /// <summary>
+        /// Ustvari primerek tipa Preiskava v podatkovni bazi
+        /// </summary>
+        public void UstvariPreiskavo()
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("preiskava_dodaj", povezava);
+           
+            ukaz.Parameters.Add(new SqlParameter("@opis", SqlDbType.Text));
+            ukaz.Parameters.Add(new SqlParameter("@rezultati", SqlDbType.Text));
+
+            ukaz.Parameters["@opis"].Value = this.Opis;
+            ukaz.Parameters["@rezultati"].Value = this.Rezultati;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
     }
 }

@@ -123,5 +123,30 @@ namespace IPNMP
 
         }
 
+        /// <summary>
+        /// Ustvari nov primerek tipa Kartoteka v podatkovni bazi
+        /// </summary>
+        public void UstvariKartoteko(Pacient pacient, Zaposleni zaposlen)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("kartoteka_dodaj", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@datum_obiska", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@simptomi", SqlDbType.Text));
+            ukaz.Parameters.Add(new SqlParameter("@id_pacient", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_zaposleni", SqlDbType.Int));
+
+            ukaz.Parameters["@datum_obiska"].Value = this.DatumObiska;
+            ukaz.Parameters["@simptomi"].Value = this.Simptomi;
+            ukaz.Parameters["@id_pacient"].Value = pacient.IdPacienta;
+            ukaz.Parameters["@id_zaposleni"].Value = zaposlen.IdZaposleni;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+        }
+
     }
 }

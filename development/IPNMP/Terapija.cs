@@ -21,6 +21,12 @@ namespace IPNMP
             get;
             set;
         }
+
+        public string Kaj
+        {
+            get;
+            set;
+        }
 /*
         public DateTime DatumObiska
         {
@@ -48,6 +54,7 @@ namespace IPNMP
         //        tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Tip = (string)Bralec["Tip"];
                 tmp.Opis = (string)Bralec["Opis"];
+                tmp.Kaj = (string)Bralec["Kaj"];
                 seznam.Add(tmp);
             }
 
@@ -79,12 +86,36 @@ namespace IPNMP
             //    tmp.DatumObiska = (DateTime)Bralec["DatumObiska"];
                 tmp.Tip = (string)Bralec["Tip"];
                 tmp.Opis = (string)Bralec["Opis"];
+                tmp.Kaj = (string)Bralec["Kaj"];
                 seznam.Add(tmp);
             }
 
             Terapija[] ds = seznam.ToArray();
             povezava.Close();
             return ds;
+        }
+
+        /// <summary>
+        /// Ustvari nov primerek terapije v podatkovni bazi
+        /// </summary>
+        public void UstvariTerapijo()
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("terapija_dodaj", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@tip", SqlDbType.NVarChar));
+            ukaz.Parameters.Add(new SqlParameter("@opis", SqlDbType.Text));
+            ukaz.Parameters.Add(new SqlParameter("@kaj", SqlDbType.Text));
+
+            ukaz.Parameters["@tip"].Value = this.Tip;
+            ukaz.Parameters["@opis"].Value = this.Opis;
+            ukaz.Parameters["@kaj"].Value = this.Kaj;
+
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
         }
     }
 }
