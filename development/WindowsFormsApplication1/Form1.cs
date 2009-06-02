@@ -250,7 +250,7 @@ namespace WindowsFormsApplication1
         {
             //TestPorociloPosodobi(); //storage procedure so napačno spisane
             //TestPorociloUstvari(); //dela
-            //TestPorociloVrniVse(); //dela
+            TestPorociloVrniVse(); //dela
             TestPorociloPoPacientu();
         }
 

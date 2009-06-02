@@ -129,6 +129,9 @@ namespace IPNMP
                 tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
+                tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
+                tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
+                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
                 seznam.Add(tmp);
             }
 
@@ -229,6 +232,9 @@ namespace IPNMP
                 tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
+                tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
+                tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
+                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
           
             return tmp;
         }
@@ -262,6 +268,9 @@ namespace IPNMP
                 tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
+                tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
+                tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
+                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
                 seznam.Add(tmp);
             }
 
@@ -296,6 +305,9 @@ namespace IPNMP
                 tmp.StanjePacientaObPrispetjuVBolnišnico = (string)Bralec["StanjePacientaObPrispetjuVBolnisnico"];
                 tmp.ŠtevilkaPoročila = (int)Bralec["ID"];
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
+                tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
+                tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
+                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
                 seznam.Add(tmp);
             }
 
@@ -303,5 +315,43 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+
+        public DateTime Datum
+        {
+            get;
+            set;
+        }
+
+        public IPNMP.Zaposleni[] Ekipa
+        {
+            get;
+            set;
+        }
+
+        public static Vožnja VrniVoznjoPoIdPorocila(int idporocila)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("voznja_vrniPoIDPorocilo", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_porocilo", SqlDbType.Int));
+            ukaz.Parameters["@id_porocilo"].Value = idporocila;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Bralec.Read();
+
+            Vožnja v = new Vožnja();
+           v.ČasDogodka = (DateTime)Bralec["casdogodka"];
+           v.Naslov = Naslov.VrniNaslov((int)Bralec["Idnaslov"]);
+
+           return v;
+        }
+
+        public Naslov Naslov
+        {
+            get;
+            set;
+        }
+
     }
 }

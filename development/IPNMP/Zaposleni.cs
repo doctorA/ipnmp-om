@@ -362,5 +362,37 @@ namespace IPNMP
             return ds;
 
         }
+
+        public static IPNMP.Zaposleni[] VrniZaposlenePoIdPoročila(int  idporocila)
+        {
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            SqlCommand ukaz = new SqlCommand("zaposleni_vrniPoIDPorocilo", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_porocilo", SqlDbType.Int));
+            ukaz.Parameters["@id_porocilo"].Value =idporocila;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            
+            List<Zaposleni> seznam = new List<Zaposleni>();
+
+
+
+            while (Bralec.Read())
+            {
+            Oseba tmp = Oseba.VrniPoIDOsebe((int)Bralec["idOseba"]);
+            Zaposleni tmp2 = new Zaposleni(tmp);
+            tmp2.IdZaposleni = (int)Bralec["id"];
+            tmp2.DatumZaposlitve = (DateTime)Bralec["DatumZaposlitve"];
+            tmp2.Specializacija = (string)Bralec["Specializacija"];
+            tmp2.TipZaposlenega = (string)Bralec["TipZaposlenega"];
+            seznam.Add(tmp2);
+            }
+
+            Zaposleni[] ds = seznam.ToArray();
+            povezava.Close();
+
+            return ds;
+        }
     }
 }
