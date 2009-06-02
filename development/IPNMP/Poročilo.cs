@@ -15,7 +15,7 @@ namespace IPNMP
         public String OpisDogodka { set;get;}
         public String AkcijeReševalcev { set; get; }
 
-        //public DateTime Datum { set; get; }
+        //public DateTime ČasDogodka { set; get; }
 
         public Poročilo()
         {
@@ -131,7 +131,7 @@ namespace IPNMP
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
                 tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
                 tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
-                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
+                tmp.ČasDogodka = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
                 seznam.Add(tmp);
             }
 
@@ -165,8 +165,24 @@ namespace IPNMP
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
-            ukaz.ExecuteNonQuery();
-            povezava.Close();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+         
+            Bralec.Read();
+            this.ŠtevilkaPoročila = Convert.ToInt32(Bralec[0]);
+
+            Vožnja tst = new Vožnja();
+            tst.ČasDogodka = this.ČasDogodka;
+            tst.ČasKlicanjaReševalcev = this.ČasKlicanjaReševalcev;
+            tst.ČasPrispetjaReševalcev = this.ČasPrispetjaReševalcev;
+            tst.ČasPrispetjaVBolnišnico = this.ČasPrispetjaVBolnišnico;
+            tst.Naslov = this.Naslov;
+            int id_voznje=tst.Ustvari();
+            Vožnja.VP(this.ŠtevilkaPoročila, id_voznje);
+           foreach(Zaposleni z in this.Ekipa){
+               Vožnja.VZ(z.IdZaposleni, id_voznje);
+           }
+
+            
         }
         ///// <summary>
         ///// Metoda poišče poročila v podatkovni bazi glede na podanega avtorja(njegov emšo)
@@ -234,7 +250,7 @@ namespace IPNMP
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
                 tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
                 tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
-                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
+                tmp.ČasDogodka = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
           
             return tmp;
         }
@@ -270,7 +286,7 @@ namespace IPNMP
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
                 tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
                 tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
-                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
+                tmp.ČasDogodka = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
                 seznam.Add(tmp);
             }
 
@@ -307,7 +323,7 @@ namespace IPNMP
                 tmp.Pacient = Pacient.VrniPoIdPacient((int)Bralec["idPacient"]);
                 tmp.Ekipa = Zaposleni.VrniZaposlenePoIdPoročila((int)Bralec["ID"]);
                 tmp.Naslov = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).Naslov;
-                tmp.Datum = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
+                tmp.ČasDogodka = Poročilo.VrniVoznjoPoIdPorocila((int)Bralec["ID"]).ČasDogodka;
                 seznam.Add(tmp);
             }
 
@@ -316,7 +332,7 @@ namespace IPNMP
             return ds;
         }
 
-        public DateTime Datum
+        public DateTime ČasDogodka
         {
             get;
             set;
@@ -348,6 +364,24 @@ namespace IPNMP
         }
 
         public Naslov Naslov
+        {
+            get;
+            set;
+        }
+
+        public DateTime ČasKlicanjaReševalcev
+        {
+            get;
+            set;
+        }
+
+        public DateTime ČasPrispetjaReševalcev
+        {
+            get;
+            set;
+        }
+
+        public DateTime ČasPrispetjaVBolnišnico
         {
             get;
             set;

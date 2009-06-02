@@ -250,8 +250,9 @@ namespace WindowsFormsApplication1
         {
             //TestPorociloPosodobi(); //storage procedure so napačno spisane
             //TestPorociloUstvari(); //dela
-            TestPorociloVrniVse(); //dela
-            TestPorociloPoPacientu();
+           // TestPorociloVrniVse(); //dela
+           // TestPorociloPoPacientu();
+            TestPorociloUstvari();
         }
 
         public void TestPorociloPosodobi()
@@ -272,8 +273,17 @@ namespace WindowsFormsApplication1
             porocilo.StanjePacientaObPrispetjuVBolnišnico = "Pacient mrtev, pulz 0";
             porocilo.AkcijeReševalcev = "Razgrnitev mrtvaške vrečke, pobiranje človeških udov v obsegu 150 m od nesreče";
             porocilo.Pacient = Pacient.VrniPoEmšo("1305281500333");
+            porocilo.Naslov= Naslov.VrniNaslov(122);
+            List<Zaposleni> lista = new List<Zaposleni>();
+            lista.Add(Zaposleni.VrniPoEmšo("1605969500555"));
+            lista.Add(Zaposleni.VrniPoEmšo("0904987505222"));
+            lista.Add(Zaposleni.VrniPoEmšo("0110960500456"));
 
-
+            porocilo.Ekipa = lista.ToArray();
+            porocilo.ČasDogodka = Convert.ToDateTime("01.01.2008");
+            porocilo.ČasKlicanjaReševalcev = Convert.ToDateTime("01.01.2011");
+            porocilo.ČasPrispetjaReševalcev = Convert.ToDateTime("01.01.2010");
+            porocilo.ČasPrispetjaVBolnišnico = Convert.ToDateTime("01.01.2009");
             porocilo.UstvariPorocilo();
         }
 
