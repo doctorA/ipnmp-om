@@ -80,10 +80,10 @@ namespace IPNMP
                     
                     Kartoteka tmp = new Kartoteka();
                     tmp.ŠtevilkaKartoteke = (int)Bralec["id"];
-                    tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(ŠtevilkaKartoteke);
-                    tmp.terapije = Terapija.VrniVseTerapijePoIdKartoteke(ŠtevilkaKartoteke);
-                    tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(ŠtevilkaKartoteke);
-                    tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(ŠtevilkaKartoteke);
+                    tmp.Diagnoze = Diagnoza.VrniDiagnozePoID(tmp.ŠtevilkaKartoteke);
+                    tmp.terapije = Terapija.VrniVseTerapijePoIdKartoteke(tmp.ŠtevilkaKartoteke);
+                    tmp.Preiskave = Preiskava.VrniVsePreiskavePoID(tmp.ŠtevilkaKartoteke);
+                    tmp.Medicinski_pripomocki = Medicinski_pripomočki.VrniVseMedPripPoID(tmp.ŠtevilkaKartoteke);
                     tmp.DatumObiska = (DateTime)Bralec["datumObiska"];
                     tmp.Simptomi = (string)Bralec["simptomi"];
                     seznam.Add(tmp);
@@ -141,11 +141,42 @@ namespace IPNMP
             ukaz.Parameters["@simptomi"].Value = this.Simptomi;
             ukaz.Parameters["@id_pacient"].Value = pacient.IdPacienta;
             ukaz.Parameters["@id_zaposleni"].Value = zaposlen.IdZaposleni;
-
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
-            ukaz.ExecuteNonQuery();
-            povezava.Close();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+           
+            Bralec.Read();
+            int IDKartoteke = Convert.ToInt32(Bralec[0]);
+
+            foreach (Terapija t in this.terapije)
+            {
+                int IDTerapije = t.UstvariTerapijo();
+                Terapija.KT(IDKartoteke,IDTerapije);
+                
+            }
+
+            foreach (Preiskava p in this.Preiskave)
+            {
+                int IDPreiskave = p.UstvariPreiskavo();
+                Preiskava.KP(IDKartoteke, IDPreiskave);
+
+            }
+
+            foreach (Diagnoza d in this.Diagnoze)
+            {
+                int IDDiagnoza = d.UstvariDiagnozo();
+                Diagnoza.KD(IDKartoteke, IDDiagnoza);
+
+            }
+
+            foreach (Medicinski_pripomočki m in this.Medicinski_pripomocki)
+            {
+                int IDMedPrip = m.UstvariMedPrip();
+                Terapija.KT(IDKartoteke, IDMedPrip);
+
+            }
+
+           
         }
 
     }

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="Ta dva razreda sta ukinjena&#xD;&#xA;">
+  <Comment CommentText="Ta razred je ukinjen&#xD;&#xA;">
     <Position X="18.757" Y="1.093" Height="0.75" Width="1.7" />
   </Comment>
   <Class Name="IPNMP.Oseba">
@@ -25,7 +25,7 @@
   <Class Name="IPNMP.Poročilo">
     <Position X="13.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAASIAAAAAECAABAAAABAAAAQACEAAQAAQACgABCAA=</HashCode>
+      <HashCode>AAAAyIBAAAAECAABAAAABAAAAQAAECAQAAQAGgABCAA=</HashCode>
       <FileName>Poročilo.cs</FileName>
       <NewMemberFileName>IPNMP.cs</NewMemberFileName>
     </TypeIdentifier>
@@ -48,21 +48,21 @@
   <Class Name="IPNMP.Vožnja">
     <Position X="16.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAQABAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAwABAAAAAAAABAAAEAAAAABAEACAAAAAAEAAAAAA=</HashCode>
       <FileName>Vo+żnja.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Diagnoza">
     <Position X="6.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgAAAADBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgAIAADBCAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Diagnoza.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="IPNMP.Preiskava">
     <Position X="8.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAgEAAABBAACAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAgEAAABBAACAAAAgAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Preiskava.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -76,7 +76,7 @@
   <Class Name="IPNMP.Medicinski_pripomočki">
     <Position X="5.25" Y="4.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAABBEAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAABBEAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Medicinski_pripomočki.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -107,7 +107,7 @@
   <Class Name="IPNMP.Terapija">
     <Position X="4.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>QAQAAAAAAAAEAAABBCAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <HashCode>QAQAAAAAAAAEAAABBCAAAAAAAAAAAAAQAAAAAAAAACA=</HashCode>
       <FileName>Terapija.cs</FileName>
     </TypeIdentifier>
   </Class>

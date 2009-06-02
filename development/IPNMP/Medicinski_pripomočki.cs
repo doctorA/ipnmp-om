@@ -78,5 +78,26 @@ namespace IPNMP
             povezava.Close();
             return ds;
         }
+
+        public int UstvariMedPrip()
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("terapija_dodaj", povezava);
+
+            
+            ukaz.Parameters.Add(new SqlParameter("@opis", SqlDbType.Text));
+            ukaz.Parameters.Add(new SqlParameter("@kaj", SqlDbType.Text));
+
+        
+            ukaz.Parameters["@opis"].Value = this.Kategorija;
+            ukaz.Parameters["@kaj"].Value = this.Naziv;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Bralec.Read();
+            int ID = Convert.ToInt32(Bralec[0]);
+            return ID;
+        }
     }
 }

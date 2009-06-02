@@ -91,7 +91,7 @@ namespace IPNMP
         /// <summary>
         /// Ustvari primerek tipa Preiskava v podatkovni bazi
         /// </summary>
-        public void UstvariPreiskavo()
+        public int UstvariPreiskavo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -102,11 +102,33 @@ namespace IPNMP
 
             ukaz.Parameters["@opis"].Value = this.Opis;
             ukaz.Parameters["@rezultati"].Value = this.Rezultati;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Bralec.Read();
+            int ID = Convert.ToInt32(Bralec[0]);
+            return ID;
+        }
+
+        public static void KP(int id_kartoteka, int id_preiskava)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("KP_dodaj", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@id_kartoteka", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_preiskava", SqlDbType.Int));
+
+
+            ukaz.Parameters["@id_kartoteka"].Value = id_kartoteka;
+            ukaz.Parameters["@id_preiskava"].Value = id_preiskava;
+
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             ukaz.ExecuteNonQuery();
             povezava.Close();
+
         }
     }
 }

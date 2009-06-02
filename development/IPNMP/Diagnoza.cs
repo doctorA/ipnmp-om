@@ -90,7 +90,7 @@ namespace IPNMP
         /// <summary>
         /// Ustvari nov vnos diagnoze v podatkovno bazo
         /// </summary>
-        public void UstvariDiagnozo()
+        public int UstvariDiagnozo()
         {
             SqlConnection povezava = new SqlConnection(PotPovezave);
 
@@ -101,11 +101,33 @@ namespace IPNMP
 
             ukaz.Parameters["@tip"].Value = this.Tip;
             ukaz.Parameters["@opis"].Value = this.Opis;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Bralec.Read();
+            int ID = Convert.ToInt32(Bralec[0]);
+            return ID;
+        }
+
+        public static void KD(int id_kartoteka, int id_diagnoza)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("KD_dodaj", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@id_kartoteka", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@id_diagnoza", SqlDbType.Int));
+
+
+            ukaz.Parameters["@id_kartoteka"].Value = id_kartoteka;
+            ukaz.Parameters["@id_diagnoza"].Value = id_diagnoza;
+
 
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
             ukaz.ExecuteNonQuery();
             povezava.Close();
+
         }
     }
 }
