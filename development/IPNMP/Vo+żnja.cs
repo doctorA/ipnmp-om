@@ -19,6 +19,8 @@ namespace IPNMP
 
         public DateTime ČasDogodka { set; get; }
 
+        public int ŠtevilkaVožnje { set; get; }
+
         public Naslov Naslov
         {
             get;
@@ -59,6 +61,105 @@ namespace IPNMP
 
 
             return ID;
+        }
+
+        public void Posodobi()
+        {
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("voznja_uredi", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@id_voznje", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@casDokodka_voznje", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@casklicanjaresevalcev_voznje", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@casprispetjaresevalcev_voznje", SqlDbType.DateTime));
+            ukaz.Parameters.Add(new SqlParameter("@casprispetjavbolnisnico_voznje", SqlDbType.DateTime));
+     //       ukaz.Parameters.Add(new SqlParameter("@idnaslov_voznje", SqlDbType.Int));
+
+            ukaz.Parameters["@id_voznje"].Value = this.ŠtevilkaVožnje;
+            ukaz.Parameters["@casDokodka_voznje"].Value = this.ČasDogodka;
+            ukaz.Parameters["@casklicanjaresevalcev_voznje"].Value = this.ČasKlicanjaReševalcev;
+            ukaz.Parameters["@casprispetjaresevalcev_voznje"].Value = this.ČasPrispetjaReševalcev;
+            ukaz.Parameters["@casprispetjavbolnisnico_voznje"].Value = this.ČasPrispetjaVBolnišnico;
+      //      ukaz.Parameters["@idnaslov_voznje"].Value = this.Naslov.IDNaslova;
+           
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+
+
+        }
+
+        public static void VZ_brisi(int id)
+        {
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+            SqlCommand ukaz = new SqlCommand("V_Z_brisi", povezava);
+            ukaz.Parameters.Add(new SqlParameter("@id_vz", SqlDbType.Int));
+            ukaz.Parameters["@id_vz"].Value = id;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            ukaz.ExecuteNonQuery();
+            povezava.Close();
+
+        }
+
+        public static int[] VZ_VrniVZIDpoIDvoznje(int id)
+        {
+            List<int> idji = new List<int>();
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("V_Z_vrniPoIDVoznja", povezava);
+             ukaz.Parameters.Add(new SqlParameter("@id_voznja", SqlDbType.Int));
+            ukaz.Parameters["@id_voznja"].Value = id;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+
+
+            while (Bralec.Read())
+            {
+                idji.Add((int)Bralec["id"]);
+
+
+            }
+            povezava.Close();
+            int[] ds = idji.ToArray();
+            return ds;
+
+        }
+
+
+
+        public static Vožnja VrniVoznjaPoIdPorocila(int idPorocila)
+        {
+
+            SqlConnection povezava = new SqlConnection(PotPovezave);
+
+            SqlCommand ukaz = new SqlCommand("voznja_vrnipoidporocilo", povezava);
+
+            ukaz.Parameters.Add(new SqlParameter("@id_porocilo", SqlDbType.Int));
+            ukaz.Parameters["@id_porocilo"].Value = idPorocila;
+            ukaz.CommandType = CommandType.StoredProcedure;
+            povezava.Open();
+            SqlDataReader Bralec = ukaz.ExecuteReader();
+            Bralec.Read();
+
+          
+                Vožnja tmp = new Vožnja();
+                tmp.ČasDogodka = (DateTime)Bralec["CasDogodka"];
+                tmp.ČasKlicanjaReševalcev = (DateTime)Bralec["casklicanjaresevalcev"];
+                tmp.ČasPrispetjaReševalcev = (DateTime)Bralec["casprispetjaresevalcev"];
+                tmp.ČasPrispetjaVBolnišnico = (DateTime)Bralec["casprispetjavbolnisnico"];
+                tmp.Naslov = Naslov.VrniNaslov((int)Bralec["idnaslov"]);
+                tmp.ŠtevilkaVožnje = (int)Bralec["id"];
+                
+            
+
+            povezava.Close();
+return tmp;
         }
 
         public static void VZ(int id_zap,int id_voz)

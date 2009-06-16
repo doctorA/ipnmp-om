@@ -45,13 +45,6 @@
       <FileName>Naslov.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IPNMP.Vožnja">
-    <Position X="16.25" Y="0.5" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAwABAAAAAAAABAAAEAAAAABAEACAAAAAAEAAAAAA=</HashCode>
-      <FileName>Vo+żnja.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="IPNMP.Diagnoza">
     <Position X="6.75" Y="7.5" Width="1.75" />
     <TypeIdentifier>
@@ -109,6 +102,13 @@
     <TypeIdentifier>
       <HashCode>QAQAAAAAAAAEAAABBCAAAAAAAAAAAAAQAAAAAAAAACA=</HashCode>
       <FileName>Terapija.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IPNMP.Vožnja">
+    <Position X="16.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAwABAAAAAAEABAAAGAAAAABCkACAAIAAAEAAAAAA=</HashCode>
+      <FileName>Vo+żnja.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Tahoma" Size="8.25" />

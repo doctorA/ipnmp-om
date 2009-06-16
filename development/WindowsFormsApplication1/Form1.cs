@@ -250,17 +250,30 @@ namespace WindowsFormsApplication1
         {
             //TestPorociloPosodobi(); //storage procedure so napačno spisane
             //TestPorociloUstvari(); //dela
-           // TestPorociloVrniVse(); //dela
+            //TestPorociloVrniVse(); //dela
            // TestPorociloPoPacientu();
-            TestPorociloUstvari();
+           // TestPorociloUstvari();  //Dela
+           // TestPorociloPosodobi();  //dela
+
         }
+
+        
 
         public void TestPorociloPosodobi()
         {
-            int id = 5310;
+            int id = 5334;
+
+            List<Zaposleni> seznam = new List<Zaposleni>();
+
+            seznam.Add(Zaposleni.VrniPoEmšo("0110960500456"));
+            seznam.Add(Zaposleni.VrniPoEmšo("1605969500555"));
+            
+
             Poročilo test = Poročilo.VrniPorociloPoID(id);
-            test.OpisDogodka = "padec po stopnicah, nato nalet v okno ter padec iz 3. nadstropja na gradbišče v cement";
+            test.OpisDogodka = "možganska kap";
+            test.Ekipa = seznam.ToArray();
             test.PosodobiPorocilo();
+            
         }
 
         public void TestPorociloUstvari()
