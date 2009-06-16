@@ -75,14 +75,14 @@ namespace IPNMP
             ukaz.Parameters.Add(new SqlParameter("@casklicanjaresevalcev_voznje", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@casprispetjaresevalcev_voznje", SqlDbType.DateTime));
             ukaz.Parameters.Add(new SqlParameter("@casprispetjavbolnisnico_voznje", SqlDbType.DateTime));
-     //       ukaz.Parameters.Add(new SqlParameter("@idnaslov_voznje", SqlDbType.Int));
+            ukaz.Parameters.Add(new SqlParameter("@idnaslov_voznje", SqlDbType.Int));
 
             ukaz.Parameters["@id_voznje"].Value = this.ŠtevilkaVožnje;
             ukaz.Parameters["@casDokodka_voznje"].Value = this.ČasDogodka;
             ukaz.Parameters["@casklicanjaresevalcev_voznje"].Value = this.ČasKlicanjaReševalcev;
             ukaz.Parameters["@casprispetjaresevalcev_voznje"].Value = this.ČasPrispetjaReševalcev;
             ukaz.Parameters["@casprispetjavbolnisnico_voznje"].Value = this.ČasPrispetjaVBolnišnico;
-      //      ukaz.Parameters["@idnaslov_voznje"].Value = this.Naslov.IDNaslova;
+            ukaz.Parameters["@idnaslov_voznje"].Value = this.Naslov.IDNaslova;
            
             ukaz.CommandType = CommandType.StoredProcedure;
             povezava.Open();
